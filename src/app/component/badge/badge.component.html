@@ -9,4 +9,9 @@
       <p>{{badgeText}}</p>
     </div>
   }
+  @case('station') {
+    <div class="badge__station medium bold" [style.backgroundColor]="getColor()">
+      <p>{{badgeText}}</p>
+    </div>
+  }
 }

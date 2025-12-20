@@ -4,4 +4,9 @@
       <app-list-item itemType="route-group" [itemData]="group" [lineColor]="lineColor"/>
     }
   }
+  @case('route-station') {
+    @for(station of listData; track station.station_id; let isFirst = $first; let isLast = $last) {
+      <app-list-item itemType="route-station" [itemData]="station" [lineColor]="lineColor" [routeGroupCode]="routeGroupCode" [isFirst]="isFirst" [isLast]="isLast"/>
+    }
+  }
 }

@@ -1,7 +1,7 @@
-<div class="item" (click)="handleClick()">
+<div class="item">
   @switch(itemType) {
     @case('route-group') {
-      <div class="item__route-group">
+      <div class="item__route-group" (click)="handleItemClick()">
         <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
         <div class="item__route-group__text">
           <p class="item__route-group__text__line-name small bold">{{itemData.route_group_name}}</p>
@@ -9,6 +9,28 @@
             <p class="item__route-group__text__route__terminus large bold">{{getRouteTerminus()}}</p>
             <p class="item__route-group__text__route__via medium semibold">{{getRouteVia()}}</p>
           </span>
+        </div>
+      </div>
+    }
+    @case('route-station') {
+      <div class="item__route-station">
+        <div class="item__route-station__leading">
+          <div class="item__route-station__leading__figure">
+            <div class="item__route-station__leading__figure__point" [style.backgroundColor]="getColor()"></div>
+            @if(!isFirst) {
+              <div class="item__route-station__leading__figure__leading" [style.backgroundColor]="getColor()"></div>
+            }
+            @if(!isLast) {
+              <div class="item__route-station__leading__figure__trailing" [style.backgroundColor]="getColor()"></div>
+            }
+          </div>
+          <app-badge badgeType="station" [badgeText]="getBadgeText()" [lineColor]="lineColor"/>
+          <p class="large bold">{{itemData.station_name}}</p>
+        </div>
+        <div class="item__route-station__trailing">
+          @for(interchange of filterizedInterchange; track interchange.line_station_code) {
+            <app-badge badgeType="route-group" [badgeText]="interchange.route_group_code" [lineColor]="interchange.line_color"/>
+          }
         </div>
       </div>
     }

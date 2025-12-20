@@ -13,8 +13,18 @@ export class ListItemComponent {
   @Input() itemType: string = "route-group";
   @Input() itemData: any = {};
   @Input() lineColor: string = "";
+  @Input() routeGroupCode: string = "";
+  @Input() isFirst: boolean = false;
+  @Input() isLast: boolean = false;
+  filterizedInterchange: any;
 
   constructor(private subjectService: SubjectService) { }
+
+  ngOnInit() {
+    if(this.itemType === 'route-station') {
+      this.getFilterizedInterchange();
+    }
+  }
 
   getRouteTerminus() {
     let routeTerminus = "";
@@ -40,12 +50,29 @@ export class ListItemComponent {
     return null;
   }
 
-  handleClick() {
+  getBadgeText() {
+    let code = this.itemData.interchanges.find((interchange: any) => {
+      return interchange.route_group_code === this.routeGroupCode;
+    })
+    return code.line_station_code;
+  }
+
+  handleItemClick() {
     let data = {
       nextStage: 'route',
       lineColor: this.lineColor,
       itemData: this.itemData
     }
     this.subjectService.sendData(data);
+  }
+
+  getFilterizedInterchange() {
+    this.filterizedInterchange = this.itemData.interchanges.filter((interchange: any) => {
+      return interchange.route_group_code !== this.routeGroupCode
+    })
+  }
+
+  getColor() {
+    return 'var(--' + this.lineColor + ')';
   }
 }
