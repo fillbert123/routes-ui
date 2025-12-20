@@ -1,0 +1,35 @@
+.item {
+  height: 48px;
+  width: calc(100% - 16px);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  cursor: pointer;
+  &__route-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    &__text {
+      display: flex;
+      flex-direction: column;
+      &__line-name {
+        margin: 0;
+        color: var(--semiwhite);
+      }
+      &__route {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 4px;
+        &__terminus, &__via {
+          margin: 0;
+        }
+      }
+    }
+  }
+  &:hover {
+    background-color: var(--transparent);
+  }
+}

@@ -1,0 +1,12 @@
+@switch(badgeType) {
+  @case('route-group') {
+    <div class="badge__route-group medium semibold" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor()">
+      <p>{{badgeText}}</p>
+    </div>
+  }
+  @case('line') {
+    <div class="badge__line medium bold">
+      <p>{{badgeText}}</p>
+    </div>
+  }
+}

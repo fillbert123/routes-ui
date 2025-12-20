@@ -1,0 +1,5 @@
+<div class="stack">
+  @for(line of stackData; track line.line_code) {
+    <app-container [containerHasTitle]="true" containerType="route-group" [containerData]="line"/>
+  }
+</div>

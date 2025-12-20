@@ -1,0 +1,7 @@
+@switch(listType) {
+  @case('route-group') {
+    @for(group of listData; track group.route_group_id) {
+      <app-list-item itemType="route-group" [itemData]="group" [lineColor]="lineColor"/>
+    }
+  }
+}

@@ -1,1 +1,52 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--white);
+  background-color: var(--background);
+
+  --green: #00964D;
+  --red: #E22726;
+  --purple: #8F4199;
+  --yellow: #F99D25;
+  --blue: #005DA8;
+  --brown: #9D5B25;
+  --cyan: #01ACBD;
+  --lime: #94C83D;
+  --grey: #718573;
+
+  --white: #FFFFFF;
+  --semiwhite: #A1A1A1;
+  --dummy: #1B6358;
+
+  --transparent: rgba(128, 128, 128, 0.3);
+  --background: #363636;
+}
+
+.semibold {
+  font-weight: 600;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.small {
+  font-size: 10px;
+}
+
+.medium {
+  font-size: 12px;
+}
+
+.large {
+  font-size: 16px;
+}
+
+.xlarge {
+  font-size: 24px;
+}

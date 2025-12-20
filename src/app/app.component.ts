@@ -1,13 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { MainComponent } from "./stage/main/main.component";
+import { SubjectService } from './service/shared/subject.service';
+import { RouteComponent } from "./stage/route/route.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [MainComponent, RouteComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'routes-ui';
+  currentStage: string = 'main';
+  lineColor: string = '';
+  itemData: any;
+
+  constructor(private subjectService: SubjectService) { }
+
+  ngOnInit() {
+    this.subjectService.data$.subscribe(value => {
+      if (value) {
+        this.currentStage = value.nextStage;
+        this.lineColor = value.lineColor;
+        this.itemData = value.itemData;
+      }
+    });
+  }
 }

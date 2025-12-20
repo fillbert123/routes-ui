@@ -1,0 +1,16 @@
+<div class="item" (click)="handleClick()">
+  @switch(itemType) {
+    @case('route-group') {
+      <div class="item__route-group">
+        <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
+        <div class="item__route-group__text">
+          <p class="item__route-group__text__line-name small bold">{{itemData.route_group_name}}</p>
+          <span class="item__route-group__text__route">
+            <p class="item__route-group__text__route__terminus large bold">{{getRouteTerminus()}}</p>
+            <p class="item__route-group__text__route__via medium semibold">{{getRouteVia()}}</p>
+          </span>
+        </div>
+      </div>
+    }
+  }
+</div>

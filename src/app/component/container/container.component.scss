@@ -1,0 +1,20 @@
+.container {
+  background-color: var(--transparent);
+  border-radius: 24px;
+  &__title {
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--dummy);
+    border-radius: 24px 24px 0 0;
+    &__text {
+      margin: 0;
+    }
+  }
+  &__content {
+    padding: 12px;
+  }
+}
