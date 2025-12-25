@@ -1,7 +1,7 @@
 <div class="item">
   @switch(itemType) {
     @case('route-group') {
-      <div class="item__route-group" (click)="handleItemClick()">
+      <div class="item__route-group" (click)="handleItemClick('route-group')">
         <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
         <div class="item__route-group__text">
           <p class="item__route-group__text__line-name small bold">{{itemData.route_group_name}}</p>
@@ -13,7 +13,7 @@
       </div>
     }
     @case('route-station') {
-      <div class="item__route-station">
+      <div class="item__route-station" (click)="handleItemClick('route-station')">
         <div class="item__route-station__leading">
           <div class="item__route-station__leading__figure">
             <div class="item__route-station__leading__figure__point" [style.backgroundColor]="getColor()"></div>
@@ -32,6 +32,96 @@
             <app-badge badgeType="route-group" [badgeText]="interchange.route_group_code" [lineColor]="interchange.line_color"/>
           }
         </div>
+      </div>
+    }
+    @case('track') {
+      <div class="item__track">
+        <div class="item__track__header">
+          <div class="item__track__header__direction-leading">
+            <p class="item__track__header__direction__label xsmall bold">BOUND FOR</p>
+            <span class="item__track__header__direction__info">
+              <img class="item__track__header__direction__info__arrow" src="../../../assets/icons/arrow.left.svg" alt="">
+              <p class="item__track__header__direction__info__terminus-leading medium regular">{{getTerminus('prev')}}</p>
+            </span>
+          </div>
+          <app-badge badgeType="route-group" [badgeText]="itemData.route_group" [lineColor]="itemData.line_color" />
+          <div class="item__track__header__direction-trailing">
+            <p class="item__track__header__direction__label xsmall bold">BOUND FOR</p>
+            <span class="item__track__header__direction__info">
+              <p class="item__track__header__direction__info__terminus-trailing medium regular">{{getTerminus('next')}}</p>
+              <img class="item__track__header__direction__info__arrow" src="../../../assets/icons/arrow.right.svg" alt="">
+            </span>
+          </div>
+        </div>
+        <div class="item__track__figure">
+          <div class="item__track__figure__stations">
+            @for(station of stationDataList; track station.station_code) {
+              <div class="item__track__figure__stations__station">
+                @if(station.station_code) {
+                  <app-badge badgeType="station" [badgeText]="station.station_code" [lineColor]="itemData.line_color" />
+                }
+                <p class="item__track__figure__stations__station__name medium bold">{{station.station_name}}</p>
+              </div>
+            }
+          </div>
+          <div class="item__track__figure__lines">
+            @for(line of lineDataList; track line) {
+              @switch(line) {
+                @case('solid') {
+                  <div class="item__track__figure__lines__line-solid" [style.backgroundColor]="getColor()"></div>
+                }
+                @case('dashed-leading') {
+                  <div class="item__track__figure__lines__line-dashed-leading" [style.backgroundColor]="getColor()"></div>
+                }
+                @case('dashed-trailing') {
+                  <div class="item__track__figure__lines__line-dashed-trailing" [style.backgroundColor]="getColor()"></div>
+                }
+                @default {
+                  <div class="item__track__figure__lines__line-null" [style.backgroundColor]="getColor()"></div>
+                }
+              }
+            }
+          </div>
+        </div>
+        @if(branchStationDataList.length > 0) {
+          <div class="item__track__header-branch">
+            <div class="item__track__header__direction-trailing">
+              <p class="item__track__header__direction__label xsmall bold">BOUND FOR</p>
+              <span class="item__track__header__direction__info">
+                <p class="item__track__header__direction__info__terminus-trailing medium regular">{{getTerminus('branch')}}</p>
+                <img class="item__track__header__direction__info__arrow" src="../../../assets/icons/arrow.right.svg" alt="">
+              </span>
+            </div>
+          </div>
+          <div class="item__track__figure">
+            <div class="item__track__figure__stations">
+              @for(station of branchStationDataList; track station.station_code) {
+                <div class="item__track__figure__stations__station">
+                  @if(station.station_code) {
+                    <app-badge badgeType="station" [badgeText]="station.station_code" [lineColor]="itemData.line_color" />
+                  }
+                  <p class="item__track__figure__stations__station__name medium bold">{{station.station_name}}</p>
+                </div>
+              }
+            </div>
+            <div class="item__track__figure__lines-branch">
+              @for(line of branchLineDataList; track line) {
+                @switch(line) {
+                  @case('curve') {
+                    <div class="item__track__figure__lines__line-curve">
+                      <svg width="84" height="95" viewBox="0 0 84 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 4H17.7922C31.1279 4 41.9063 14.8717 41.7913 28.2069L41.4587 66.7931C41.3438 80.1283 52.1222 91 65.4579 91H84" stroke="#01ACBD" stroke-width="8"/>
+                      </svg>
+                    </div>
+                  }
+                  @case('dashed-trailing') {
+                    <div class="item__track__figure__lines__line-dashed-trailing-branch" [style.backgroundColor]="getColor()"></div>
+                  }
+                }
+              }
+            </div>
+          </div>
+        }
       </div>
     }
   }

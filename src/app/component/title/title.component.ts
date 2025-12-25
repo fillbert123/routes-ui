@@ -9,6 +9,8 @@ import { BadgeComponent } from '../badge/badge.component';
   styleUrl: './title.component.scss'
 })
 export class TitleComponent {
+  @Input() titleType!: string;
   @Input() lineColor!: string;
   @Input() itemData: any;
+  @Input() stationData: any;
 }

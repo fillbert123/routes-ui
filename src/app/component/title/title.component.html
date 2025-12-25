@@ -1,4 +1,12 @@
 <div class="title">
-  <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
-  <p class="title__text xlarge bold">{{itemData.route_group_name}}</p>
+  @switch(titleType) {
+    @case('route-group') {
+      <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
+      <p class="title__text xlarge bold">{{itemData.route_group_name}}</p>
+    }
+    @case('station') {
+      <app-badge badgeType="stations" [stationData]="stationData"/>
+      <p class="title__text xlarge bold">{{itemData.station_name}}</p>
+    }
+  }
 </div>

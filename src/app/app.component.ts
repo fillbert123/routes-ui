@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { MainComponent } from "./stage/main/main.component";
 import { SubjectService } from './service/shared/subject.service';
 import { RouteComponent } from "./stage/route/route.component";
+import { StationComponent } from './stage/station/station.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainComponent, RouteComponent],
+  imports: [MainComponent, RouteComponent, StationComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

@@ -1,5 +1,5 @@
 <div class="route">
-  <app-title [lineColor]="lineColor" [itemData]="itemData"/>
+  <app-title titleType="route-group" [lineColor]="lineColor" [itemData]="itemData"/>
   <app-selection [routes]="routeData" (sendSelectedRouteId)="handleSelectedRouteId($event)"/>
   <app-list [lineColor]="lineColor" [listData]="routeStationData" [routeGroupCode]="itemData.route_group_code" listType="route-station"/>
 </div>

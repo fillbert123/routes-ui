@@ -10,6 +10,9 @@
       @case('route-group') {
         <app-list listType="route-group" [listData]="containerData.route_groups" [lineColor]="containerData.line_color"/>
       }
+      @case('track') {
+        <app-list listType="track" [listData]="containerData"/>
+      }
     }
   </section>
 </div>

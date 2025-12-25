@@ -1,5 +1,4 @@
 .item {
-  height: 48px;
   width: calc(100% - 16px);
   padding: 0 8px;
   display: flex;
@@ -7,6 +6,7 @@
   border-radius: 12px;
   cursor: pointer;
   &__route-group {
+    height: 48px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -30,6 +30,7 @@
     }
   }
   &__route-station {
+    height: 48px;
     width: 100%;
     padding: 0 12px;
     display: flex;
@@ -76,6 +77,168 @@
       flex-direction: row;
       align-items: center;
       gap: 8px;
+    }
+  }
+  &__track {
+    padding: 8px 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    &__header {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      &__direction {
+        &-leading {
+          width: 128px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        &-trailing {
+          width: 128px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+        }
+        &__label {
+          margin: 0;
+          color: var(--semiwhite);
+        }
+        &__info {
+          display: flex;
+          flex-direction: row;
+          gap: 4px;
+          &__arrow {
+            width: 10px;
+          }
+          &__terminus {
+            &-leading {
+              margin: 0;
+            }
+            &-trailing {
+              margin: 0;
+              text-align: end;
+            }
+          }
+        }
+      }
+      &-branch {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+    }
+    &__figure {
+      position: relative;
+      &__stations {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        &__station {
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+          &__name {
+            width: 96px;
+            text-align: center;
+            margin: 0;
+          }
+        }
+      }
+      &__lines {
+        height: fit-content;
+        width: 100%;
+        position: absolute;
+        top: 6px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        &__line {
+          &-solid, &-dashed-leading, &-dashed-trailing, &-dashed-trailing-branch, &-null {
+            z-index: 1;
+            width: calc(100% / 6);
+            height: 8px;
+          }
+          &-dashed {
+            &-leading {
+              mask-image:
+                linear-gradient(to right, transparent 0%, black 100%),
+                repeating-linear-gradient(
+                  to right,
+                  black 0 4px,
+                  transparent 4px 8px
+                );
+              mask-composite: intersect;
+              -webkit-mask-image:
+                linear-gradient(to right, transparent 0%, black 100%),
+                repeating-linear-gradient(
+                  to right,
+                  black 0 4px,
+                  transparent 4px 8px
+                );
+              -webkit-mask-composite: source-in;
+            }
+            &-trailing {
+              mask-image:
+                linear-gradient(to left, transparent 0%, black 100%),
+                repeating-linear-gradient(
+                  to left,
+                  black 0 4px,
+                  transparent 4px 8px
+                );
+              mask-composite: intersect;
+              -webkit-mask-image:
+                linear-gradient(to left, transparent 0%, black 100%),
+                repeating-linear-gradient(
+                  to left,
+                  black 0 4px,
+                  transparent 4px 8px
+                );
+              -webkit-mask-composite: source-in;
+              &-branch {
+                margin: 0 0 5px 0;
+                mask-image:
+                  linear-gradient(to left, transparent 0%, black 100%),
+                  repeating-linear-gradient(
+                    to left,
+                    black 0 4px,
+                    transparent 4px 8px
+                  );
+                mask-composite: intersect;
+                -webkit-mask-image:
+                  linear-gradient(to left, transparent 0%, black 100%),
+                  repeating-linear-gradient(
+                    to left,
+                    black 0 4px,
+                    transparent 4px 8px
+                  );
+                -webkit-mask-composite: source-in;
+              }
+            }
+          }
+          &-null {
+            visibility: hidden;
+          }
+          &-curve {
+            top: -40px;
+          }
+        }
+        &-branch {
+          height: fit-content;
+          width: 100%;
+          position: absolute;
+          top: -81px;
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-end;
+          align-items: flex-end;
+        }
+      }
     }
   }
   &:hover {

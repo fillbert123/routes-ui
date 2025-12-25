@@ -27,12 +27,20 @@ body {
   --background: #363636;
 }
 
+.regular {
+  font-weight: 400;
+}
+
 .semibold {
   font-weight: 600;
 }
 
 .bold {
   font-weight: 700;
+}
+
+.xsmall {
+  font-size: 8px;
 }
 
 .small {

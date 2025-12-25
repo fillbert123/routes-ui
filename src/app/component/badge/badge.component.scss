@@ -26,6 +26,47 @@
     border: 2px var(--white) solid;
     border-radius: 10px;
   }
+  &__stations {
+    width: fit-content;
+    padding: 2px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: row;
+    gap: 2px;
+    border-radius: 10px;
+    &__base {
+      height: 16px;
+      width: 42px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 2px;
+      &-single {
+        height: 16px;
+        width: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+      }
+      &-leading {
+        height: 16px;
+        width: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px 2px 2px 10px;
+      }
+      &-trailing {
+        height: 16px;
+        width: 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 2px 10px 10px 2px;
+      }
+    }
+  }
 }
 
 p {

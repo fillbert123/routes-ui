@@ -9,5 +9,6 @@ import { ContainerComponent } from "../container/container.component";
   styleUrl: './stack.component.scss'
 })
 export class StackComponent {
+  @Input() stackType!: string;
   @Input() stackData: any = [];
 }
