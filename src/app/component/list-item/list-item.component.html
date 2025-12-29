@@ -2,7 +2,11 @@
   @switch(itemType) {
     @case('route-group') {
       <div class="item__route-group" (click)="handleItemClick('route-group')">
-        <app-badge badgeType="route-group" [badgeText]="itemData.route_group_code" [badgeIsActive]="itemData.route_is_active" [lineColor]="lineColor"/>
+        <app-badge
+          badgeType="route-group"
+          [badgeLabel]="itemData.route_group_code"
+          [badgeIsActive]="itemData.route_is_active"
+          [badgeColor]="lineColor"/>
         <div class="item__route-group__text">
           <p class="item__route-group__text__line-name small bold">{{itemData.route_group_name}}</p>
           <span class="item__route-group__text__route">
@@ -24,12 +28,19 @@
               <div class="item__route-station__leading__figure__trailing" [style.backgroundColor]="getColor()"></div>
             }
           </div>
-          <app-badge badgeType="station" [badgeText]="getBadgeText()" [lineColor]="lineColor"/>
+          <app-badge 
+            badgeType="station" 
+            [badgeLabel]="getBadgeText()" 
+            [badgeColor]="lineColor"/>
           <p class="large bold">{{itemData.station_name}}</p>
         </div>
         <div class="item__route-station__trailing">
           @for(interchange of filterizedInterchange; track interchange.line_station_code) {
-            <app-badge badgeType="route-group" [badgeText]="interchange.route_group_code" [lineColor]="interchange.line_color"/>
+            <app-badge
+              badgeType="route-group" 
+              [badgeLabel]="interchange.route_group_code" 
+              [badgeColor]="interchange.line_color"
+            />
           }
         </div>
       </div>
@@ -44,7 +55,11 @@
               <p class="item__track__header__direction__info__terminus-leading medium regular">{{getTerminus('prev')}}</p>
             </span>
           </div>
-          <app-badge badgeType="route-group" [badgeText]="itemData.route_group" [lineColor]="itemData.line_color" />
+          <app-badge 
+            badgeType="route-group" 
+            [badgeLabel]="itemData.route_group" 
+            [badgeColor]="lineColor"
+          />
           <div class="item__track__header__direction-trailing">
             <p class="item__track__header__direction__label xsmall bold">BOUND FOR</p>
             <span class="item__track__header__direction__info">
@@ -58,7 +73,11 @@
             @for(station of stationDataList; track station.station_code) {
               <div class="item__track__figure__stations__station">
                 @if(station.station_code) {
-                  <app-badge badgeType="station" [badgeText]="station.station_code" [lineColor]="itemData.line_color" />
+                  <app-badge 
+                    badgeType="station" 
+                    [badgeLabel]="station.station_code" 
+                    [badgeColor]="lineColor"
+                  />
                 }
                 <p class="item__track__figure__stations__station__name medium bold">{{station.station_name}}</p>
               </div>
@@ -98,7 +117,11 @@
               @for(station of branchStationDataList; track station.station_code) {
                 <div class="item__track__figure__stations__station">
                   @if(station.station_code) {
-                    <app-badge badgeType="station" [badgeText]="station.station_code" [lineColor]="itemData.line_color" />
+                    <app-badge 
+                      badgeType="station" 
+                      [badgeLabel]="station.station_code" 
+                      [badgeColor]="lineColor"
+                    />
                   }
                   <p class="item__track__figure__stations__station__name medium bold">{{station.station_name}}</p>
                 </div>
@@ -110,7 +133,11 @@
                   @case('curve') {
                     <div class="item__track__figure__lines__line-curve">
                       <svg width="84" height="95" viewBox="0 0 84 95" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M0 4H17.7922C31.1279 4 41.9063 14.8717 41.7913 28.2069L41.4587 66.7931C41.3438 80.1283 52.1222 91 65.4579 91H84" stroke="#01ACBD" stroke-width="8"/>
+                        <path 
+                          d="M0 4H17.7922C31.1279 4 41.9063 14.8717 41.7913 28.2069L41.4587 66.7931C41.3438 80.1283 52.1222 91 65.4579 91H84" 
+                          stroke="#01ACBD" 
+                          stroke-width="8"
+                        />
                       </svg>
                     </div>
                   }

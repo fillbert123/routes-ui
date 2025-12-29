@@ -1,5 +1,19 @@
 <div class="route">
-  <app-title titleType="route-group" [lineColor]="lineColor" [itemData]="itemData"/>
-  <app-selection [routes]="routeData" (sendSelectedRouteId)="handleSelectedRouteId($event)"/>
-  <app-list [lineColor]="lineColor" [listData]="routeStationData" [routeGroupCode]="itemData.route_group_code" listType="route-station"/>
+  <app-title
+    titleType="route-group"
+    [badgeColor]="lineColor"
+    [title]="routeData.route_group_name"
+    [badgeLabel]="routeData.route_group_code"
+    [badgeIsActive]="routeData.route_is_active"
+  />
+  <app-selection 
+    [selectionData]="terminusData" 
+    (onClickItem)="handleSelectedRouteId($event)"
+  />
+  <app-list
+    listType="route-station"
+    [lineColor]="lineColor"
+    [listData]="routeStationData"
+    [routeGroupCode]="routeData.route_group_code"
+  />
 </div>

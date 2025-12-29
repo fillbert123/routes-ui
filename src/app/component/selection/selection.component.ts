@@ -8,12 +8,12 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './selection.component.scss'
 })
 export class SelectionComponent {
-  @Input() routes: any;
-  @Output() sendSelectedRouteId = new EventEmitter();
+  @Input() selectionData: any;
+  @Output() onClickItem = new EventEmitter();
   selectedIndex: number = 0;
 
   handleItemClick(index: number, id: number): void {
     this.selectedIndex = index;
-    this.sendSelectedRouteId.emit(id);
+    this.onClickItem.emit(id);
   }
 }

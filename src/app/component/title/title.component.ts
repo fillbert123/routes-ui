@@ -10,7 +10,9 @@ import { BadgeComponent } from '../badge/badge.component';
 })
 export class TitleComponent {
   @Input() titleType!: string;
-  @Input() lineColor!: string;
-  @Input() itemData: any;
-  @Input() stationData: any;
+  @Input() title!: string;
+  @Input() badgeColor: string = "";
+  @Input() badgeLabel: string = "";
+  @Input() badgeIsActive: boolean = true;
+  @Input() stationInterchange: any;
 }

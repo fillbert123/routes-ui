@@ -1,17 +1,28 @@
 <div class="container">
   @if(containerHasTitle) {
     <div class="container__title" [style.backgroundColor]="getColor()">
-      <app-badge badgeType="line" [badgeText]="containerData.line_code"/>
+      <app-badge
+        badgeType="line"
+        [badgeLabel]="containerData.line_code"
+      />
       <p class="container__title__text large bold">{{containerData.line_name}}</p>
     </div>
   }
   <section class="container__content">
     @switch(containerType) {
       @case('route-group') {
-        <app-list listType="route-group" [listData]="containerData.route_groups" [lineColor]="containerData.line_color"/>
+        <app-list 
+          listType="route-group"
+          [listData]="containerData.route_groups" 
+          [lineColor]="containerData.line_color"
+        />
       }
       @case('track') {
-        <app-list listType="track" [listData]="containerData"/>
+        <app-list 
+          listType="track" 
+          [listData]="containerData.track" 
+          [lineColor]="containerData.line_color"
+        />
       }
     }
   </section>

@@ -2,21 +2,35 @@
   @case('route-group') {
     <div class="list">
       @for(group of listData; track group.route_group_id) {
-        <app-list-item itemType="route-group" [itemData]="group" [lineColor]="lineColor"/>
+        <app-list-item 
+          itemType="route-group" 
+          [itemData]="group" 
+          [lineColor]="lineColor"
+        />
       }
     </div>
   }
   @case('route-station') {
     <div class="list">
       @for(station of listData; track station.station_id; let isFirst = $first; let isLast = $last) {
-        <app-list-item itemType="route-station" [itemData]="station" [lineColor]="lineColor" [routeGroupCode]="routeGroupCode" [isFirst]="isFirst" [isLast]="isLast"/>
+        <app-list-item 
+          itemType="route-station" 
+          [itemData]="station" 
+          [lineColor]="lineColor" 
+          [routeGroupCode]="routeGroupCode" 
+          [isFirst]="isFirst" 
+          [isLast]="isLast"
+        />
       }
     </div>
   }
   @case('track') {
     <div class="list__track">
-      @for(track of listData.track; track listData.track.current_station_code) {
-        <app-list-item itemType="track" [itemData]="track"/>
+      @for(track of listData; track track.current_station_code) {
+        <app-list-item
+          itemType="track"
+          [itemData]="track"
+          [lineColor]="lineColor"/>
       }
     </div>
   }

@@ -12,13 +12,15 @@ import { StackComponent } from "../../component/stack/stack.component";
 })
 export class StationComponent {
   isLoading: boolean = false;
-  stationData: any;
+  stationTrack: any;
   @Input() itemData: any;
+
+  @Input() stationData: any;
 
   constructor(private routeService: RouteService) { };
 
   ngOnInit() {
-    this.fetchRouteDetail(this.itemData.station_id);
+    this.fetchRouteDetail(this.stationData.station_id);
   }
 
   fetchRouteDetail(id: number) {
@@ -26,7 +28,7 @@ export class StationComponent {
 
     this.routeService.getRouteDetail(id).subscribe({
       next: (res) => {
-        this.stationData = res;
+        this.stationTrack = res;
         this.isLoading = false;
       },
       error: (err) => {

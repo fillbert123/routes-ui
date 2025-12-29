@@ -1,14 +1,24 @@
-<div class="stack">
-  @switch(stackType) {
-    @case('main') {
+@switch(stackType) {
+  @case('main') {
+    <div class="stack">
       @for(line of stackData; track line.line_code) {
-        <app-container [containerHasTitle]="true" containerType="route-group" [containerData]="line"/>
+        <app-container
+          containerType="route-group" 
+          [containerHasTitle]="true"
+          [containerData]="line"
+        />
       }
-    }
-    @case('station') {
-      @for(track of stackData; track track.current_station_code) {
-        <app-container [containerHasTitle]="true" containerType="track" [containerData]="track"/>
-      }
-    }
+    </div>
   }
-</div>
+  @case('station') {
+    <div class="stack">
+      @for(track of stackData; track track.current_station_code) {
+        <app-container
+          containerType="track" 
+          [containerHasTitle]="true"
+          [containerData]="track"
+        />
+      }
+    </div>
+  }
+}

@@ -1,40 +1,40 @@
 @switch(badgeType) {
   @case('route-group') {
-    <div class="badge__route-group" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(lineColor)">
-      <p class="medium semibold">{{badgeText}}</p>
+    <div class="badge__route-group" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
+      <p class="medium semibold">{{badgeLabel}}</p>
     </div>
   }
   @case('line') {
     <div class="badge__line">
-      <p class="medium bold">{{badgeText}}</p>
+      <p class="medium bold">{{badgeLabel}}</p>
     </div>
   }
   @case('station') {
-    <div class="badge__station" [style.backgroundColor]="getColor(lineColor)">
-      <p class="medium bold">{{badgeText}}</p>
+    <div class="badge__station" [style.backgroundColor]="getColor(badgeColor)">
+      <p class="medium bold">{{badgeLabel}}</p>
     </div>
   }
   @case('stations') {
     <div class="badge__stations">
-      @for(track of formattedTrack; track track.current_station_code; let isFirst = $first; let isLast = $last) {
+      @for(badge of badgeData; track badge.line_station_code; let isFirst = $first; let isLast = $last) {
         @if(isFirst && isLast) {
-          <div class="badge__stations__base-single" [style.backgroundColor]="getColor(track.line_color)">
-            <p class="medium bold">{{track.current_station_code}}</p>
+          <div class="badge__stations__base-single" [style.backgroundColor]="getColor(badge.line_color)">
+            <p class="medium bold">{{badge.line_station_code}}</p>
           </div>
         }
         @else if(isFirst) {
-          <div class="badge__stations__base-leading" [style.backgroundColor]="getColor(track.line_color)">
-            <p class="medium bold">{{track.current_station_code}}</p>
+          <div class="badge__stations__base-leading" [style.backgroundColor]="getColor(badge.line_color)">
+            <p class="medium bold">{{badge.line_station_code}}</p>
           </div>
         }
         @else if (isLast) {
-          <div class="badge__stations__base-trailing" [style.backgroundColor]="getColor(track.line_color)">
-            <p class="medium bold">{{track.current_station_code}}</p>
+          <div class="badge__stations__base-trailing" [style.backgroundColor]="getColor(badge.line_color)">
+            <p class="medium bold">{{badge.line_station_code}}</p>
           </div>
         }
         @else {
-          <div class="badge__stations__base" [style.backgroundColor]="getColor(track.line_color)">
-            <p class="medium bold">{{track.current_station_code}}</p>
+          <div class="badge__stations__base" [style.backgroundColor]="getColor(badge.line_color)">
+            <p class="medium bold">{{badge.line_station_code}}</p>
           </div>
         }
       }

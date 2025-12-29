@@ -1,8 +1,8 @@
 <div class="selection">
-  @for(route of routes; track route.id; let i = $index) {
-    <div class="selection__item" (click)="handleItemClick(i, route.id)" [class.selected]="i === selectedIndex">
+  @for(selection of selectionData; track selection.id; let i = $index) {
+    <div class="selection__item" (click)="handleItemClick(i, selection.id)" [class.selected]="i === selectedIndex">
       <p class="selection__item__label medium bold">Bound for</p>
-      <p class="selection__item__route large bold">{{route.name_en}}</p>
+      <p class="selection__item__route large bold">{{selection.label}}</p>
     </div>
   }
 </div>

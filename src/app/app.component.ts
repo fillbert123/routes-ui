@@ -15,7 +15,8 @@ export class AppComponent {
   title = 'routes-ui';
   currentStage: string = 'main';
   lineColor: string = '';
-  itemData: any;
+  routeStageData: any;
+  stationStageData: any;
 
   constructor(private subjectService: SubjectService) { }
 
@@ -24,7 +25,14 @@ export class AppComponent {
       if (value) {
         this.currentStage = value.nextStage;
         this.lineColor = value.lineColor;
-        this.itemData = value.itemData;
+        switch(value.nextStage) {
+          case 'route':
+            this.routeStageData = value.itemData;
+            break;
+          case 'station':
+            this.stationStageData = value.itemData;
+            break;
+        }
       }
     });
   }

@@ -9,7 +9,7 @@ import { ListItemComponent } from "../list-item/list-item.component";
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  @Input() listType: string = "";
+  @Input() listType!: string;
   @Input() listData: any = [];
   @Input() lineColor: string = "";
   @Input() routeGroupCode!: string;

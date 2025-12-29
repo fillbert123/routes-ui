@@ -31,10 +31,9 @@ export class ListItemComponent {
 
   ngOnInit() {
     if(this.itemType === 'route-station') {
-      this.getFilterizedInterchange();
+      this.setFilterizedInterchange();
     }
     if(this.itemType === 'track') {
-      this.lineColor = this.itemData.line_color;
       this.setTerminusOrder();
     }
   }
@@ -92,7 +91,7 @@ export class ListItemComponent {
     }
   }
 
-  getFilterizedInterchange() {
+  setFilterizedInterchange() {
     this.filterizedInterchange = this.itemData.interchanges.filter((interchange: any) => {
       return interchange.route_group_code !== this.routeGroupCode
     })

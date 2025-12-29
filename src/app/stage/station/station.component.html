@@ -1,4 +1,11 @@
 <div class="station">
-  <app-title titleType="station" [itemData]="itemData" [stationData]="stationData"/>
-  <app-stack stackType="station" [stackData]="stationData"/>
+  <app-title
+    titleType="station"
+    [title]="stationData.station_name"
+    [stationInterchange]="stationData.interchanges"
+  />
+  <app-stack 
+    stackType="station"
+    [stackData]="stationTrack"
+  />
 </div>

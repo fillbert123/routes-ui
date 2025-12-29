@@ -10,8 +10,8 @@ import { ListComponent } from "../list/list.component";
   styleUrl: './container.component.scss'
 })
 export class ContainerComponent {
-  @Input() containerHasTitle: boolean = true;
-  @Input() containerType: string = "";
+  @Input() containerHasTitle!: boolean;
+  @Input() containerType!: string;
   @Input() containerData: any = {};
 
   getColor() {

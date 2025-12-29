@@ -4,10 +4,15 @@
       <app-main/>
     }
     @case('route') {
-      <app-route [lineColor]="lineColor" [itemData]="itemData"/>
+      <app-route
+        [lineColor]="lineColor"
+        [routeData]="routeStageData";
+      />
     }
     @case('station') {
-      <app-station [itemData]="itemData"/>
+      <app-station
+        [stationData]="stationStageData"
+      />
     }
   }
 </main>

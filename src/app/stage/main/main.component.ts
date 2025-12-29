@@ -11,7 +11,7 @@ import { RouteService } from '../../service/api/route.service';
 })
 export class MainComponent implements OnInit{
   isLoading: boolean = false;
-  mainData: any;
+  mainStageData: any;
 
   constructor(private routeService: RouteService) { };
 
@@ -24,7 +24,7 @@ export class MainComponent implements OnInit{
 
     this.routeService.getAllRoutesByLine().subscribe({
       next: (res) => {
-        this.mainData = res;
+        this.mainStageData = res;
         this.isLoading = false;
       },
       error: (err) => {

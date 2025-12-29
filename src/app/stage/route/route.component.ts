@@ -14,15 +14,20 @@ import { ListComponent } from "../../component/list/list.component";
 export class RouteComponent {
   isLoading: boolean = false;
   @Input() lineColor!: string;
-  @Input() itemData: any;
-  routeData: any = [];
+  @Input() routeGroupId!: number;
+  @Input() routeGroupName!: string;
+  @Input() routeGroupCode!: string;
+  @Input() routeIsActive!: boolean;
+  @Input() routeData: any;
+
+  terminusData: any = [];
   selectedRouteId!: number;
   routeStationData: any = [];
 
   constructor(private routeService: RouteService) { };
   
   ngOnInit() {
-    this.fetchRouteByRouteGroupId(this.itemData.route_group_id);
+    this.fetchRouteByRouteGroupId(this.routeData.route_group_id);
   }
 
   handleSelectedRouteId(index: number) {
@@ -35,15 +40,23 @@ export class RouteComponent {
 
     this.routeService.getRouteByRouteGroupId(id).subscribe({
       next: (res) => {
-        this.routeData = res;
         this.selectedRouteId = res[0].id;
+        this.setRouteData(res);
         this.fetchRouteStation(this.selectedRouteId);
-        this.isLoading = false;
       },
       error: (err) => {
         console.log('error', err);
         this.isLoading = false;
       }
+    })
+  }
+
+  setRouteData(data: any) {
+    data.forEach((item: any) => {
+      this.terminusData.push({
+        'id': item.id,
+        'label': item.name_en
+      })
     })
   }
 
