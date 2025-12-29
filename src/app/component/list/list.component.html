@@ -11,7 +11,7 @@
     </div>
   }
   @case('route-station') {
-    <div class="list">
+    <div class="list__station">
       @for(station of listData; track station.station_id; let isFirst = $first; let isLast = $last) {
         <app-list-item 
           itemType="route-station" 

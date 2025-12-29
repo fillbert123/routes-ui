@@ -1,16 +1,19 @@
 .item {
-  width: calc(100% - 16px);
-  padding: 0 8px;
   display: flex;
   align-items: center;
-  border-radius: 12px;
-  cursor: pointer;
   &__route-group {
     height: 48px;
+    width: calc(100% - 16px);
+    padding: 0 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--transparent);
+    }
     &__text {
       display: flex;
       flex-direction: column;
@@ -31,12 +34,17 @@
   }
   &__route-station {
     height: 48px;
-    width: 100%;
-    padding: 0 12px;
+    width: calc(100% - 16px);
+    padding: 0 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    border-radius: 12px;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--transparent);
+    }
     &__leading {
       display: flex;
       flex-direction: row;
@@ -138,11 +146,18 @@
         flex-direction: row;
         justify-content: space-around;
         &__station {
+          padding: 4px 8px;
+          height: fit-content;
           z-index: 2;
           display: flex;
           flex-direction: column;
           align-items: center;
           gap: 4px;
+          border-radius: 12px;
+          cursor: pointer;
+          &:hover {
+            background-color: var(--transparent);
+          }
           &__name {
             width: 96px;
             text-align: center;
@@ -154,7 +169,7 @@
         height: fit-content;
         width: 100%;
         position: absolute;
-        top: 6px;
+        top: 10px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -232,7 +247,7 @@
           height: fit-content;
           width: 100%;
           position: absolute;
-          top: -81px;
+          top: -85px;
           display: flex;
           flex-direction: row;
           justify-content: flex-end;
@@ -240,8 +255,5 @@
         }
       }
     }
-  }
-  &:hover {
-    background-color: var(--transparent);
   }
 }

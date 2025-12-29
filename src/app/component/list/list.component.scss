@@ -1,4 +1,9 @@
 .list {
+  &__station {
+    padding: 12px;
+    background-color: var(--transparent);
+    border-radius: 24px;
+  }
   &__track {
     display: flex;
     flex-direction: column;
