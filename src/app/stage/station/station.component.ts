@@ -13,13 +13,12 @@ import { StackComponent } from "../../component/stack/stack.component";
 export class StationComponent {
   isLoading: boolean = false;
   stationTrack: any;
-  @Input() itemData: any;
-
+  interchangeData: any = [];
   @Input() stationData: any;
 
   constructor(private routeService: RouteService) { };
 
-  ngOnInit() {
+  ngOnChanges() {
     this.fetchRouteDetail(this.stationData.station_id);
   }
 
@@ -29,6 +28,16 @@ export class StationComponent {
     this.routeService.getRouteDetail(id).subscribe({
       next: (res) => {
         this.stationTrack = res;
+        this.interchangeData = [];
+        this.stationTrack.forEach((line: any) => {
+          line.track.forEach((track: any) => {
+            this.interchangeData.push({
+              'line_color': line.line_color,
+              'line_station_code': track.current_station_code,
+              'route_group_code': track.route_group
+            })
+          })
+        })
         this.isLoading = false;
       },
       error: (err) => {

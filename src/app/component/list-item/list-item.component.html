@@ -1,7 +1,7 @@
 <div class="item">
   @switch(itemType) {
     @case('route-group') {
-      <div class="item__route-group" (click)="handleItemClick('route-group')">
+      <div class="item__route-group" (click)="handleItemClick('route-group', null)">
         <app-badge
           badgeType="route-group"
           [badgeLabel]="itemData.route_group_code"
@@ -17,7 +17,7 @@
       </div>
     }
     @case('route-station') {
-      <div class="item__route-station" (click)="handleItemClick('route-station')">
+      <div class="item__route-station" (click)="handleItemClick('route-station', null)">
         <div class="item__route-station__leading">
           <div class="item__route-station__leading__figure">
             <div class="item__route-station__leading__figure__point" [style.backgroundColor]="getColor()"></div>
@@ -71,7 +71,7 @@
         <div class="item__track__figure">
           <div class="item__track__figure__stations">
             @for(station of stationDataList; track station.station_code) {
-              <div class="item__track__figure__stations__station">
+              <div class="item__track__figure__stations__station" (click)="handleItemClick('track', station)">
                 @if(station.station_code) {
                   <app-badge 
                     badgeType="station" 
@@ -115,7 +115,7 @@
           <div class="item__track__figure">
             <div class="item__track__figure__stations">
               @for(station of branchStationDataList; track station.station_code) {
-                <div class="item__track__figure__stations__station">
+                <div class="item__track__figure__stations__station" (click)="handleItemClick('track', station)">
                   @if(station.station_code) {
                     <app-badge 
                       badgeType="station" 

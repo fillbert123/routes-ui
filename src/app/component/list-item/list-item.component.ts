@@ -69,7 +69,7 @@ export class ListItemComponent {
     return code.line_station_code;
   }
 
-  handleItemClick(type: string) {
+  handleItemClick(type: string, stationData: any) {
     let data;
     switch(type) {
       case 'route-group':
@@ -87,6 +87,21 @@ export class ListItemComponent {
           itemData: this.itemData
         }
         this.subjectService.sendData(data);
+        break;
+      case 'track':
+        console.log('station data', stationData);
+        if(stationData.station_id) {
+          data = {
+            nextStage: 'station',
+            lineColor: this.lineColor,
+            itemData: {
+              station_id: stationData.station_id,
+              station_name: stationData.station_name
+            }
+          }
+          console.log('data', data);
+          this.subjectService.sendData(data);
+        }
         break;
     }
   }
@@ -156,6 +171,7 @@ export class ListItemComponent {
           acc[curr.next_station_name] ??= {
             next_station_name: curr.next_station_name,
             next_station_code: curr.next_station_code,
+            next_station_id: curr.next_station_id,
             end_station_name: []
           };
           acc[curr.next_station_name].end_station_name.push(curr.end_station_name);
@@ -192,6 +208,7 @@ export class ListItemComponent {
           acc[curr.next_station_name] ??= {
             next_station_name: curr.next_station_name,
             next_station_code: curr.next_station_code,
+            next_station_id: curr.next_station_id,
             end_station_name: []
           };
           acc[curr.next_station_name].end_station_name.push(curr.end_station_name);
@@ -250,18 +267,22 @@ export class ListItemComponent {
   setStationDataList(dataListType: string, prev: any, next: any) {
     switch(dataListType) {
       case 'station': {
+        console.log('prev and next', prev, next);
         this.stationDataList.push(
           {
             station_name: (prev) ? prev.next_station_name : null,
-            station_code: (prev) ? prev.next_station_code : null
+            station_code: (prev) ? prev.next_station_code : null,
+            station_id: (prev) ? prev.next_station_id : null
           },
           {
             station_name: this.itemData.current_station_name,
-            station_code: this.itemData.current_station_code
+            station_code: this.itemData.current_station_code,
+            station_id: null
           },
           {
             station_name: (next) ? next.next_station_name : null,
-            station_code: (next) ? next.next_station_code : null
+            station_code: (next) ? next.next_station_code : null,
+            station_id: (next) ? next.next_station_id : null
           }
         )
         break;
@@ -270,15 +291,18 @@ export class ListItemComponent {
         this.branchStationDataList.push(
           {
             station_name: (prev) ? prev.next_station_name : null,
-            station_code: (prev) ? prev.next_station_code : null
+            station_code: (prev) ? prev.next_station_code : null,
+            station_id: (prev) ? prev.next_station_id : null
           },
           {
             station_name: null,
-            station_code: null
+            station_code: null,
+            station_id: null
           },
           {
             station_name: (next) ? next.next_station_name : null,
-            station_code: (next) ? next.next_station_code : null
+            station_code: (next) ? next.next_station_code : null,
+            station_id: (next) ? next.next_station_id : null,
           }
         )
         break;
