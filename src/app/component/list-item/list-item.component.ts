@@ -89,7 +89,6 @@ export class ListItemComponent {
         this.subjectService.sendData(data);
         break;
       case 'track':
-        console.log('station data', stationData);
         if(stationData.station_id) {
           data = {
             nextStage: 'station',
@@ -99,7 +98,6 @@ export class ListItemComponent {
               station_name: stationData.station_name
             }
           }
-          console.log('data', data);
           this.subjectService.sendData(data);
         }
         break;
@@ -267,7 +265,6 @@ export class ListItemComponent {
   setStationDataList(dataListType: string, prev: any, next: any) {
     switch(dataListType) {
       case 'station': {
-        console.log('prev and next', prev, next);
         this.stationDataList.push(
           {
             station_name: (prev) ? prev.next_station_name : null,
