@@ -14,6 +14,7 @@ export class ListItemComponent {
   @Input() itemType: string = "route-group";
   @Input() itemData: any = {};
   @Input() lineColor: string = "";
+  @Input() lineName: string = "";
   @Input() routeGroupCode: string = "";
   @Input() isFirst: boolean = false;
   @Input() isLast: boolean = false;
@@ -116,7 +117,7 @@ export class ListItemComponent {
         this.terminusOrder = res.reverse();
         this.setStationOrder();
         this.setLineOrder();
-        if(this.itemData.current_station_name === 'Bahar Junction') {
+        if(this.itemData.current_station_name === 'Bahar Junction' || (this.terminusOrder.length === 2 && this.itemData.next_station.length === 3)) {
           this.setBranchLineOrder();
         }
       },
@@ -133,8 +134,20 @@ export class ListItemComponent {
       this.lowerTerminusName = lowerTerminus.name_en;
       this.upperTerminusName = upperTerminus.name_en;
 
-      const prev = this.findNextStationByTerminusName(lowerTerminus.name_en, this.itemData.next_station);
-      const next = this.findNextStationByTerminusName(upperTerminus.name_en, this.itemData.next_station);
+      if(this.itemData.current_station_name === 'South View' || this.itemData.current_station_name === 'Keat Hong' || this.itemData.current_station_name === 'Teck Whye') {
+        this.itemData.next_station.reverse();
+      }
+
+      let prev;
+      let next;
+
+      if(this.lowerTerminusName === this.upperTerminusName) {
+        prev = this.itemData.next_station[1];
+        next = this.itemData.next_station[0];
+      } else {
+        prev = this.findNextStationByTerminusName(lowerTerminus.name_en, this.itemData.next_station);
+        next = this.findNextStationByTerminusName(upperTerminus.name_en, this.itemData.next_station);
+      }
 
       this.setStationDataList('station', prev, next);
     } else if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 1) {
@@ -149,6 +162,15 @@ export class ListItemComponent {
       if(this.itemData.current_station_name === this.terminusOrder[1].name_en) {
         this.setStationDataList('station', this.itemData.next_station[0], null)
       }
+    } else if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 3) {
+      const [prev, next, branch] = this.itemData.next_station;
+
+      this.lowerTerminusName = this.terminusOrder[0].name_en;
+      this.upperTerminusName = this.terminusOrder[0].name_en;
+      this.branchTerminusName = this.terminusOrder[0].name_en;
+
+      this.setStationDataList('station', prev, next)
+      this.setStationDataList('branch', null, branch);
     } else if(this.itemData.current_station_name === 'Bahar Junction') {
       const [upperTerminus, lowerTerminus, branchTerminus] = this.terminusOrder;
         
@@ -227,10 +249,10 @@ export class ListItemComponent {
 
   setLineOrder() {
     this.stationDataList.forEach((station: any, index: number) => {
-      if(station.station_name === this.lowerTerminusName) {
+      if(station.station_name === this.lowerTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
         this.lineDataList.push(null);
         this.lineDataList.push('solid');
-      } else if(station.station_name === this.upperTerminusName) {
+      } else if(station.station_name === this.upperTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
         this.lineDataList.push('solid');
         this.lineDataList.push(null);
       } else if(station.station_name) {
@@ -321,5 +343,16 @@ export class ListItemComponent {
 
   getColor() {
     return 'var(--' + this.lineColor + ')';
+  }
+
+  getColorHex() {
+    switch(this.lineColor) {
+      case 'cyan': 
+        return '#01ACBD';
+      case 'grey': 
+        return '#718573';
+      default:
+        return;
+    }
   }
 }

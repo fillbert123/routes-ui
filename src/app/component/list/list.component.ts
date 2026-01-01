@@ -12,5 +12,6 @@ export class ListComponent {
   @Input() listType!: string;
   @Input() listData: any = [];
   @Input() lineColor: string = "";
+  @Input() lineName: string = "";
   @Input() routeGroupCode!: string;
 }
