@@ -14,6 +14,7 @@
     cursor: pointer;
     &__label, &__route {
       margin: 0;
+      text-align: center;
     }
     &__label {
       color: var(--semiwhite);

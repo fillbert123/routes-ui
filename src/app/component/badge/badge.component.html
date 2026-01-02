@@ -10,7 +10,7 @@
     </div>
   }
   @case('station') {
-    <div class="badge__station" [style.backgroundColor]="getColor(badgeColor)">
+    <div class="badge__station" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
       <p class="medium bold">{{badgeLabel}}</p>
     </div>
   }

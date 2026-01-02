@@ -31,14 +31,16 @@
           <app-badge 
             badgeType="station" 
             [badgeLabel]="getBadgeText()" 
+            [badgeIsActive]="getIsStationActive()"
             [badgeColor]="lineColor"/>
-          <p class="large bold">{{itemData.station_name}}</p>
+          <p class="large bold" [style.opacity]="getIsStationActive() ? 1 : 0.5">{{itemData.station_name}}</p>
         </div>
         <div class="item__route-station__trailing">
           @for(interchange of filterizedInterchange; track interchange.line_station_code) {
             <app-badge
               badgeType="route-group" 
               [badgeLabel]="interchange.route_group_code" 
+              [badgeIsActive]="interchange.line_station_is_active"
               [badgeColor]="interchange.line_color"
             />
           }

@@ -32,6 +32,7 @@ export class ListItemComponent {
 
   ngOnInit() {
     if(this.itemType === 'route-station') {
+      console.log('this', this);
       this.setFilterizedInterchange();
     }
     if(this.itemType === 'track') {
@@ -68,6 +69,13 @@ export class ListItemComponent {
       return interchange.route_group_code === this.routeGroupCode;
     })
     return code.line_station_code;
+  }
+
+  getIsStationActive() {
+    let code = this.itemData.interchanges.find((interchange: any) => {
+      return interchange.route_group_code === this.routeGroupCode;
+    })
+    return code.line_station_is_active;
   }
 
   handleItemClick(type: string, stationData: any) {
