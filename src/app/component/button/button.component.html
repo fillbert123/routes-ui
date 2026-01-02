@@ -1,0 +1,10 @@
+@if(isDisabled) {
+  <button class="button-disabled" (click)="handleButtonClick()">
+    <img class="button__icon-disabled" src="../../../assets/icons/chevron.backward.svg" alt="">
+  </button>
+}
+@else {
+  <button class="button" (click)="handleButtonClick()">
+    <img class="button__icon" src="../../../assets/icons/chevron.backward.svg" alt="">
+  </button>
+}

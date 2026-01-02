@@ -32,7 +32,6 @@ export class ListItemComponent {
 
   ngOnInit() {
     if(this.itemType === 'route-station') {
-      console.log('this', this);
       this.setFilterizedInterchange();
     }
     if(this.itemType === 'track') {

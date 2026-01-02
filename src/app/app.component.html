@@ -1,18 +1,23 @@
 <main class="main">
-  @switch(currentStage) {
-    @case('main') {
-      <app-main/>
+  <nav>
+    <app-button [isDisabled]="isOnMainStage()" (onClickButton)="handleBackNavigation()"/>
+  </nav>
+  <section>
+    @switch(currentStage) {
+      @case('main') {
+        <app-main/>
+      }
+      @case('route') {
+        <app-route
+          [lineColor]="lineColor"
+          [routeData]="routeStageData"
+        />
+      }
+      @case('station') {
+        <app-station
+          [stationData]="stationStageData"
+        />
+      }
     }
-    @case('route') {
-      <app-route
-        [lineColor]="lineColor"
-        [routeData]="routeStageData"
-      />
-    }
-    @case('station') {
-      <app-station
-        [stationData]="stationStageData"
-      />
-    }
-  }
+  </section>
 </main>

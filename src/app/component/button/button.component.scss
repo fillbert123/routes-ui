@@ -1,0 +1,23 @@
+.button {
+  height: 42px;
+  width: 42px;
+  background-color: var(--transparent);
+  border: none;
+  border-radius: 24px;
+  cursor: pointer;
+  &-disabled {
+    height: 42px;
+    width: 42px;
+    background-color: var(--transparent);
+    border: none;
+    border-radius: 24px;
+    cursor: not-allowed;
+  }
+  &__icon {
+    height: 16px;
+    &-disabled {
+      height: 16px;
+      opacity: 0.5;
+    }
+  };
+}

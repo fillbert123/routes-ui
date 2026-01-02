@@ -3,11 +3,12 @@ import { MainComponent } from "./stage/main/main.component";
 import { SubjectService } from './service/shared/subject.service';
 import { RouteComponent } from "./stage/route/route.component";
 import { StationComponent } from './stage/station/station.component';
+import { ButtonComponent } from './component/button/button.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainComponent, RouteComponent, StationComponent],
+  imports: [MainComponent, RouteComponent, StationComponent, ButtonComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -35,5 +36,20 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  handleBackNavigation() {
+    switch(this.currentStage) {
+      case 'station':
+        this.currentStage = 'route';
+        break;
+      case 'route':
+        this.currentStage = 'main';
+        break;
+    }
+  }
+
+  isOnMainStage() {
+    return (this.currentStage === 'main')
   }
 }
