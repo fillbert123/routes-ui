@@ -24,8 +24,10 @@ export class AppComponent {
   ngOnInit() {
     this.subjectService.data$.subscribe(value => {
       if (value) {
+        if(this.currentStage !== value.nextStage) {
+          this.lineColor = value.lineColor;
+        }
         this.currentStage = value.nextStage;
-        this.lineColor = value.lineColor;
         switch(value.nextStage) {
           case 'route':
             this.routeStageData = value.itemData;
