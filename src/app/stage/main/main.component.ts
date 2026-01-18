@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { StackComponent } from "../../component/stack/stack.component";
 import { RouteService } from '../../service/api/route.service';
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [StackComponent],
+  imports: [StackComponent, LoadingComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

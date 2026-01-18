@@ -9,6 +9,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class SelectionComponent {
   @Input() selectionData: any;
+  @Input() isLoading: boolean = false;
   @Output() onClickItem = new EventEmitter();
   selectedIndex: number = 0;
 

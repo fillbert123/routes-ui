@@ -3,11 +3,12 @@ import { RouteService } from '../../service/api/route.service';
 import { TitleComponent } from "../../component/title/title.component";
 import { SelectionComponent } from '../../component/selection/selection.component';
 import { ListComponent } from "../../component/list/list.component";
+import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
   selector: 'app-route',
   standalone: true,
-  imports: [TitleComponent, SelectionComponent, ListComponent],
+  imports: [TitleComponent, SelectionComponent, ListComponent, LoadingComponent],
   templateUrl: './route.component.html',
   styleUrl: './route.component.scss'
 })
@@ -62,7 +63,6 @@ export class RouteComponent {
 
   fetchRouteStation(id: number) {
     this.isLoading = true;
-
     this.routeService.getRouteStation(id).subscribe({
       next: (res) => {
         this.routeStationData = res;

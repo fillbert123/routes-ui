@@ -7,13 +7,19 @@
     [badgeIsActive]="routeData.route_is_active"
   />
   <app-selection 
-    [selectionData]="terminusData" 
+    [selectionData]="terminusData"
+    [isLoading]="isLoading"
     (onClickItem)="handleSelectedRouteId($event)"
   />
-  <app-list
-    listType="route-station"
-    [lineColor]="lineColor"
-    [listData]="routeStationData"
-    [routeGroupCode]="routeData.route_group_code"
-  />
+  @if(isLoading) {
+    <app-loading/>
+  }
+  @else {
+    <app-list
+      listType="route-station"
+      [lineColor]="lineColor"
+      [listData]="routeStationData"
+      [routeGroupCode]="routeData.route_group_code"
+    />
+  }
 </div>
