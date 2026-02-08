@@ -2,9 +2,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-}
-
-.test {
-  width: 128px;
-  height: 128px;
+  &__navigation {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+  }
 }

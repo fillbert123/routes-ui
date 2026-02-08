@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { RouteService } from '../../service/api/route.service';
 import { TitleComponent } from "../../component/title/title.component";
 import { SelectionComponent } from '../../component/selection/selection.component';
@@ -27,38 +27,70 @@ export class RouteComponent {
 
   constructor(private routeService: RouteService) { };
   
-  ngOnInit() {
-    this.fetchRouteByRouteGroupId(this.routeData.route_group_id);
-  }
-
-  handleSelectedRouteId(index: number) {
-    this.selectedRouteId = index;
-    this.fetchRouteStation(this.selectedRouteId);
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['routeData'] && this.routeData?.route_group_id) {
+      this.fetchRouteByRouteGroupId(this.routeData?.route_group_id);
+    }
   }
 
   fetchRouteByRouteGroupId(id: number) {
     this.isLoading = true;
-
     this.routeService.getRouteByRouteGroupId(id).subscribe({
       next: (res) => {
-        this.selectedRouteId = res[0].id;
+        if (!res || res.length === 0) {
+          this.isLoading = false;
+          return;
+        }
+        const routeId = res[0].route_id;
+        this.selectedRouteId = routeId;
         this.setRouteData(res);
-        this.fetchRouteStation(this.selectedRouteId);
+        this.fetchRouteStation(routeId);
       },
-      error: (err) => {
-        console.log('error', err);
-        this.isLoading = false;
+      error: () => {
+        this.isLoading = false
       }
-    })
+    });
   }
 
   setRouteData(data: any) {
-    data.forEach((item: any) => {
+    data.forEach((item: any, index: number) => {
       this.terminusData.push({
-        'id': item.id,
-        'label': item.name_en
-      })
-    })
+        id: item.route_id,
+        label: this.getLabel(item, index),
+        alt: this.getAltLabel(item)
+      });
+    });
+  }
+
+  getLabel(item: any, index: number) {
+    if(item.start_station_name === item.end_station_name) {
+      return this.getDirectionLabel(index);
+    } else {
+      return item.end_station_name;
+    }
+  }
+
+  getDirectionLabel(index: number) {
+    if(index === 0) {
+      return (this.routeData.route_group_code === 'SE') ? 'Clockwise' : 'Counterclockwise';
+    } else {
+      return (this.routeData.route_group_code === 'SE') ? 'Counterclockwise' : 'Clockwise';
+    }
+  }
+
+  getAltLabel(item: any) {
+    if(item.start_station_name === item.end_station_name) {
+      return item.end_station_name;
+    } else if (item.complete_end_station_name !== item.end_station_name) {
+      return item.complete_end_station_name + ' U/C';
+    } else {
+      return null;
+    }
+  }
+
+  handleSelectedRouteId(routeId: number) {
+    this.selectedRouteId = routeId;
+    this.fetchRouteStation(routeId);
   }
 
   fetchRouteStation(id: number) {

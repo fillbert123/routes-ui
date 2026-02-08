@@ -23,6 +23,9 @@ export class ListItemComponent {
   lowerTerminusName: string = '';
   upperTerminusName: string = '';
   branchTerminusName: string = '';
+  completeLowerTerminusName: string = '';
+  completeUpperTerminusName: string = '';
+  completeBranchTerminusName: string = '';
   stationDataList: any = [];
   branchStationDataList: any = [];
   lineDataList: any = [];
@@ -34,6 +37,9 @@ export class ListItemComponent {
     if(this.itemType === 'route-station') {
       this.setFilterizedInterchange();
     }
+  }
+
+  ngOnChanges() {
     if(this.itemType === 'track') {
       this.setTerminusOrder();
     }
@@ -138,8 +144,11 @@ export class ListItemComponent {
     if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 2) {
       const [lowerTerminus, upperTerminus] = this.terminusOrder;
 
-      this.lowerTerminusName = lowerTerminus.name_en;
-      this.upperTerminusName = upperTerminus.name_en;
+      this.lowerTerminusName = lowerTerminus.end_station_name;
+      this.upperTerminusName = upperTerminus.end_station_name;
+
+      this.completeLowerTerminusName = lowerTerminus.complete_end_station_name;
+      this.completeUpperTerminusName = upperTerminus.complete_end_station_name;
 
       if(this.itemData.current_station_name === 'South View' || this.itemData.current_station_name === 'Keat Hong' || this.itemData.current_station_name === 'Teck Whye') {
         this.itemData.next_station.reverse();
@@ -152,38 +161,49 @@ export class ListItemComponent {
         prev = this.itemData.next_station[1];
         next = this.itemData.next_station[0];
       } else {
-        prev = this.findNextStationByTerminusName(lowerTerminus.name_en, this.itemData.next_station);
-        next = this.findNextStationByTerminusName(upperTerminus.name_en, this.itemData.next_station);
+        prev = this.findNextStationByTerminusName(lowerTerminus.end_station_name, this.itemData.next_station);
+        next = this.findNextStationByTerminusName(upperTerminus.end_station_name, this.itemData.next_station);
       }
 
       this.setStationDataList('station', prev, next);
     } else if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 1) {
       const [lowerTerminus, upperTerminus] = this.terminusOrder;
 
-      this.lowerTerminusName = lowerTerminus.name_en;
-      this.upperTerminusName = upperTerminus.name_en;
+      this.lowerTerminusName = lowerTerminus.end_station_name;
+      this.upperTerminusName = upperTerminus.end_station_name;
 
-      if(this.itemData.current_station_name === this.terminusOrder[0].name_en) {
+      this.completeLowerTerminusName = lowerTerminus.complete_end_station_name;
+      this.completeUpperTerminusName = upperTerminus.complete_end_station_name;
+
+      if(this.itemData.current_station_name === this.terminusOrder[0].end_station_name) {
         this.setStationDataList('station', null, this.itemData.next_station[0])
       }
-      if(this.itemData.current_station_name === this.terminusOrder[1].name_en) {
+      if(this.itemData.current_station_name === this.terminusOrder[1].end_station_name) {
         this.setStationDataList('station', this.itemData.next_station[0], null)
       }
     } else if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 3) {
       const [prev, next, branch] = this.itemData.next_station;
 
-      this.lowerTerminusName = this.terminusOrder[0].name_en;
-      this.upperTerminusName = this.terminusOrder[0].name_en;
-      this.branchTerminusName = this.terminusOrder[0].name_en;
+      this.lowerTerminusName = this.terminusOrder[0].end_station_name;
+      this.upperTerminusName = this.terminusOrder[0].end_station_name;
+      this.branchTerminusName = this.terminusOrder[0].end_station_name;
+
+      this.completeLowerTerminusName = this.terminusOrder[0].end_station_name;
+      this.completeUpperTerminusName = this.terminusOrder[0].end_station_name;
+      this.completeBranchTerminusName = this.terminusOrder[0].end_station_name;
 
       this.setStationDataList('station', prev, next)
       this.setStationDataList('branch', null, branch);
     } else if(this.itemData.current_station_name === 'Bahar Junction') {
       const [upperTerminus, lowerTerminus, branchTerminus] = this.terminusOrder;
         
-      this.lowerTerminusName = lowerTerminus.name_en;
-      this.upperTerminusName = upperTerminus.name_en;
-      this.branchTerminusName = branchTerminus.name_en;
+      this.lowerTerminusName = lowerTerminus.end_station_name;
+      this.upperTerminusName = upperTerminus.end_station_name;
+      this.branchTerminusName = branchTerminus.end_station_name;
+
+      this.completeLowerTerminusName = lowerTerminus.complete_end_station_name;
+      this.completeUpperTerminusName = upperTerminus.complete_end_station_name;
+      this.completeBranchTerminusName = branchTerminus.complete_end_station_name;
 
       const prev = this.findNextStationByTerminusName(this.lowerTerminusName, this.itemData.next_station);
       const next = this.findNextStationByTerminusName(this.upperTerminusName, this.itemData.next_station);
@@ -209,7 +229,7 @@ export class ListItemComponent {
       let prev;
       let next;
 
-      if(result[1].end_station_name.length === 1 && result[1].end_station_name[0] === upperTerminus.name_en) {
+      if(result[1].end_station_name.length === 1 && result[1].end_station_name[0] === upperTerminus.end_station_name) {
         prev = result[0];
         next = result[1];
         prev.end_station_name = prev.end_station_name[0] + ", " + prev.end_station_name[1];
@@ -227,6 +247,9 @@ export class ListItemComponent {
       }
       this.lowerTerminusName = prev.end_station_name;
       this.upperTerminusName = next.end_station_name;
+
+      this.completeLowerTerminusName = this.lowerTerminusName;
+      this.completeUpperTerminusName = this.upperTerminusName;
       this.setStationDataList('station', prev, next)
     } else if(this.terminusOrder.length === 3 && this.itemData.next_station.length === 2) {
       const [upperTerminus, lowerTerminus, branchTerminus] = this.terminusOrder;
@@ -242,13 +265,17 @@ export class ListItemComponent {
           return acc;
         }, {})
       );
-      if(this.itemData.current_station_name === lowerTerminus.name_en) {
+      if(this.itemData.current_station_name === lowerTerminus.end_station_name) {
         this.lowerTerminusName = this.itemData.current_station_name;
         this.upperTerminusName = result[0].end_station_name[0] + ", " + result[0].end_station_name[1];
+        this.completeLowerTerminusName = this.lowerTerminusName;
+        this.completeUpperTerminusName = this.upperTerminusName;
         this.setStationDataList('station', null, result[0]);
       } else {
         this.lowerTerminusName = result[0].end_station_name[0] + ", " + result[0].end_station_name[1];
         this.upperTerminusName = this.itemData.current_station_name;
+        this.completeLowerTerminusName = this.lowerTerminusName;
+        this.completeUpperTerminusName = this.upperTerminusName;
         this.setStationDataList('station', result[0], null)
       }
     }
@@ -256,10 +283,10 @@ export class ListItemComponent {
 
   setLineOrder() {
     this.stationDataList.forEach((station: any, index: number) => {
-      if(station.station_name === this.lowerTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
+      if(station.station_name === this.completeLowerTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
         this.lineDataList.push(null);
         this.lineDataList.push('solid');
-      } else if(station.station_name === this.upperTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
+      } else if(station.station_name === this.completeUpperTerminusName && station.station_code !== 'STC' && station.station_code !== 'PTC' && station.station_code !== 'BP6') {
         this.lineDataList.push('solid');
         this.lineDataList.push(null);
       } else if(station.station_name) {

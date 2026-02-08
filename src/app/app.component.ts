@@ -4,11 +4,12 @@ import { SubjectService } from './service/shared/subject.service';
 import { RouteComponent } from "./stage/route/route.component";
 import { StationComponent } from './stage/station/station.component';
 import { ButtonComponent } from './component/button/button.component';
+import { SearchComponent } from './component/search/search.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainComponent, RouteComponent, StationComponent, ButtonComponent],
+  imports: [MainComponent, RouteComponent, StationComponent, ButtonComponent, SearchComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

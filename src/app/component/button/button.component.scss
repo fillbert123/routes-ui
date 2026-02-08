@@ -1,23 +1,43 @@
-.button {
+.chevron-back {
   height: 42px;
   width: 42px;
   background-color: var(--transparent);
   border: none;
   border-radius: 24px;
   cursor: pointer;
+  &__icon {
+    height: 16px;
+    &-disabled {
+      opacity: 0.5;
+    }
+  }
   &-disabled {
-    height: 42px;
-    width: 42px;
-    background-color: var(--transparent);
-    border: none;
-    border-radius: 24px;
     cursor: not-allowed;
+  }
+}
+
+.magnifying {
+  height: 32px;
+  padding: 0 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--primary);
+  gap: 8px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  &__text {
+    color: var(--white);
   }
   &__icon {
     height: 16px;
     &-disabled {
-      height: 16px;
       opacity: 0.5;
     }
-  };
+  }
+  &-disabled {
+    background-color: transparent;
+    cursor: not-allowed;
+  }
 }

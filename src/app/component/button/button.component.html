@@ -1,10 +1,15 @@
-@if(isDisabled) {
-  <button class="button-disabled" (click)="handleButtonClick()">
-    <img class="button__icon-disabled" src="../../../assets/icons/chevron.backward.svg" alt="">
-  </button>
-}
-@else {
-  <button class="button" (click)="handleButtonClick()">
-    <img class="button__icon" src="../../../assets/icons/chevron.backward.svg" alt="">
-  </button>
+@switch(icon) {
+  @case('chevron-back') {
+    <button class="chevron-back" [class.chevron-back-disabled]="isDisabled" (click)="handleButtonClick()">
+      <img class="chevron-back__icon" [class.chevron-back__icon-disabled]="isDisabled" src="../../../assets/icons/chevron.backward.svg" alt="">
+    </button>
+  }
+  @case('magnifying') {
+    <button class="magnifying" [class.magnifying-disabled]="isDisabled">
+      @if(!isDisabled) {
+        <p class="magnifying__text medium semibold">Search</p>
+      }
+      <img class="magnifying__icon" [class.magnifying__icon-disabled]="isDisabled" src="../../../assets/icons/magnifyingglass.svg" alt="">
+    </button>
+  }
 }
