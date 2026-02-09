@@ -2,17 +2,10 @@
   @for(selection of selectionData; track selection.id; let i = $index) {
     <div class="selection__item" (click)="handleItemClick(i, selection.id)" [class.selected]="i === selectedIndex">
       <p class="selection__item__label medium bold">Bound for</p>
-      <p class="selection__item__route large bold">{{selection.label}}</p>
+      <p class="selection__item__route semilarge bold">{{selection.label}}</p>
       @if(selection.label != selection.alt) {
         <p class="selection__item__alt small semibold">{{selection.alt}}</p>
       }
     </div>
   }
 </div>
-
-<!-- <div class="marquee">
-  <div class="marquee-track">
-    <span>This is a long running text that pauses first, then scrolls slowly.</span>
-    <span>This is a long running text that pauses first, then scrolls slowly.</span>
-  </div>
-</div> -->

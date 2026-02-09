@@ -27,36 +27,3 @@
   background-color: var(--transparent);
   border-radius: 20px;
 }
-
-.marquee {
-  width: 100%;
-  overflow: hidden;
-  background: #111;
-  color: #fff;
-  padding: 10px 0;
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 24px;
-  animation: marquee 25s linear infinite;
-  will-change: transform;
-}
-.marquee-track span {
-  white-space: nowrap;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-
-  15% {
-    transform: translateX(0);
-  }
-
-  100% {
-    transform: translateX(-50%);
-  }
-}
