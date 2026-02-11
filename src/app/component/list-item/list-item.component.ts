@@ -115,6 +115,13 @@ export class ListItemComponent {
           this.subjectService.sendData(data);
         }
         break;
+      case 'station':
+        data = {
+          nextStage: 'station',
+          itemData: this.itemData
+        }
+        this.subjectService.sendData(data);
+        break;
     }
   }
 

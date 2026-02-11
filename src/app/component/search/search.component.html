@@ -1,4 +1,4 @@
 <div class="search">
-  <input class="search__input large semibold" type="text" name="" [value]="searchQuery" (input)="onHandleInput($event)" placeholder="Search for station or line">
-  <app-button icon="magnifying" [isDisabled]="isButtonDisabled"/>
+  <input class="search__input large semibold" type="text" name="" [value]="searchQuery" (input)="onHandleInput($event)" placeholder="Search for station">
+  <app-button icon="magnifying" (click)="handleButtonClick()" [isDisabled]="isButtonDisabled"/>
 </div>

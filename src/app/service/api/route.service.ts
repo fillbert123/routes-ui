@@ -25,4 +25,8 @@ export class RouteService {
   getRouteByRouteGroupId(id: number): Observable<any> {
     return this.http.get(this.url + '/getRouteByRouteGroupId/' + id);
   }
+
+  getSearchStationResult(query: string): Observable<any> {
+    return this.http.get(this.url + '/getSearchStationResult/' + query);
+  }
 }

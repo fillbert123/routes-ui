@@ -31,7 +31,18 @@
           itemType="track"
           [itemData]="track"
           [lineColor]="lineColor"
-          [lineName]="lineName"/>
+          [lineName]="lineName"
+        />
+      }
+    </div>
+  }
+  @case('station') {
+    <div class="list__station">
+      @for(station of listData; track station.station_id) {
+        <app-list-item
+          itemType="station"
+          [itemData]="station"
+        />
       }
     </div>
   }
