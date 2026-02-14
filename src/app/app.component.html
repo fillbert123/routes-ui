@@ -1,7 +1,7 @@
 <main class="main">
   <nav class="main__navigation">
     <app-button [isDisabled]="isOnMainStage()" (onClickButton)="handleBackNavigation()" icon="chevron-back"/>
-    <app-search (onSearchStation)="handleSearchStation($event)"/>
+    <app-search (onSearchStation)="handleSearchStation($event)" (onClearSearch)="handleClearSearch()"/>
   </nav>
   <section>
     @switch(currentStage) {

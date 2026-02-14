@@ -11,23 +11,36 @@ import { ButtonComponent } from "../button/button.component";
 })
 export class SearchComponent {
   searchQuery: string = '';
-  isButtonDisabled: boolean = true;
+  isSearchDisabled: boolean = true;
+  isClearDisabled: boolean = true;
   @Output() onSearchStation = new EventEmitter();
+  @Output() onClearSearch = new EventEmitter();
 
   constructor(private routeService: RouteService) { };
 
   onHandleInput(event: Event) {
     this.searchQuery = (event.target as HTMLInputElement).value;
     if(this.searchQuery === '') {
-      this.isButtonDisabled = true;
+      this.isSearchDisabled = true;
+      this.isClearDisabled = true;
     } else {
-      this.isButtonDisabled = false;
+      this.isSearchDisabled = false;
+      this.isClearDisabled = false;
     }
   }
 
-  handleButtonClick() {
-    if(!this.isButtonDisabled) {
+  handleSearchButtonClick() {
+    if(!this.isSearchDisabled) {
       this.fetchSearchStationResult();
+    }
+  }
+
+  handleXmarkButtonClick() {
+    if(!this.isClearDisabled) {
+      this.searchQuery = '';
+      this.onClearSearch.emit();
+      this.isSearchDisabled = true;
+      this.isClearDisabled = true;
     }
   }
 
@@ -40,5 +53,11 @@ export class SearchComponent {
         console.log('error', err);
       }
     })
+  }
+
+  handleKeyPress(event: any) {
+    if(event.key === 'Enter') {
+      this.handleSearchButtonClick();
+    }
   }
 }

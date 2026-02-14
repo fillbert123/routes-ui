@@ -10,8 +10,4 @@ import { ListComponent } from '../../component/list/list.component';
 })
 export class SearchStage {
   @Input() searchData: any;
-
-  ngOnInit() {
-    console.log('searchData', this.searchData);
-  }
 }

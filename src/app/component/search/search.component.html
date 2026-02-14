@@ -1,4 +1,7 @@
 <div class="search">
-  <input class="search__input large semibold" type="text" name="" [value]="searchQuery" (input)="onHandleInput($event)" placeholder="Search for station">
-  <app-button icon="magnifying" (click)="handleButtonClick()" [isDisabled]="isButtonDisabled"/>
+  <input class="search__input large semibold" type="text" name="" [value]="searchQuery" (input)="onHandleInput($event)" (keydown)="handleKeyPress($event)" placeholder="Search for station">
+  @if(!isClearDisabled) {
+    <app-button icon="xmark" (click)="handleXmarkButtonClick()" [isDisabled]="isClearDisabled"/>
+  }
+  <app-button icon="magnifying" (click)="handleSearchButtonClick()" [isDisabled]="isSearchDisabled"/>
 </div>

@@ -74,4 +74,9 @@ export class AppComponent {
     this.beforeSearchStage = this.currentStage;
     this.currentStage = 'search';
   }
+
+  handleClearSearch() {
+    this.isNavigatedFromSearch = false;
+    this.currentStage = this.beforeSearchStage;
+  }
 }

@@ -8,6 +8,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
   &__input {
     width: calc(100% - 58px);
     color: var(--white);
