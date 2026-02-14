@@ -56,8 +56,10 @@ export class SearchComponent {
   }
 
   handleKeyPress(event: any) {
-    if(event.key === 'Enter') {
-      this.handleSearchButtonClick();
+    if(event.key === 'Enter' && this.searchQuery !== '') {
+      this.fetchSearchStationResult();
+    } else if(event.key === 'Enter' && this.searchQuery === '') {
+      this.onClearSearch.emit();
     }
   }
 }
