@@ -71,7 +71,9 @@ export class AppComponent {
   handleSearchStation(result: any) {
     this.isNavigatedFromSearch = true;
     this.searchStageData = result;
-    this.beforeSearchStage = this.currentStage;
+    if(this.currentStage !== 'search') {
+      this.beforeSearchStage = this.currentStage;
+    }
     this.currentStage = 'search';
   }
 
