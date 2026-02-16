@@ -9,6 +9,11 @@
       <p class="medium bold">{{badgeLabel}}</p>
     </div>
   }
+  @case('empty-station') {
+    <div class="badge__station-empty">
+      <p class="medium bold">???</p>
+    </div>
+  }
   @case('station') {
     <div class="badge__station" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
       <p class="medium bold">{{badgeLabel}}</p>

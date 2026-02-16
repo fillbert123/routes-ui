@@ -47,7 +47,11 @@ export class SearchComponent {
   fetchSearchStationResult() {
     this.routeService.getSearchStationResult(this.searchQuery).subscribe({
       next: (res) => {
-        this.onSearchStation.emit(res);
+        let searchData = {
+          'searchQuery': this.searchQuery,
+          'searchResult': res
+        }
+        this.onSearchStation.emit(searchData);
       },
       error: (err) => {
         console.log('error', err);

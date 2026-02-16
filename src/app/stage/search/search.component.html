@@ -1,4 +1,17 @@
-<app-list 
-  listType="station"
-  [listData]="searchData" 
+<app-title
+  titleType="search"
+  [title]="getTitle(searchData.searchQuery)"
 />
+@if(isSearchResultEmpty) {
+  <div class="search__empty">
+    <app-badge badgeType="empty-station"/>
+    <p class="search__empty__heading xlarge bold">No results found</p>
+    <p class="search__empty__subtext medium regular">Please check your spelling and try again</p>
+  </div>
+}
+@else {
+  <app-list 
+    listType="station"
+    [listData]="searchData.searchResult" 
+  />
+}
