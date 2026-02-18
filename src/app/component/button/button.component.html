@@ -6,9 +6,6 @@
   }
   @case('magnifying') {
     <button class="magnifying" [class.magnifying-disabled]="isDisabled">
-      @if(!isDisabled) {
-        <p class="magnifying__text medium semibold">Search</p>
-      }
       <img class="magnifying__icon" [class.magnifying__icon-disabled]="isDisabled" src="../../../assets/icons/magnifyingglass.svg" alt="">
     </button>
   }

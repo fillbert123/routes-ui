@@ -151,6 +151,10 @@
     }
     @case('station') {
       <div class="item__station" (click)="handleItemClick('station', null)">
+        <app-badge 
+          badgeType="stations" 
+          [badgeData]="itemData.interchanges"
+        />
         <p class="item__station__label large bold">{{itemData.station_name}}</p>
       </div>
     }
