@@ -182,10 +182,10 @@ export class ListItemComponent {
       this.completeLowerTerminusName = lowerTerminus.complete_end_station_name;
       this.completeUpperTerminusName = upperTerminus.complete_end_station_name;
 
-      if(this.itemData.current_station_name === this.terminusOrder[0].end_station_name) {
+      if(this.itemData.current_station_name === this.terminusOrder[0].complete_end_station_name) {
         this.setStationDataList('station', null, this.itemData.next_station[0])
       }
-      if(this.itemData.current_station_name === this.terminusOrder[1].end_station_name) {
+      if(this.itemData.current_station_name === this.terminusOrder[1].complete_end_station_name) {
         this.setStationDataList('station', this.itemData.next_station[0], null)
       }
     } else if(this.terminusOrder.length === 2 && this.itemData.next_station.length === 3) {
