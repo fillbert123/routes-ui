@@ -1,12 +1,19 @@
 .search {
   &__empty {
-    margin: 12px 0;
+    margin: 24px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    &__heading, &__subtext {
-      margin: 0;
+    gap: 8px;
+    &__text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      &__heading, &__subtext {
+        margin: 0;
+      }
     }
   }
 }

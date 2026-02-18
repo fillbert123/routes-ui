@@ -1,8 +1,8 @@
 <div class="selection">
   @for(selection of selectionData; track selection.id; let i = $index) {
     <div class="selection__item" (click)="handleItemClick(i, selection.id)" [class.selected]="i === selectedIndex">
-      <p class="selection__item__label medium bold">Bound for</p>
-      <p class="selection__item__route semilarge bold">{{selection.label}}</p>
+      <p class="selection__item__label small bold">Bound for</p>
+      <p class="selection__item__route medium bold">{{selection.label}}</p>
       @if(selection.label != selection.alt) {
         <p class="selection__item__alt small semibold">{{selection.alt}}</p>
       }

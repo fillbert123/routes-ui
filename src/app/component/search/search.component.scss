@@ -1,6 +1,6 @@
 .search {
   height: 42px;
-  width: calc(100vw - 72px);
+  width: calc(100vw - 96px);
   padding: 0 5px 0 16px;
   background-color: var(--transparent);
   border-radius: 24px;
@@ -10,7 +10,7 @@
   align-items: center;
   gap: 8px;
   &__input {
-    width: calc(100% - 58px);
+    width: calc(100% - 82px);
     color: var(--white);
     background-color: transparent;
     border: none;
