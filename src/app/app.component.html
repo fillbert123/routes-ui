@@ -3,7 +3,7 @@
     <app-button [isDisabled]="isOnMainStage()" (onClickButton)="handleBackNavigation()" icon="chevron-back"/>
     <app-search (onSearchStation)="handleSearchStation($event)" (onClearSearch)="handleClearSearch()"/>
   </nav>
-  <section>
+  <section class="main__section">
     @switch(currentStage) {
       @case('main') {
         <app-main/>
