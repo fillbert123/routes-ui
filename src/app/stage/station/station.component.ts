@@ -4,7 +4,7 @@ import { TitleComponent } from "../../component/title/title.component";
 import { StackComponent } from "../../component/stack/stack.component";
 
 @Component({
-  selector: 'app-station',
+  selector: 'station-stage',
   standalone: true,
   imports: [TitleComponent, StackComponent],
   templateUrl: './station.component.html',

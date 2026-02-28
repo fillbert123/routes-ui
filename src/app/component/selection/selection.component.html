@@ -1,10 +1,21 @@
 <div class="selection">
+  <div 
+    class="selection__indicator"
+    [style.transform]="'translateX(' + selectedIndex * 100 + '%)'"
+    [style.width.%]="100 / selectionData.length">
+  </div>
+
   @for(selection of selectionData; track selection.id; let i = $index) {
-    <div class="selection__item" (click)="handleItemClick(i, selection.id)" [class.selected]="i === selectedIndex">
-      <p class="selection__item__label small bold">Bound for</p>
+    <div 
+      class="selection__item"
+      (click)="handleItemClick(i, selection.id)"
+      [class.selection__item-active]="i === selectedIndex">
+      <p class="selection__item__label medium bold">Bound for</p>
       <p class="selection__item__route large bold">{{selection.label}}</p>
       @if(selection.label != selection.alt) {
-        <p class="selection__item__alt small semibold">{{selection.alt}}</p>
+        <p class="selection__item__alt small semibold">
+          {{selection.alt}}
+        </p>
       }
     </div>
   }

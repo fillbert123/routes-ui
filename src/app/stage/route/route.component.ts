@@ -6,7 +6,7 @@ import { ListComponent } from "../../component/list/list.component";
 import { LoadingComponent } from '../../component/loading/loading.component';
 
 @Component({
-  selector: 'app-route',
+  selector: 'route-stage',
   standalone: true,
   imports: [TitleComponent, SelectionComponent, ListComponent, LoadingComponent],
   templateUrl: './route.component.html',

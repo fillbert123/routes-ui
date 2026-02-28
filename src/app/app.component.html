@@ -9,13 +9,13 @@
         <app-main/>
       }
       @case('route') {
-        <app-route
+        <route-stage
           [lineColor]="lineColor"
           [routeData]="routeStageData"
         />
       }
       @case('station') {
-        <app-station
+        <station-stage
           [stationData]="stationStageData"
         />
       }
