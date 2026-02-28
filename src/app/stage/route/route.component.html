@@ -1,5 +1,6 @@
 <div class="route">
   <app-title
+    class="route__title"
     titleType="route-group"
     [badgeColor]="lineColor"
     [title]="routeData.route_group_name"
@@ -7,6 +8,7 @@
     [badgeIsActive]="routeData.route_is_active"
   />
   <app-selection 
+    class="route__selection"
     [selectionData]="terminusData"
     [isLoading]="isLoading"
     (onClickItem)="handleSelectedRouteId($event)"
@@ -16,6 +18,7 @@
   }
   @else {
     <app-list
+      class="route__list"
       listType="route-station"
       [lineColor]="lineColor"
       [listData]="routeStationData"
