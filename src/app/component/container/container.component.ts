@@ -10,11 +10,15 @@ import { ListComponent } from "../list/list.component";
   styleUrl: './container.component.scss'
 })
 export class ContainerComponent {
+  @Input() isLoading: boolean = true;
   @Input() containerHasTitle!: boolean;
   @Input() containerType!: string;
   @Input() containerData: any = {};
 
   getColor() {
+    if(this.isLoading) {
+      return 'var(--semiwhite)';
+    }
     return 'var(--' + this.containerData.line_color + ')';
   }
 }

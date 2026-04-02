@@ -7,6 +7,7 @@ import { Component, Input, SimpleChanges } from '@angular/core';
   styleUrl: './badge.component.scss'
 })
 export class BadgeComponent {
+  @Input() isLoading: boolean = true;
   @Input() badgeType: string = "";
   @Input() badgeIsActive: boolean = true;
   @Input() badgeColor: string = "";

@@ -81,3 +81,18 @@
 p {
   margin: 0;
 }
+
+.loading {
+  &__route-group {
+    height: 24px;
+    width: 24px;
+    display: block;
+    border-radius: 8px;
+  }
+  &__line {
+    height: 20px;
+    width: 46px;
+    display: block;
+    border-radius: 6px;
+  }
+}

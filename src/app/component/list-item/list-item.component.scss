@@ -274,3 +274,20 @@
     }
   }
 }
+
+.loading {
+  &__route-group {
+    &__title {
+      width: 192px;
+      height: 19px;
+      display: block;
+      border-radius: 4px;
+    }
+    &__subtitle {
+      width: 192px;
+      height: 12px;
+      display: block;
+      border-radius: 4px;
+    }
+  }
+}

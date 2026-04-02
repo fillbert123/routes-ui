@@ -9,6 +9,7 @@ import { ListItemComponent } from "../list-item/list-item.component";
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
+  @Input() isLoading: boolean = true;
   @Input() listType!: string;
   @Input() listData: any = [];
   @Input() lineColor: string = "";

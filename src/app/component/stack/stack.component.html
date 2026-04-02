@@ -1,11 +1,12 @@
 @switch(stackType) {
   @case('main') {
     <div class="stack">
-      @for(line of stackData; track line.line_code) {
+      @for(line of this.getStackData(); track line.line_code) {
         <app-container
           containerType="route-group" 
           [containerHasTitle]="true"
           [containerData]="line"
+          [isLoading]="isLoading"
         />
       }
     </div>

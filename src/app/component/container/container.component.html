@@ -4,8 +4,14 @@
       <app-badge
         badgeType="line"
         [badgeLabel]="containerData.line_code"
+        [isLoading]="isLoading"
       />
-      <p class="container__title__text large bold">{{containerData.line_name}}</p>
+      @if(isLoading) {
+        <span class="loading"></span>
+      }
+      @else {
+        <p class="container__title__text large bold">{{containerData.line_name}}</p>
+      }
     </div>
   }
   <section class="container__content">
@@ -15,6 +21,7 @@
           listType="route-group"
           [listData]="containerData.route_groups" 
           [lineColor]="containerData.line_color"
+          [isLoading]="isLoading"
         />
       }
       @case('track') {

@@ -1,13 +1,23 @@
 @switch(badgeType) {
   @case('route-group') {
-    <div class="badge__route-group" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
-      <p class="medium semibold">{{badgeLabel}}</p>
-    </div>
+    @if(isLoading) {
+      <span class="loading loading__route-group"></span>
+    }
+    @else {
+      <div class="badge__route-group" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
+        <p class="medium semibold">{{badgeLabel}}</p>
+      </div>
+    }
   }
   @case('line') {
-    <div class="badge__line">
-      <p class="medium bold">{{badgeLabel}}</p>
-    </div>
+    @if(isLoading) {
+      <span class="loading loading__line"></span>
+    }
+    @else {
+      <div class="badge__line">
+        <p class="medium bold">{{badgeLabel}}</p>
+      </div>
+    }
   }
   @case('empty-station') {
     <div class="badge__station-empty">

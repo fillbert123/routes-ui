@@ -1,11 +1,22 @@
 @switch(listType) {
   @case('route-group') {
     <div class="list">
-      @for(group of listData; track group.route_group_id) {
+      @if(listData) {
+        @for(group of listData; track group.route_group_id) {
+          <app-list-item 
+            itemType="route-group" 
+            [itemData]="group" 
+            [lineColor]="lineColor"
+            [isLoading]="isLoading"
+          />
+        }
+      }
+      @else {
         <app-list-item 
           itemType="route-group" 
-          [itemData]="group" 
+          [itemData]="" 
           [lineColor]="lineColor"
+          [isLoading]="isLoading"
         />
       }
     </div>

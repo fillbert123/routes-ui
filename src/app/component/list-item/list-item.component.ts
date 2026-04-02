@@ -11,6 +11,7 @@ import { RouteService } from '../../service/api/route.service';
   styleUrl: './list-item.component.scss'
 })
 export class ListItemComponent {
+  @Input() isLoading: boolean = true;
   @Input() itemType: string = "route-group";
   @Input() itemData: any = {};
   @Input() lineColor: string = "";
