@@ -1,0 +1,26 @@
+.selection-item {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__desc, &__subtext {
+    color: var(--semiwhite);
+  }
+  &__label, &__subtext {
+    text-align: center;
+  }
+  & > p {
+    margin: 0;
+  }
+  &-loading {
+    width: 128px;
+    height: 19px;
+    border-radius: 4px;
+    background-color: var(--transparent);
+  }
+  &:hover, &-selected {
+    border-radius: 20px;
+    background-color: var(--transparent);
+    cursor: pointer;
+  }
+}

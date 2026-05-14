@@ -1,0 +1,22 @@
+.figure-header {
+  &__main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__lower, &__upper {
+    width: 40%;
+  }
+  &__upper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  &__branch {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}

@@ -1,10 +1,17 @@
 .title {
   padding: 8px 12px;
+  height: 32px;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
-  &__text {
+  gap: 12px;
+  &-loading {
+    width: 256px;
+    height: 30px;
+    border-radius: 8px;
+    background-color: var(--transparent);
+  }
+  & > h1 {
     margin: 0;
   }
 }

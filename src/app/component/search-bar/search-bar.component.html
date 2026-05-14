@@ -1,0 +1,33 @@
+<div class="search-bar">
+  <component-button
+    [status]="(stage === 'line') ? 'inactive' : 'active'"
+    [color]="'transparent'"
+    [icon]="'back'"
+    (click)="emitItem('back')"
+  />
+  <span class="search-bar__search">
+    <input
+      type="text"
+      class="search-bar__search__input semibold large"
+      placeholder="Search for station or line"
+      [value]="searchQuery"
+      (input)="handleInput($event)"
+      (keydown)="handleKeyPress($event)"
+    >
+    @if (clearButtonStatus === 'active') {
+      <component-button
+        [size]="'small'"
+        [status]="'active'"
+        [icon]="'xmark'"
+        (click)="clearQuery()"
+      />
+    }
+    <component-button
+      [size]="'small'"
+      [status]="searchButtonStatus"
+      [color]="'primary'"
+      [icon]="'search'"
+      (click)="emitItem('search')"
+    />
+  </span>
+</div>

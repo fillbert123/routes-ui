@@ -1,0 +1,59 @@
+<div class="atomic">
+  @switch (kind) {
+    @case ('stationCode') {
+      @switch (status) {
+        @case ('empty') {
+          <div 
+            class="atomic__code"
+            [ngStyle]="{
+              'border-radius': getBorderRadius()
+            }"
+          >
+            <p class="bold medium">{{label}}</p>
+          </div>
+        }
+        @default {
+          <div 
+            class="atomic__code"
+            [ngStyle]="{
+              'opacity': getOpacity(),
+              'background-color': getColor(),
+              'border-radius': getBorderRadius()
+            }"
+          >
+            <p class="bold medium">{{label}}</p>
+          </div>
+        }
+      }
+    }
+    @case ('stationLine') {
+      <div class="atomic__line">
+        @if(status != 'loading') {
+          <div 
+            class="atomic__line__leading"
+            [ngStyle]="{
+              'background-color': getColor(),
+              'visibility': getVisibility('leading')
+            }"
+          ></div>
+          <div 
+            class="atomic__line__stop"
+            [ngStyle]="{
+              'background-color': getColor()
+            }"
+          ></div>
+          <div 
+            class="atomic__line__trailing"
+            [ngStyle]="{
+              'background-color': getColor(),
+              'visibility': getVisibility('trailing')
+            }"
+          ></div>
+        }
+        @else if(status === 'loading') {
+          <div class="atomic__line-loading loading"></div>
+        }
+      </div>
+    }
+  }
+</div>

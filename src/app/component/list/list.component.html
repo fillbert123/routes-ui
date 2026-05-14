@@ -1,49 +1,102 @@
-@switch(listType) {
-  @case('route-group') {
-    <div class="list">
-      @for(group of listData; track group.route_group_id) {
-        <app-list-item 
-          itemType="route-group" 
-          [itemData]="group" 
-          [lineColor]="lineColor"
-        />
+<div class="list">
+  @if (listHeader) {
+    <div 
+      class="list__header"
+      [ngStyle]="{
+        'background-color': getColor()
+      }"
+    >
+      <component-badge
+        [kind]="'line'"
+        [status]="status"
+        [label]="headerCode"
+      />
+      @if (status === 'loading') {
+        <div class="list__header-loading loading"></div>
+      }
+      @else {
+        <p class="large bold">{{headerName}}</p>
       }
     </div>
   }
-  @case('route-station') {
-    <div class="list__station">
-      @for(station of listData; track station.station_id; let isFirst = $first; let isLast = $last) {
-        <app-list-item 
-          itemType="route-station" 
-          [itemData]="station" 
-          [lineColor]="lineColor" 
-          [routeGroupCode]="routeGroupCode" 
-          [isFirst]="isFirst" 
-          [isLast]="isLast"
-        />
+  <div 
+    class="list__content"
+    [ngStyle]="{
+      'border-radius': (listHeader) ? '0 0 24px 24px' : '24px'
+    }"
+  >
+    @if (status === 'loading') {
+      @switch (kind) {
+        @case ('routeGroup') {
+          <component-list-item
+            [kind]="'routeGroup'"
+            [status]="'loading'"
+          />
+        }
+        @case ('station') {
+          <component-list-item
+            [kind]="'station'"
+            [status]="'loading'"
+          />
+        }
+        @case ('figure') {
+          <component-figure
+            [status]="'loading'"
+          />
+        }
       }
-    </div>
-  }
-  @case('track') {
-    <div class="list__track">
-      @for(track of listData; track track.current_station_code) {
-        <app-list-item
-          itemType="track"
-          [itemData]="track"
-          [lineColor]="lineColor"
-          [lineName]="lineName"
-        />
+    }
+    @if (status !== 'loading') {
+      @for (item of listData; track $index; let isFirst = $first; let isLast = $last) {
+        @switch (kind) {
+          @case ('routeGroup') {
+            @if (!isSearch) {
+              <component-list-item
+                [kind]="'routeGroup'"
+                [status]="'active'"
+                [color]="color"
+                [itemListData]="item"
+              />
+            }
+            @else {
+              <component-list-item
+                [kind]="'routeGroup'"
+                [status]="'active'"
+                [color]="item.line.color"
+                [itemListData]="item.routeGroup"
+              />
+            }
+          }
+          @case ('station') {
+            @if (!isSearch) {
+              <component-list-item
+                [kind]="'station'"
+                [status]="'active'"
+                [type]="getType(isFirst, isLast)"
+                [color]="color"
+                [itemListData]="item"
+              />
+            }
+            @else {
+              <component-list-item
+                [kind]="'station'"
+                [status]="'active'"
+                [type]="getType(isFirst, isLast)"
+                [color]="color"
+                [itemListData]="item"
+                [isSearch]="isSearch"
+              />
+            }
+          }
+          @case ('figure') {
+            <component-figure
+              [color]="color"
+              [status]="'active'"
+              [routeGroupData]="item"
+            />
+          }
+        }
       }
-    </div>
-  }
-  @case('station') {
-    <div class="list__station">
-      @for(station of listData; track station.station_id) {
-        <app-list-item
-          itemType="station"
-          [itemData]="station"
-        />
-      }
-    </div>
-  }
-}
+    }
+  </div>
+</div>

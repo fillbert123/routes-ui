@@ -1,0 +1,42 @@
+.atomic {
+  &__code {
+    width: 42px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__line {
+    width: 18px;
+    height: 48px;
+    position: relative;
+    &__leading, &__trailing {
+      width: 8px;
+      height: 24px;
+      position: absolute;
+      left: 5px;
+    }
+    &__leading {
+      top: 0px;
+    }
+    &__trailing {
+      bottom: 0px;
+    }
+    &-loading {
+      width: 8px;
+      height: 48px;
+      position: absolute;
+      left: 5px;
+      background-color: var(--transparent);
+    }
+    &__stop {
+      width: 14px;
+      height: 14px;
+      border: 2px solid var(--white);
+      border-radius: 10px;
+      position: absolute;
+      top: 15px;
+      z-index: 2;
+    }
+  }
+}

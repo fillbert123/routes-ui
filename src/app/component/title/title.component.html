@@ -1,23 +1,17 @@
 <div class="title">
-  @switch(titleType) {
-    @case('route-group') {
-      <app-badge 
-        badgeType="route-group"
-        [badgeLabel]="badgeLabel" 
-        [badgeIsActive]="badgeIsActive" 
-        [badgeColor]="badgeColor"
+  @if (status === 'loading') {
+    <div class="title-loading loading"></div>
+  }
+  @else {
+    @if (kind != 'standard') {
+      <component-badge
+        [kind]="kind"
+        [status]="status"
+        [label]="badgeLabel"
+        [color]="badgeColor"
+        [bulkData]="badgeData"
       />
-      <p class="title__text xlarge bold">{{title}}</p>
     }
-    @case('station') {
-      <app-badge 
-        badgeType="stations" 
-        [badgeData]="stationInterchange"
-      />
-      <p class="title__text xlarge bold">{{title}}</p>
-    }
-    @case('search') {
-      <p class="title__text xlarge bold">{{title}}</p>
-    }
+    <h1 class="bold xlarge">{{title}}</h1>
   }
 </div>

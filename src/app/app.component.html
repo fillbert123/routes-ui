@@ -1,27 +1,25 @@
 <main class="main">
-  <nav class="main__navigation">
-    <app-button [isDisabled]="isOnMainStage()" (onClickButton)="handleBackNavigation()" icon="chevron-back"/>
-    <app-search (onSearchStation)="handleSearchStation($event)" (onClearSearch)="handleClearSearch()"/>
-  </nav>
-  <section class="main__section">
-    @switch(currentStage) {
-      @case('main') {
-        <app-main/>
+  <component-search-bar 
+    [stage]="currentStage"
+  />
+  <section class="main__content">
+    @switch (currentStage) {
+      @case ('line') {
+        <stage-line/>
       }
-      @case('route') {
-        <route-stage
-          [lineColor]="lineColor"
-          [routeData]="routeStageData"
+      @case ('routeGroup') {
+        <stage-route
+          [routeGroupId]="currentId"
         />
       }
-      @case('station') {
-        <station-stage
-          [stationData]="stationStageData"
+      @case ('station') {
+        <stage-station
+          [stationId]="currentId"
         />
       }
-      @case('search') {
-        <search-stage
-          [searchData]="searchStageData"
+      @case ('search') {
+        <stage-search
+          [searchQuery]="currentId"  
         />
       }
     }

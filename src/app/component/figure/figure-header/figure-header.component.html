@@ -1,0 +1,43 @@
+<div class="figure-header">
+  @switch (type) {
+    @case ('main') {
+      <div class="figure-header__main">
+        <div class="figure-header__lower">
+          @if (lowerTerminusData || status === 'loading') {
+            <component-figure-direction
+              [direction]="'low'"
+              [status]="status"
+              [bulkData]="lowerTerminusData"
+            />
+          }
+        </div>
+        <component-badge
+          [kind]="'routeGroup'"
+          [status]="status"
+          [color]="color"
+          [label]="label"
+        />
+        <div class="figure-header__upper">
+          @if (upperTerminusData || status === 'loading') {
+            <component-figure-direction
+              [direction]="'up'"
+              [status]="status"
+              [bulkData]="upperTerminusData"
+            />
+          }
+        </div>
+      </div>
+    }
+    @case ('branch') {
+      <div class="figure-header__branch">
+        @if (status !== 'loading') {
+          <component-figure-direction
+            [direction]="'up'"
+            [status]="status"
+            [bulkData]="branchTerminusData"
+          />
+        }
+      </div>
+    }
+  }
+</div>

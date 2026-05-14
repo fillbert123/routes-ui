@@ -1,48 +1,69 @@
-@switch(badgeType) {
-  @case('route-group') {
-    <div class="badge__route-group" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
-      <p class="medium semibold">{{badgeLabel}}</p>
-    </div>
-  }
-  @case('line') {
-    <div class="badge__line">
-      <p class="medium bold">{{badgeLabel}}</p>
-    </div>
-  }
-  @case('empty-station') {
-    <div class="badge__station-empty">
-      <p class="medium bold">???</p>
-    </div>
-  }
-  @case('station') {
-    <div class="badge__station" [style.opacity]="badgeIsActive ? 1 : 0.5" [style.backgroundColor]="getColor(badgeColor)">
-      <p class="medium bold">{{badgeLabel}}</p>
-    </div>
-  }
-  @case('stations') {
-    <div class="badge__stations">
-      @for(badge of badgeData; track badge.line_station_code; let isFirst = $first; let isLast = $last) {
-        @if(isFirst && isLast) {
-          <div class="badge__stations__base-single" [style.backgroundColor]="getColor(badge.line_color)">
-            <p class="medium bold">{{badge.line_station_code}}</p>
-          </div>
-        }
-        @else if(isFirst) {
-          <div class="badge__stations__base-leading" [style.backgroundColor]="getColor(badge.line_color)">
-            <p class="medium bold">{{badge.line_station_code}}</p>
-          </div>
-        }
-        @else if (isLast) {
-          <div class="badge__stations__base-trailing" [style.backgroundColor]="getColor(badge.line_color)">
-            <p class="medium bold">{{badge.line_station_code}}</p>
-          </div>
-        }
-        @else {
-          <div class="badge__stations__base" [style.backgroundColor]="getColor(badge.line_color)">
-            <p class="medium bold">{{badge.line_station_code}}</p>
-          </div>
-        }
+<div class="badge">
+  @switch (kind) {
+    @case ('routeGroup') {
+      @if (status != 'loading') {
+        <div
+          class="badge__routegroup"
+          [ngStyle]="{
+            'opacity': getOpacity(),
+            'background-color': getColor()
+          }"
+        >
+          <p class="semibold medium">{{label}}</p>
+        </div>
       }
-    </div>
+      @else if (status === 'loading') {
+        <div class="badge__routegroup-loading loading"></div>
+      }
+    }
+    @case ('line') {
+      @if (status != 'loading') {
+        <div class="badge__line">
+          <p class="bold medium">{{label}}</p>
+        </div>
+      }
+      @else if (status === 'loading') {
+        <div class="badge__line-loading loading"></div>
+      }
+    }
+    @case ('station') {
+      @if (status === 'empty') {
+        <div class="badge__station-empty">
+          <component-atomic 
+            [kind]="'stationCode'"
+            [type]="'single'"
+            [status]="status"
+            [label]="'???'"
+          />
+        </div>
+      }
+      @else if (status === 'loading') {
+        <div class="badge__station-loading loading"></div>
+      }
+      @else {
+        <div class="badge__station">
+          @if (bulkData) {
+            @for (data of bulkData; track $index; let isFirst = $first, isLast = $last) {
+              <component-atomic 
+                [kind]="'stationCode'"
+                [type]="getType(isFirst, isLast)"
+                [status]="data.status"
+                [color]="data.color"
+                [label]="data.label"
+              />
+            }
+          }
+          @else {
+            <component-atomic 
+              [kind]="'stationCode'"
+              [type]="'single'"
+              [status]="status"
+              [color]="color"
+              [label]="label"
+            />
+          }
+        </div>
+      }
+    }
   }
-}
+</div>

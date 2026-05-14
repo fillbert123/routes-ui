@@ -1,0 +1,196 @@
+<component-search-bar/>
+  <component-title
+    [kind]="'station'"
+    [status]="'active'"
+    [title]="'Sample Title'"
+    [badgeData]="[
+      {
+        'label': 'AA50',
+        'color': 'red',
+        'status': 'active'
+      },
+      {
+        'label': 'AA50',
+        'color': 'green',
+        'status': 'active'
+      },
+      {
+        'label': 'AA50',
+        'color': 'cyan',
+        'status': 'active'
+      }
+    ]"
+  />
+  <component-title
+    [kind]="'routeGroup'"
+    [status]="'active'"
+    [title]="'Sample Title'"
+    [badgeLabel]="'AA'"
+    [badgeColor]="'blue'"
+    [badgeData]="{
+      'label': 'AA',
+      'color': 'green'
+    }"
+  />
+  <component-title
+    [kind]="'standard'"
+    [status]="'active'"
+    [title]="'Text Title'"
+  />
+  <component-title
+    [kind]="'routeGroup'"
+    [status]="'loading'"
+  />
+  <component-atomic 
+    [kind]="'stationLine'"
+    [type]="'leading'"
+    [status]="'active'"
+    [color]="'red'"
+    [label]="'AA99'"
+  />
+  <component-atomic 
+    [kind]="'stationLine'"
+    [status]="'loading'"
+  />
+  <component-badge
+    [kind]="'routeGroup'"
+    [status]="'active'"
+    [color]="'blue'"
+    [label]="'AA'"
+  />
+  <component-badge
+    [kind]="'line'"
+    [status]="'active'"
+    [label]="'AAL'"
+  />
+  <component-badge
+    [kind]="'station'"
+    [status]="'active'"
+    [bulkData]="[
+      {
+        'label': 'AA50',
+        'color': 'red',
+        'status': 'active'
+      }
+    ]"
+  />
+  <component-badge
+    [kind]="'station'"
+    [status]="'active'"
+    [color]="'blue'"
+    [label]="'AA99'"
+  />
+  <component-selection
+    [status]="'active'"
+  />
+  <component-figure-direction
+    [direction]="'low'"
+    [status]="'loading'"
+  />
+  <component-figure
+    [color]="'cyan'"
+    [status]="'active'"
+    [routeGroupData]="{
+      'id': 9,
+      'name': 'Jurong Region Line West',
+      'code': 'JW',
+      'currentStation': {
+        'id': 163,
+        'name': 'Bahar Junction',
+        'code': 'JS7'
+      },
+      'branchStation': {
+        'id': 164,
+        'name': 'Gek Poh',
+        'code': 'JW1',
+        'terminus': {
+          'id': [178],
+          'name': ['Peng Kang Hill']
+        }
+      },
+      'previousStation': {
+        'id': 162,
+        'name': 'Jurong West',
+        'code': 'JS6',
+        'terminus': {
+          'id': [39],
+          'name': ['Choa Chu Kang']
+        }
+      },
+      'nextStation': {
+        'id': 27,
+        'name': 'Boon Lay',
+        'code': 'JS8',
+        'terminus': {
+          'id': [175],
+          'name': ['Jurong Pier']
+        }
+      }
+    }"
+  />
+  <component-figure
+    [color]="'green'"
+    [status]="'loading'"
+    [routeGroupData]="{
+      'id': 1,
+      'name': 'East-West Line',
+      'code': 'EW',
+      'currentStation': {
+        'id': 2,
+        'name': 'Tampines',
+        'code': 'EW2'
+      },
+      'nextStation': {
+        'id': 3,
+        'name': 'Simei',
+        'code': 'EW3',
+        'terminus': {
+          'id': [
+            33
+          ],
+          'name': [
+            'Tuas Link'
+          ]
+        }
+      },
+      'previousStation': {
+        'id': 1,
+        'name': 'Pasir Ris',
+        'code': 'EW1',
+        'terminus': {
+          'id': [
+            1
+          ],
+          'name': [
+            'Pasir Ris'
+          ]
+        }
+      }
+    }"
+  />
+  <component-button
+    [status]="'active'"
+    [icon]="'direct'"
+  />
+  <component-button
+    [status]="'loading'"
+  />
+  <component-list
+    [kind]="'station'"
+    [status]="'loading'"
+    [listHeader]="true"
+    [headerCode]="'AAL'"
+    [headerName]="'Test Line'"
+    [color]="'red'"
+    [listData]="listData"
+  />
+  <component-list
+    [kind]="'routeGroup'"
+    [status]="'loading'"
+    [listHeader]="false"
+  />
+  <component-list
+    [kind]="'figure'"
+    [status]="'loading'"
+    [listHeader]="true"
+  />

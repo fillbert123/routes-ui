@@ -1,0 +1,79 @@
+<div class="figure-route">
+  @if (status != 'loading') {
+    <div class="figure-route__item">
+      @if (previousStationData) {
+        <component-figure-item
+          [status]="status"
+          [color]="color"
+          [id]="previousStationData.id"
+          [label]="previousStationData.code"
+          [name]="previousStationData.name"
+        />
+      }
+      @else {
+        <component-figure-item
+          [status]="'empty'"
+        />
+      }
+      @if (currentStationData) {
+        <component-figure-item
+          [status]="status"
+          [color]="color"
+          [id]="currentStationData.id"
+          [label]="currentStationData.code"
+          [name]="currentStationData.name"
+        />       
+      }
+      @else {
+        <component-figure-item
+          [status]="'empty'"
+        />
+      }
+      @if (nextStationData) {
+        <component-figure-item
+          [status]="status"
+          [color]="color"
+          [id]="nextStationData.id"
+          [label]="nextStationData.code"
+          [name]="nextStationData.name"
+        />
+      }
+      @else {
+        <component-figure-item
+          [status]="'empty'"
+        />
+      }
+    </div>
+    <div class="figure-route__line">
+      @if (currentStationData) {
+        @for (line of arrangedFigureRouteLine(); track $index) {
+          <div 
+            class="figure-route__line__path"
+            [class.figure-route__line__path__leading]="line === 'leading'"
+            [class.figure-route__line__path__trailing]="line === 'trailing'"
+            [class.figure-route__line__path__empty]="line === 'empty'"
+            [ngStyle]="{
+              'background-color': getColor()
+            }">
+          </div>
+        }
+      }
+      @else {
+        <div class="figure-route__line__path__branch">
+          <svg width="84" height="105" viewBox="0 0 84 103" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 4H17.8098C31.1387 4 41.9143 14.861 41.8091 28.1894L41.441 74.8106C41.3358 88.139 52.1114 99 65.4403 99H84" [attr.stroke]="getColorHex()" stroke-width="8"/>
+          </svg>
+        </div>
+        <div 
+          class="figure-route__line__path figure-route__line__path__trailing"
+          [ngStyle]="{
+            'background-color': getColor()
+          }">
+        </div>
+      }
+    </div>
+  }
+  @else if (status === 'loading') {
+    <div class="figure-route__loading loading"></div>
+  }
+</div>

@@ -1,16 +1,14 @@
 .main {
+  height: 100dvh;
+  box-sizing: border-box;
   padding: 12px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  &__navigation {
-    display: flex;
-    flex-direction: row;
-    gap: 8px;
-  }
-  &__section {
-    height: calc(100vh - 78px);
-    overflow: scroll;
+  &__content {
+    flex: 1;
+    min-height: 0;
+    overflow: auto;
     border-radius: 24px;
     &::-webkit-scrollbar {
       display: none;

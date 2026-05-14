@@ -1,18 +1,18 @@
 import { Component, Input } from '@angular/core';
-import { BadgeComponent } from '../badge/badge.component';
+import { BadgeComponent } from "../badge/badge.component";
 
 @Component({
-  selector: 'app-title',
+  selector: 'component-title',
   standalone: true,
   imports: [BadgeComponent],
   templateUrl: './title.component.html',
   styleUrl: './title.component.scss'
 })
 export class TitleComponent {
-  @Input() titleType!: string;
-  @Input() title!: string;
-  @Input() badgeColor: string = "";
-  @Input() badgeLabel: string = "";
-  @Input() badgeIsActive: boolean = true;
-  @Input() stationInterchange: any;
+  @Input() kind!: 'routeGroup' | 'station' | 'standard';
+  @Input() status!: 'active' | 'loading';
+  @Input() title: string | any;
+  @Input() badgeLabel: string | any;
+  @Input() badgeColor: string | any;
+  @Input() badgeData: any;
 }

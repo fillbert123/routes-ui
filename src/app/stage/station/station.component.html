@@ -1,11 +1,29 @@
-<div class="station">
-  <app-title
-    titleType="station"
-    [title]="stationData.station_name"
-    [stationInterchange]="interchangeData"
+<section class="station">
+  <component-title
+    [kind]="'station'"
+    [status]="status"
+    [title]="(stationData) ? stationData.name : null"
+    [badgeData]="(stationData) ? badgeData : null"
   />
-  <app-stack 
-    stackType="station"
-    [stackData]="stationTrack"
-  />
-</div>
+
+  @if (stationData) {
+    @for (line of stationData.line; track $index) {
+      <component-list
+        [kind]="'figure'"
+        [status]="status"
+        [listHeader]="true"
+        [headerCode]="line.code"
+        [headerName]="line.name"
+        [color]="line.color"
+        [listData]="line.routeGroup"
+      />
+    }
+  }
+  @else {
+    <component-list
+      [kind]="'figure'"
+      [status]="'loading'"
+      [listHeader]="true"
+    />
+  }
+</section>
