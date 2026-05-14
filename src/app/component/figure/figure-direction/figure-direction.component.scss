@@ -1,0 +1,40 @@
+.figure-direction {
+  width: 160px;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  &__information {
+    margin: 0;
+    color: var(--semiwhite);
+  }
+  &__terminus {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 4px;
+    &__list {
+      display: flex;
+      flex-direction: column;
+      &__name {
+        margin: 0;
+      }
+    }
+    &__arrow {
+      width: 10px;
+    }
+    &-loading {
+      width: 128px;
+      height: 15px;
+      background-color: var(--transparent);
+      border-radius: 4px;
+    }
+  }
+}
+
+.left-align {
+  align-items: flex-start;
+}
+
+.right-align {
+  align-items: flex-end;
+}

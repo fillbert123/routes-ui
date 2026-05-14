@@ -1,84 +1,92 @@
 import { Component } from '@angular/core';
-import { MainComponent } from "./stage/main/main.component";
 import { SubjectService } from './service/shared/subject.service';
+import { LineComponent } from "./stage/line/line.component";
 import { RouteComponent } from "./stage/route/route.component";
-import { StationComponent } from './stage/station/station.component';
-import { ButtonComponent } from './component/button/button.component';
-import { SearchComponent } from './component/search/search.component';
-import { SearchStage } from './stage/search/search.component';
+import { StationComponent } from "./stage/station/station.component";
+import { SearchComponent } from './stage/search/search.component';
+import { SearchBarComponent } from "./component/search-bar/search-bar.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MainComponent, RouteComponent, StationComponent, ButtonComponent, SearchComponent, SearchStage],
+  imports: [
+    LineComponent, RouteComponent, StationComponent, SearchComponent,
+    SearchBarComponent
+],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'routes-ui';
-  currentStage: string = 'main';
-  lineColor: string = '';
-  routeStageData: any;
-  stationStageData: any;
-  searchStageData: any;
-  isNavigatedFromSearch: boolean = false;
-  beforeSearchStage: string = '';
+  currentStage: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search' = 'line';
+  currentId: any = '';
+  breadcrumbs: any = [];
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService) {}
 
   ngOnInit() {
     this.subjectService.data$.subscribe(value => {
-      if (value) {
-        if(this.currentStage !== value.nextStage) {
-          this.lineColor = value.lineColor;
-        }
-        this.currentStage = value.nextStage;
-        switch(value.nextStage) {
-          case 'route':
-            this.routeStageData = value.itemData;
-            break;
-          case 'station':
-            this.stationStageData = value.itemData;
-            break;
+      if(value) {
+        if(value.action === 'back') {
+          this.breadcrumbs.pop();
+          if(this.breadcrumbs.length === 0) {
+            this.currentId = '';
+            this.currentStage = 'line';
+          } else {
+            this.currentId = this.breadcrumbs[this.breadcrumbs.length - 1].id;
+            this.currentStage = this.breadcrumbs[this.breadcrumbs.length - 1].stage;
+          }
+        } else if(value.action === 'search') {
+          this.currentId = value.data;
+          this.currentStage = 'search';
+          this.breadcrumbs.push({
+            'stage': 'search',
+            'id': this.currentId
+          })
+        } else {
+          if(value.to) {
+            if(value.to === 'line') {
+              this.currentId = '';
+              this.currentStage = value.to;
+              this.breadcrumbs = [];
+            } else {
+              this.currentId = value.data;
+              this.currentStage = value.to;
+              this.breadcrumbs.push({
+                'stage': this.currentStage,
+                'id': this.currentId
+              })
+            }
+          } else {
+            switch(this.currentStage) {
+              case 'line':
+                this.currentId = value.data;
+                this.currentStage = 'routeGroup';
+                this.breadcrumbs.push({
+                  'stage': 'route',
+                  'id': this.currentId
+                });
+                break;
+              case 'routeGroup':
+                this.currentId = value.data;
+                this.currentStage = 'station';
+                this.breadcrumbs.push({
+                  'stage': 'station',
+                  'id': this.currentId
+                });
+                break;
+              case 'station':
+                this.currentId = value.data;
+                this.currentStage = 'station';
+                this.breadcrumbs.push({
+                  'stage': 'station',
+                  'id': this.currentId
+                })
+                break;
+            }
+          }
         }
       }
     });
-  }
-
-  handleBackNavigation() {
-    if(this.isNavigatedFromSearch) {
-      this.currentStage = this.beforeSearchStage;
-      this.isNavigatedFromSearch = false;
-    } else {
-      switch(this.currentStage) {
-        case 'station':
-          this.currentStage = 'route';
-          break;
-        case 'route':
-          this.currentStage = 'main';
-          break;
-        case 'search':
-          this.currentStage = 'main';
-          break;
-      }
-    }
-  }
-
-  isOnMainStage() {
-    return (this.currentStage === 'main')
-  }
-
-  handleSearchStation(result: any) {
-    this.isNavigatedFromSearch = true;
-    this.searchStageData = result;
-    if(this.currentStage !== 'search') {
-      this.beforeSearchStage = this.currentStage;
-    }
-    this.currentStage = 'search';
-  }
-
-  handleClearSearch() {
-    this.isNavigatedFromSearch = false;
-    this.currentStage = this.beforeSearchStage;
   }
 }

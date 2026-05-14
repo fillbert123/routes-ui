@@ -1,49 +1,53 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { RouteService } from '../../service/api/route.service';
 import { TitleComponent } from "../../component/title/title.component";
-import { StackComponent } from "../../component/stack/stack.component";
+import { ListComponent } from "../../component/list/list.component";
 
 @Component({
-  selector: 'station-stage',
+  selector: 'stage-station',
   standalone: true,
-  imports: [TitleComponent, StackComponent],
+  imports: [TitleComponent, ListComponent],
   templateUrl: './station.component.html',
   styleUrl: './station.component.scss'
 })
 export class StationComponent {
-  isLoading: boolean = false;
-  stationTrack: any;
-  interchangeData: any = [];
-  @Input() stationData: any;
+  @Input() stationId!: number;
+  status: 'active' | 'loading' = 'loading';
+  stationData: any;
+  badgeData: any = [];
 
   constructor(private routeService: RouteService) { };
 
-  ngOnChanges() {
-    this.fetchRouteDetail(this.stationData.station_id);
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['stationId']) {
+      this.fetchStationById(this.stationId);
+    }
   }
 
-  fetchRouteDetail(id: number) {
-    this.isLoading = true;
-
-    this.routeService.getRouteDetail(id).subscribe({
+  fetchStationById(id: number) {
+    this.status = 'loading';
+    this.routeService.getStationById(id).subscribe({
       next: (res) => {
-        this.stationTrack = res;
-        this.interchangeData = [];
-        this.stationTrack.forEach((line: any) => {
-          line.track.forEach((track: any) => {
-            this.interchangeData.push({
-              'line_color': line.line_color,
-              'line_station_code': track.current_station_code,
-              'route_group_code': track.route_group
-            })
-          })
-        })
-        this.isLoading = false;
+        this.stationData = res;
+        this.setBadgeData();
+        this.status = 'active';
       },
       error: (err) => {
         console.log('error', err);
-        this.isLoading = false;
       }
     })
+  }
+
+  setBadgeData() {
+    this.badgeData = [];
+    this.stationData.line.forEach((station: any) => {
+      station.routeGroup.forEach((routeGroup: any) => {
+        this.badgeData.push({
+          'label': routeGroup.currentStation.code,
+          'color': station.color,
+          'status': (routeGroup.isActive) ? 'active' : 'inactive'
+        });
+      });
+    });
   }
 }

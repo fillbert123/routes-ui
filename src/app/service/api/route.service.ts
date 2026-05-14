@@ -29,4 +29,24 @@ export class RouteService {
   getSearchStationResult(query: string): Observable<any> {
     return this.http.get(this.url + '/getSearchStationResult/' + query);
   }
+
+  getAllLine(): Observable<any> {
+    return this.http.get(this.url + '/getAllLine');
+  }
+
+  getRouteGroupById(id: number): Observable<any> {
+    return this.http.get(this.url + '/getRouteGroup/' + id);
+  }
+
+  getRouteById(id: number): Observable<any> {
+    return this.http.get(this.url + '/getRoute/' + id);
+  }
+
+  getStationById(id: number): Observable<any> {
+    return this.http.get(this.url + '/getStation/' + id);
+  }
+
+  getSearchResult(query: string): Observable<any> {
+    return this.http.get(this.url + '/getSearchResult/' + query);
+  }
 }

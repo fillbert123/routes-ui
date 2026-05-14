@@ -1,0 +1,33 @@
+<div 
+  class="figure-direction"
+  [ngClass]="{
+    'left-align': isAligned('low'),
+    'right-align': isAligned('up')
+  }"
+>
+  <p class="figure-direction__information bold xsmall">BOUND FOR</p>
+  <div class="figure-direction__terminus">
+    @if (direction === 'low') {
+      <img class="figure-direction__terminus__arrow" src="../../../../assets/icons/arrow.left.svg" alt="">
+    }
+    @if (status !== 'loading') {
+      <div 
+        class="figure-direction__terminus__list"
+        [ngClass]="{
+          'left-align': isAligned('low'),
+          'right-align': isAligned('up')
+        }"
+      >
+        @for (terminus of bulkData.name; track $index) {
+          <p class="figure-direction__terminus__list__name regular medium">{{terminus}}</p>
+        }
+      </div>
+    }
+    @else if (status === 'loading') {
+      <div class="figure-direction__terminus-loading loading"></div>
+    }
+    @if (direction === 'up') {
+      <img class="figure-direction__terminus__arrow" src="../../../../assets/icons/arrow.right.svg" alt="">
+    }
+  </div>
+</div>

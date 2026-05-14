@@ -1,0 +1,32 @@
+<div class="figure">
+  <component-figure-header
+    [type]="'main'"
+    [status]="status"
+    [color]="color"
+    [label]="routeGroupData?.code"
+    [lowerTerminusData]="routeGroupData?.previousStation?.terminus"
+    [upperTerminusData]="routeGroupData?.nextStation?.terminus"
+  />
+  <component-figure-route
+    [status]="status"
+    [color]="color"
+    [isBranching]="false"
+    [currentStationData]="routeGroupData?.currentStation"
+    [previousStationData]="routeGroupData?.previousStation"
+    [nextStationData]="routeGroupData?.nextStation"
+  />
+  @if (isBranching() && status != 'loading') {
+    <component-figure-header
+      [type]="'branch'"
+      [status]="status"
+      [branchTerminusData]="routeGroupData?.branchStation.terminus"
+    />
+    <component-figure-route
+      [status]="status"
+      [color]="color"
+      [isBranching]="isBranching()"
+      [nextStationData]="routeGroupData?.branchStation"
+    />
+  }
+</div>
+

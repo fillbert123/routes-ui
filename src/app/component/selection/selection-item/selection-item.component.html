@@ -1,0 +1,16 @@
+<div 
+  class="selection-item"
+  [class.selection-item-selected]="isSelected"
+  (click)="emitSelectedItem()"
+>
+  <p class="selection-item__desc bold medium">BOUND FOR</p>
+  @if (status === 'loading') {
+    <div class="selection-item-loading loading"></div>
+  }
+  @else {
+    <p class="selection-item__label bold large">{{label}}</p>
+    @if (subtext) {
+      <p class="selection-item__subtext bold small">{{subtext}}</p>
+    }
+  }
+</div>

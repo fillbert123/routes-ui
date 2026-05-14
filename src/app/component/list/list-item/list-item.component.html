@@ -1,0 +1,92 @@
+<div class="list-item" (click)="emitItem()">
+  @switch (kind) {
+    @case ('routeGroup') {
+      <div class="list-item__route-group">
+        <component-badge
+          [kind]="'routeGroup'"
+          [status]="status"
+          [color]="(status === 'loading') ? null : color"
+          [label]="(status === 'loading') ? null : itemListData.code"
+        />
+        <div class="list-item__route-group__text">
+          @if (status === 'loading') {
+            <div class="list-item__route-group__text__name-loading loading"></div>
+            <div class="list-item__route-group__text__route-loading loading"></div>
+          }
+          @else {
+            <p class="list-item__route-group__text__name bold small">{{itemListData.name}}</p>
+            <span 
+              class="list-item__route-group__text__route"
+              [style]="{
+                color: (status === 'inactive') ? 'var(--semiwhite)' : 'var(--white)'
+              }"
+            >
+              <p class="bold large">{{getRouteName()}}</p>
+              <p class="medium small">{{getViaName()}}</p>
+            </span>
+          }
+        </div>
+      </div>
+    }
+    @case ('station') {
+      <div class="list-item__station">
+        <div class="list-item__station__leading">
+          @if (!isSearch) {
+            <component-atomic 
+              [kind]="'stationLine'"
+              [type]="(status === 'loading') ? null : type"
+              [status]="(status === 'loading') ? 'loading' : ((itemListData.isActive) ? 'active' : 'inactive')"
+              [color]="(status === 'loading') ? null : color"
+            />
+            <component-badge
+              [kind]="'station'"
+              [status]="(status === 'loading') ? 'loading' : ((itemListData.isActive) ? 'active' : 'inactive')"
+              [color]="(status === 'loading') ? null : color"
+              [label]="(status === 'loading') ? null : itemListData.code"
+            />
+          }
+          @else {
+            <component-badge
+              [kind]="kind"
+              [status]="status"
+              [bulkData]="badgeData"
+            />
+          }
+          @if (status === 'loading') {
+            <div class="list-item__station__leading__name-loading loading"></div>
+          }
+          @else {
+            <p 
+              class="list-item__station__leading__name bold large"
+              [style]="{
+                color: (itemListData.isActive) ? 'var(--white)' : 'var(--semiwhite)'
+              }"
+            >
+              {{itemListData.name}}
+            </p>
+          }
+        </div>
+        @if (!isSearch) {
+          <div class="list-item__station__trailing">
+            @if (status === 'loading') {
+              <component-badge
+                [kind]="'routeGroup'"
+                [status]="'loading'"
+              />
+            }
+            @else {
+              @for (interchange of itemListData.interchange; track $index) {
+                <component-badge
+                  [kind]="'routeGroup'"
+                  [status]="(interchange.isActive) ? 'active' : 'inactive'"
+                  [color]="interchange.color"
+                  [label]="interchange.code"
+                />
+              }
+            }
+          </div>
+        }
+      </div>
+    }
+  }
+</div>

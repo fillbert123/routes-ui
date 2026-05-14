@@ -1,0 +1,34 @@
+<section class="line">
+  @switch (status) {
+    @case ('active') {
+      @for (line of lineData; track $index) {
+        <component-list
+          [kind]="'routeGroup'"
+          [status]="'active'"
+          [listHeader]="true"
+          [headerName]="line.name"
+          [headerCode]="line.code"
+          [color]="line.color"
+          [listData]="line.routeGroup"
+        />
+      }
+    }
+    @case ('loading') {
+      <component-list
+        [kind]="'routeGroup'"
+        [status]="'loading'"
+        [listHeader]="true"
+      />
+      <component-list
+        [kind]="'routeGroup'"
+        [status]="'loading'"
+        [listHeader]="true"
+      />
+      <component-list
+        [kind]="'routeGroup'"
+        [status]="'loading'"
+        [listHeader]="true"
+      />
+    }
+  }
+</section>

@@ -1,28 +1,24 @@
-<div class="route">
-  <app-title
-    class="route__title"
-    titleType="route-group"
-    [badgeColor]="lineColor"
-    [title]="routeData.route_group_name"
-    [badgeLabel]="routeData.route_group_code"
-    [badgeIsActive]="routeData.route_is_active"
+<section class="route">
+  <component-title
+    [kind]="'routeGroup'"
+    [status]="headerStatus"
+    [title]="(routeGroupData) ? routeGroupData.name : null"
+    [badgeLabel]="(routeGroupData) ? routeGroupData.code : null"
+    [badgeColor]="(routeGroupData) ? routeGroupData.color : null"
   />
-  <app-selection 
-    class="route__selection"
-    [selectionData]="terminusData"
-    [isLoading]="isLoading"
-    (onClickItem)="handleSelectedRouteId($event)"
+
+  <component-selection
+    [status]="headerStatus"
+    [selectionData]="(routeGroupData) ? routeGroupData.route : null"
+    (routeIdUpdate)="handleIdUpdate($event)"
   />
-  @if(isLoading) {
-    <app-loading/>
-  }
-  @else {
-    <app-list
-      class="route__list"
-      listType="route-station"
-      [lineColor]="lineColor"
-      [listData]="routeStationData"
-      [routeGroupCode]="routeData.route_group_code"
-    />
-  }
-</div>
+
+  <component-list
+    class="route__list"
+    [kind]="'station'"
+    [status]="dataStatus"
+    [listHeader]="false"
+    [color]="(routeGroupData) ? routeGroupData.color : null"
+    [listData]="(routeData) ? routeData.station : null"
+  />
+</section>

@@ -1,17 +1,40 @@
-@switch(icon) {
-  @case('chevron-back') {
-    <button class="chevron-back" [class.chevron-back-disabled]="isDisabled" (click)="handleButtonClick()">
-      <img class="chevron-back__icon" [class.chevron-back__icon-disabled]="isDisabled" src="../../../assets/icons/chevron.backward.svg" alt="">
-    </button>
+<div 
+  class="button"
+  [ngStyle]="{
+    'width': getSize(),
+    'height': getSize(),
+    'opacity': getOpacity(),
+    'background-color': getColor(),
+    'cursor': getCursor()
+  }"
+  (mouseenter)="switchIsHovered()"
+  (mouseleave)="switchIsHovered()"
+>
+  @if (status != 'loading') {
+    @switch (icon) {
+      @case ('back') {
+        <img class="button__icon" src="../../../assets/icons/chevron.backward.svg" alt="">
+      }
+      @case ('search') {
+        <img class="button__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
+      }
+      @case ('xmark') {
+        <img class="button__icon" src="../../../assets/icons/xmark.svg" alt="">
+      }
+      @case ('reverse') {
+        <img class="button__icon" src="../../../assets/icons/arrow.left.arrow.right.svg" alt="">
+      }
+      @case ('direct') {
+        @if (isHovered) {
+          <img class="button__icon" src="../../../assets/icons/arrowshape.turn.up.forward.fill.svg" alt="">
+        }
+        @else if (!isHovered) {
+          <img class="button__icon" src="../../../assets/icons/arrowshape.turn.up.forward.svg" alt="">
+        }
+      }
+    }
   }
-  @case('magnifying') {
-    <button class="magnifying" [class.magnifying-disabled]="isDisabled">
-      <img class="magnifying__icon" [class.magnifying__icon-disabled]="isDisabled" src="../../../assets/icons/magnifyingglass.svg" alt="">
-    </button>
+  @else if (status === 'loading') {
+    <div class="button__loading loading"></div>
   }
-  @case('xmark') {
-    <button class="xmark">
-      <img class="xmark__icon" src="../../../assets/icons/xmark.svg">
-    </button>
-  }
-}
+</div>

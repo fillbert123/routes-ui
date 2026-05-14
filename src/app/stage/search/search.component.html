@@ -1,19 +1,48 @@
-<app-title
-  titleType="search"
-  [title]="getTitle(searchData.searchQuery)"
-/>
-@if(isSearchResultEmpty) {
-  <div class="search__empty">
-    <app-badge badgeType="empty-station"/>
-    <div class="search__empty__text">
-      <p class="search__empty__text__heading xlarge bold">No results found</p>
-      <p class="search__empty__text__subtext medium regular">Please check your spelling and try again</p>
-    </div>
-  </div>
-}
-@else {
-  <app-list 
-    listType="station"
-    [listData]="searchData.searchResult" 
+<section class="search">
+  <component-title
+    [kind]="'standard'"
+    [status]="status"
+    [title]="(searchResultData) ? 'Result for ' + searchQuery + ':' : null"
   />
-}
+  <div class="search__result">
+    @switch (status) {
+      @case ('active') {
+        @if (searchResultData.lineResult.length > 0) {
+          <component-list
+            [kind]="'routeGroup'"
+            [status]="'active'"
+            [listHeader]="false"
+            [listData]="searchResultData.lineResult"
+            [isSearch]="true"
+          />
+        }
+        @if (searchResultData.stationResult.length > 0) {
+          <component-list
+            [kind]="'station'"
+            [status]="'active'"
+            [listHeader]="false"
+            [listData]="searchResultData.stationResult"
+            [isSearch]="true"
+          />
+        }
+        @if (searchResultData.lineResult.length === 0 && searchResultData.stationResult.length === 0) {
+          <div class="search__result-empty">
+            <component-badge
+              [kind]="'station'"
+              [status]="'empty'"
+            />
+            <p class="bold xlarge">No results found</p>
+            <p class="regular medium">Please check your spelling and try again</p>
+          </div>
+        }
+      }
+      @case ('loading') {
+        <component-list
+          [kind]="'routeGroup'"
+          [status]="'loading'"
+          [listHeader]="false"
+        />
+      }
+    }
+  </div>
+</section>
