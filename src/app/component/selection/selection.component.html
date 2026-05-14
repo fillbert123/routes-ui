@@ -10,6 +10,11 @@
     />
   }
   @else {
+    <div 
+      class="selection__indicator"
+      [style.width]="'calc((100% - 8px - ' + ((selectionData.length - 1) * 4) + 'px) / ' + selectionData.length + ')'"
+      [style.transform]="'translateX(calc(' + selectedIndex + ' * (100% + 4px)))'"
+    ></div>
     @for (item of selectionData; track index; let index = $index) {
       <component-selection-item
         class="selection__item"
@@ -18,7 +23,7 @@
         [subtext]="getSubtext(item)"
         [isSelected]="isSelected(item.id)"
         [id]="item.id"
-        (selectionItemClick)="handleItemClick($event)"
+        (click)="setSelectedId(index, item.id)"
       />
     }
   }
