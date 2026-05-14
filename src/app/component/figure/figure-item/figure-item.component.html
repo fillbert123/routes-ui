@@ -1,11 +1,16 @@
 <div class="figure-item" (click)="emitItem()">
   @if (status != 'empty') {
-    <component-badge
-      [kind]="'station'"
-      [status]="status"
-      [color]="color"
-      [label]="label"
-    />
-    <p class="figure-item__label bold medium">{{name}}</p>
+    <div class="figure-item__content">
+      <component-badge
+        [kind]="'station'"
+        [status]="status"
+        [color]="color"
+        [label]="label"
+      />
+      <p class="figure-item__content__label bold medium">{{name}}</p>
+    </div>
+  }
+  @else {
+    <div class="figure-item-empty"></div>
   }
 </div>

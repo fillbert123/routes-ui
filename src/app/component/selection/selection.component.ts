@@ -17,6 +17,7 @@ export class SelectionComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if(changes['selectionData'] && this.selectionData) {
+      this.selectedIndex = this.selectionData.length - 1;
       this.selectedId = this.selectionData[this.selectionData.length - 1].id;
       this.emitRouteId();
     }
@@ -26,7 +27,8 @@ export class SelectionComponent {
     return id === this.selectedId;
   }
 
-  handleItemClick(id: any) {
+  setSelectedId(index: any, id: any) {
+    this.selectedIndex = index;
     this.selectedId = id;
     this.emitRouteId();
   }

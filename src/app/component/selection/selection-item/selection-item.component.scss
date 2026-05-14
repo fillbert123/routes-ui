@@ -18,7 +18,7 @@
     border-radius: 4px;
     background-color: var(--transparent);
   }
-  &:hover, &-selected {
+  &:hover {
     border-radius: 20px;
     background-color: var(--transparent);
     cursor: pointer;

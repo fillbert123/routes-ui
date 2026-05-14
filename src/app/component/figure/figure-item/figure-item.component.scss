@@ -1,21 +1,25 @@
 .figure-item {
-  padding: 4px 8px;
-  width: 96px;
+  width: 112px;
   height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  border-radius: 12px;
-  &__label {
-    margin: 0;
-    width: 96px;
+  &__content {
+    padding: 4px 0;
+    width: 100%;
     height: fit-content;
-    text-align: center;
-  }
-  &:hover {
-    background-color: var(--transparent);
-    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 12px;
+    &__label {
+      margin: 0;
+      width: 96px;
+      height: fit-content;
+      text-align: center;
+    }
+    &:hover {
+      background-color: var(--transparent);
+      cursor: pointer;
+    }
   }
 }

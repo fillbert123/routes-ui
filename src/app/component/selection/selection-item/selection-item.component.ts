@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'component-selection-item',
@@ -13,9 +13,4 @@ export class SelectionItemComponent {
   @Input() subtext: string | any;
   @Input() isSelected!: boolean;
   @Input() id: number | any;
-  @Output() selectionItemClick = new EventEmitter<any>();
-
-  emitSelectedItem() {
-    this.selectionItemClick.emit(this.id);
-  }
 }
