@@ -37,8 +37,6 @@ export class SearchBarComponent {
   handleKeyPress(event: any) {
     if(event.key === 'Enter' && this.searchQuery !== '') {
       this.emitItem('search');
-    } else if(event.key === 'Enter' && this.searchQuery === '') {
-      this.emitItem('line');
     }
   }
 
@@ -50,10 +48,12 @@ export class SearchBarComponent {
         });
         break;
       case 'search':
-        this.subjectService.sendData({
-          'action': 'search',
-          'data': this.searchQuery
-        });
+        if(this.searchButtonStatus === 'active') {
+          this.subjectService.sendData({
+            'action': 'search',
+            'data': this.searchQuery
+          });
+        }
         break;
       case 'line':
         this.subjectService.sendData({
