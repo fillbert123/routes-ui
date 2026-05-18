@@ -21,6 +21,7 @@
   }
   <div 
     class="list__content"
+    [class.list__content-station]="(kind === 'figure')"
     [ngStyle]="{
       'border-radius': (listHeader) ? '0 0 24px 24px' : '24px'
     }"

@@ -23,5 +23,10 @@
     width: calc(100% - 24px);
     height: fit-content;
     background-color: var(--transparent);
+    &-station {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
   }
 }
