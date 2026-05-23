@@ -1,7 +1,11 @@
-<main
-  class="main"
-  [class.main-desktop]="!isMobile()"
-  [class.main-mobile]="isMobile()"
->
-  <component-side-panel/>
+<main class="main">
+  <component-side-panel class="main__side-panel"/>
+  @if(!isMobile()) {
+    <div 
+      #mapScroll
+      class="main__map"
+    >
+      <component-system-map/>
+    </div>
+  }
 </main>

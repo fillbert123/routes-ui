@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { RouteService } from '../../service/api/route.service';
 import { TitleComponent } from "../../component/title/title.component";
 import { SelectionComponent } from "../../component/selection/selection.component";
@@ -21,8 +21,10 @@ export class RouteComponent {
 
   constructor(private routeService: RouteService) { };
 
-  ngOnInit() {
-    this.fetchRouteGroupById(this.routeGroupId);
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['routeGroupId']) {
+      this.fetchRouteGroupById(this.routeGroupId);
+    }
   }
 
   fetchRouteGroupById(id: number) {
