@@ -6,6 +6,7 @@
   gap: 12px;
   background-color: var(--transparent);
   border-radius: 36px;
+  backdrop-filter: blur(12px);
   &-desktop {
     width: 448px;
     height: calc(100dvh - 24px);
