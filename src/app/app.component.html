@@ -1,27 +1,7 @@
-<main class="main">
-  <component-search-bar 
-    [stage]="currentStage"
-  />
-  <section class="main__content">
-    @switch (currentStage) {
-      @case ('line') {
-        <stage-line/>
-      }
-      @case ('routeGroup') {
-        <stage-route
-          [routeGroupId]="currentId"
-        />
-      }
-      @case ('station') {
-        <stage-station
-          [stationId]="currentId"
-        />
-      }
-      @case ('search') {
-        <stage-search
-          [searchQuery]="currentId"  
-        />
-      }
-    }
-  </section>
+<main
+  class="main"
+  [class.main-desktop]="!isMobile()"
+  [class.main-mobile]="isMobile()"
+>
+  <component-side-panel/>
 </main>

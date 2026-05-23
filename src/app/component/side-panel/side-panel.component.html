@@ -1,0 +1,31 @@
+<div 
+  class="side-panel"
+  [class.side-panel-desktop]="!isMobile()"
+  [class.side-panel-mobile]="isMobile()"
+>
+  <component-search-bar 
+    [stage]="currentStage"
+  />
+  <section class="side-panel__content">
+    @switch (currentStage) {
+      @case ('line') {
+        <stage-line/>
+      }
+      @case ('routeGroup') {
+        <stage-route
+          [routeGroupId]="currentId"
+        />
+      }
+      @case ('station') {
+        <stage-station
+          [stationId]="currentId"
+        />
+      }
+      @case ('search') {
+        <stage-search
+          [searchQuery]="currentId"  
+        />
+      }
+    }
+  </section>
+</div>
