@@ -1,11 +1,22 @@
-<main class="main">
-  <component-side-panel class="main__side-panel"/>
+<main 
+  class="main"
+  [class.main-desktop]="!isMobile()"
+  [class.main-mobile]="isMobile()"  
+>
+  <component-side-panel 
+    class="main__side-panel"
+    [class.main__side-panel-desktop]="!isMobile()"
+    [class.main__side-panel-mobile]="isMobile()"  
+  />
   @if(!isMobile()) {
     <div 
       #mapScroll
       class="main__map"
     >
-      <component-system-map/>
+      <component-system-map [zoomLevel]="zoomLevel"/>
+    </div>
+    <div class="main__zoom">
+      <component-zoom-control (updateZoomLevel)="handleZoomUpdate($event)"/>
     </div>
   }
 </main>

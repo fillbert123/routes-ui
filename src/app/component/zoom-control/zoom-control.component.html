@@ -1,0 +1,22 @@
+<div class="zoom-control">
+  <component-button
+    [size]="'small'"
+    [status]="'active'"
+    [icon]="'zoom-plus'"
+    (click)="zoomIn()"
+  />
+  <input 
+    type="range" 
+    class="zoom-control__slider" 
+    [min]="minZoom" 
+    [max]="maxZoom" 
+    step="0.001" 
+    [(ngModel)]="zoomLevel" 
+    (ngModelChange)="changeZoom($event)">
+  <component-button
+    [size]="'small'"
+    [status]="'active'"
+    [icon]="'zoom-minus'"
+    (click)="zoomOut()"
+  />
+</div>
