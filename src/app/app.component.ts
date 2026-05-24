@@ -5,10 +5,11 @@ import { ZoomControlComponent } from './component/zoom-control/zoom-control.comp
 import { isMobile } from './util/display.util';
 import { ɵEmptyOutletComponent } from "@angular/router";
 import { SystemMapComponent } from "./component/system-map/system-map.component";
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [SidePanelComponent, ɵEmptyOutletComponent, SystemMapComponent, ZoomControlComponent],
+  imports: [SidePanelComponent, ɵEmptyOutletComponent, SystemMapComponent, ZoomControlComponent, CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
