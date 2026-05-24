@@ -1,0 +1,33 @@
+.zoom-control {
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--transparent);
+  border-radius: 22px;
+  backdrop-filter: blur(12px);
+  &__slider {
+    margin: 12px 0;
+    height: 144px;
+    width: fit-content;
+    writing-mode: sideways-lr;
+    background-color: transparent;
+    -webkit-appearance: none;
+    cursor: pointer;
+    &::-webkit-slider-runnable-track {
+      height: 144px;
+      width: 16px;
+      background-color: var(--transparent);
+      border-radius: 12px;
+    }
+    &::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      border: none;
+      height: 16px;
+      width: 16px;
+      border-radius: 8px;
+      background: var(--white);
+      margin-top: -4px;
+    }
+  }
+}
