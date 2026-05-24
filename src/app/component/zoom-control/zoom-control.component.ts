@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 export class ZoomControlComponent {
   @Output() updateZoomLevel = new EventEmitter<any>;
   zoomLevel: number = 1;
-  zoomIncrement: number = 0.5;
-  maxZoom: number = 5;
+  zoomIncrement: number = 0.1;
+  maxZoom: number = 2;
   minZoom: number = 0.5;
 
   changeZoom(event: any) {
