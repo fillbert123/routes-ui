@@ -50,4 +50,21 @@
       border-radius: 10px;
     }
   }
+  &__terminus {
+    min-width: 26px;
+    width: fit-content;
+    padding: 0 8px;
+    height: 21px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 2px solid var(--white);
+    &-loading {
+      width: 42px;
+      height: 21px;
+      border-radius: 8px;
+      background-color: var(--transparent);
+    }
+  }
 }

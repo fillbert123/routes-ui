@@ -19,8 +19,10 @@
       <component-selection-item
         class="selection__item"
         [status]="status"
+        [currentTerminusData]="item.currentTerminus.end"
+        [completeTerminusData]="item.completeTerminus.end"
+        [viaData]="item.via"
         [label]="item.currentTerminus.endName"
-        [subtext]="getSubtext(item)"
         [isSelected]="isSelected(item.id)"
         [id]="item.id"
         (click)="setSelectedId(index, item.id)"
