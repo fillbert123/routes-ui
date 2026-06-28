@@ -33,16 +33,6 @@ export class SelectionComponent {
     this.emitRouteId();
   }
 
-  getSubtext(item: any) {
-    if(item.currentTerminus.endName !== item.completeTerminus.endName) {
-      return `${item.completeTerminus.endName} (U/C)`;
-    } else if(item.via) {
-      return `via ${item.via}`;
-    } else {
-      return;
-    }
-  }
-
   emitRouteId() {
     this.routeIdUpdate.emit(this.selectedId);
   }

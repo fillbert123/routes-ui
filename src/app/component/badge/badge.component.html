@@ -65,5 +65,15 @@
         </div>
       }
     }
+    @case ('terminus') {
+      @if (status != 'loading') {
+        <div class="badge__terminus">
+          <p class="bold semilarge monospaced">{{label}}</p>
+        </div>
+      }
+      @else if (status === 'loading') {
+        <div class="badge__terminus-loading loading"></div>
+      }
+    }
   }
 </div>

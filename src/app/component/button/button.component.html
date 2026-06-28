@@ -38,6 +38,14 @@
           <img class="button__icon" src="../../../assets/icons/arrowshape.turn.up.forward.svg" alt="">
         }
       }
+      @case ('home') {
+        @if (isHovered) {
+          <img class="button__icon" src="../../../assets/icons/house.fill.svg" alt="">
+        }
+        @else if (!isHovered) {
+          <img class="button__icon" src="../../../assets/icons/house.svg" alt="">
+        }
+      }
     }
   }
   @else if (status === 'loading') {

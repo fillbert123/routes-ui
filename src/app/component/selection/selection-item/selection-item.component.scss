@@ -3,14 +3,24 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  &__desc, &__subtext {
-    color: var(--semiwhite);
+  gap: 4px;
+  &__label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    &__arrow {
+      width: 16px;
+    }
   }
-  &__label, &__subtext {
-    text-align: center;
-  }
-  & > p {
-    margin: 0;
+  &__subtext {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    &__text {
+      margin: 0;
+    }
   }
   &-loading {
     width: 128px;
