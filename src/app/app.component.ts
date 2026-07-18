@@ -17,7 +17,7 @@ export class AppComponent {
   title = 'routes-ui';
 
   isMobile = isMobile;
-  scrollTo: any = [1820, 1320];
+  scrollTo: any = [1400, 1280];
   zoomLevel!: number;
 
   @ViewChild('mapScroll')
