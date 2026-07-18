@@ -31,14 +31,16 @@ export class ListItemComponent {
     let routeName = "";
     if(this.itemListData.via) {
       routeName = this.itemListData.terminus[0];
+    } else if(this.itemListData.id === 6) {
+      routeName = 'Clockwise or Anticlockwise service'
     } else {
       this.itemListData.terminus.forEach((terminus: string, index: number) => {
-      if(index === 0) {
-        routeName = terminus;
-      } else {
-        routeName = routeName + ' - ' + terminus;
-      }
-    })
+        if(index === 0) {
+          routeName = terminus;
+        } else {
+          routeName = routeName + ' - ' + terminus;
+        }
+      })
     }
     return routeName;
   }

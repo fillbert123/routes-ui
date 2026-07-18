@@ -16,4 +16,5 @@ export class SelectionItemComponent {
   @Input() currentTerminusData: any;
   @Input() completeTerminusData: any;
   @Input() viaData: any;
+  @Input() loopDirection: any;
 }

@@ -9,34 +9,48 @@
   @else {
     <div class="selection-item__label">
       <img class="selection-item__label__arrow" src="../../../../assets/icons/arrow.right.svg" alt="">
-      <component-badge
-        [kind]="'terminus'"
-        [status]="status"
-        [label]="currentTerminusData.abbr"
-      />
-      @if (viaData) {
-        <p class="selection-item__label__text medium small">via</p>
+      @if (loopDirection) {
         <component-badge
           [kind]="'terminus'"
           [status]="status"
-          [label]="viaData.abbr"
+          [label]="loopDirection.abbr"
         />
       }
-      @if (completeTerminusData.name !== currentTerminusData.name) {
+      @else {
         <component-badge
           [kind]="'terminus'"
           [status]="status"
-          [label]="completeTerminusData.abbr"
+          [label]="currentTerminusData.abbr"
         />
+        @if (viaData) {
+          <p class="selection-item__label__text medium small">via</p>
+          <component-badge
+            [kind]="'terminus'"
+            [status]="status"
+            [label]="viaData.abbr"
+          />
+        }
+        @if (completeTerminusData.name !== currentTerminusData.name) {
+          <component-badge
+            [kind]="'terminus'"
+            [status]="status"
+            [label]="completeTerminusData.abbr"
+          />
+        }
       }
     </div>
     <div class="selection-item__subtext">
-      <p class="selection-item__subtext__text medium small">for {{currentTerminusData.name}}</p>
-      @if (viaData) {
-        <p class="selection-item__subtext__text medium small">via {{viaData.name}}</p>
+      @if (loopDirection) {
+        <p class="selection-item__subtext__text semibold medium">{{loopDirection.name}} direction</p>
       }
-      @if (completeTerminusData.name !== currentTerminusData.name) {
-        <p class="selection-item__subtext__text medium small">/ {{completeTerminusData.name}}</p>
+      @else {
+        <p class="selection-item__subtext__text semibold medium">for {{currentTerminusData.name}}</p>
+        @if (viaData) {
+          <p class="selection-item__subtext__text semibold medium">via {{viaData.name}}</p>
+        }
+        @if (completeTerminusData.name !== currentTerminusData.name) {
+          <p class="selection-item__subtext__text semibold medium">/ {{completeTerminusData.name}}</p>
+        }
       }
     </div>
   }
