@@ -50,4 +50,8 @@ export class RouteService {
   getSearchResult(query: string): Observable<any> {
     return this.http.get(this.url + '/getSearchResult/' + query);
   }
+
+  getDirectionResult(originId: number, destinationId: number): Observable<any> {
+    return this.http.get(`${this.url}/getDirection?stationStartId=${originId}&stationEndId=${destinationId}`);
+  }
 }

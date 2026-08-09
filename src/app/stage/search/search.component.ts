@@ -3,11 +3,12 @@ import { RouteService } from '../../service/api/route.service';
 import { TitleComponent } from "../../component/title/title.component";
 import { ListComponent } from "../../component/list/list.component";
 import { BadgeComponent } from "../../component/badge/badge.component";
+import { StateComponent } from '../../component/state/state.component';
 
 @Component({
   selector: 'stage-search',
   standalone: true,
-  imports: [TitleComponent, ListComponent, BadgeComponent],
+  imports: [TitleComponent, ListComponent, BadgeComponent, StateComponent],
   templateUrl: './search.component.html',
   styleUrl: './search.component.scss'
 })

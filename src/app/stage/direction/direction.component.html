@@ -1,0 +1,43 @@
+<section class="direction">
+  <component-direction-bar
+    [directionData]="directionData"
+    (updateSearchQuery)="handleSearchQueryUpdate($event)"
+    (updateActiveField)="setActiveField($event)"
+    (reverseDirection)="reverseDirection()"
+  />
+  @if (searchResultData) {
+    <component-list
+      [kind]="'directionStation'"
+      [status]="fetchStationListStatus"
+      [listHeader]="false"
+      [listData]="searchResultData.stationResult"
+      [isSearch]="true"
+    />
+  }
+  @else {
+    <component-button
+      class="input-text__clear"
+      [color]="'primary'"
+      [size]="'small'"
+      [status]="(isDirectable) ? 'active' : 'inactive'"
+      [icon]="'search'"
+      [label]="'Find direction'"
+      (click)="findDirection()"
+    />
+  }
+  @if (directionResultData && findDirectionStatus !== 'error') {
+    <component-list
+      [kind]="'directionResult'"
+      [status]="findDirectionStatus"
+      [listHeader]="true"
+      [headerName]="getHeaderName()"
+      [listData]="directionResultData.path"
+      [isSearch]="false"
+    />
+  }
+  @else if(findDirectionStatus === 'error') {
+    <component-state
+      [error]="'noDirection'"
+    />
+  }
+</section>

@@ -8,6 +8,7 @@ import { FigureDirectionComponent } from "../../component/figure/figure-directio
 import { FigureComponent } from "../../component/figure/figure.component";
 import { ButtonComponent } from "../../component/button/button.component";
 import { ListComponent } from "../../component/list/list.component";
+import { InputTextComponent } from "../../component/input/input-text/input-text.component";
 
 @Component({
   selector: 'stage-documentation',
@@ -22,7 +23,8 @@ import { ListComponent } from "../../component/list/list.component";
     FigureComponent,
     ButtonComponent,
     ListComponent,
-  ],
+    InputTextComponent
+],
   templateUrl: './documentation.component.html',
   styleUrl: './documentation.component.scss',
 })

@@ -13,14 +13,30 @@ export class AtomicComponent {
   @Input() type: 'standard' | 'single' | 'leading' | 'middle' | 'trailing' | any;
   @Input() status!: 'active' | 'inactive' | 'loading' | 'empty';
   @Input() color: string | any;
+  @Input() colorLeading: string | any;
+  @Input() colorTrailing: string | any;
   @Input() label: string | any;
 
   getOpacity() {
     return (this.status === 'inactive') ? 0.5 : 1;
   }
   
-  getColor() {
-    return(`var(--${this.color})`);
+  getColor(position?: string) {
+    if(this.color) {
+      return(`var(--${this.color})`);
+    } else {
+      switch(position) {
+        case 'leading':
+          return(`var(--${this.colorLeading})`);
+        case 'trailing':
+          return(`var(--${this.colorTrailing})`);
+        default:
+          if(!this.colorLeading || this.colorLeading === 'white') {
+            return(`var(--${this.colorTrailing})`);
+          }
+          return(`var(--${this.colorLeading})`);
+      }
+    }
   }
 
   getBorderRadius(){

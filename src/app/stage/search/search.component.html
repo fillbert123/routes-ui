@@ -26,14 +26,9 @@
           />
         }
         @if (searchResultData.lineResult.length === 0 && searchResultData.stationResult.length === 0) {
-          <div class="search__result-empty">
-            <component-badge
-              [kind]="'station'"
-              [status]="'empty'"
-            />
-            <p class="bold xlarge">No results found</p>
-            <p class="regular medium">Please check your spelling and try again</p>
-          </div>
+          <component-state
+            [error]="'noResult'"
+          />
         }
       }
       @case ('loading') {

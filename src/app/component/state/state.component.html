@@ -1,0 +1,43 @@
+<div class="state">
+  @switch (error) {
+    @case ('noResult') {
+      <div class="state__no-result">
+        <component-badge
+          [kind]="'station'"
+          [status]="'empty'"
+        />
+        <p class="bold xlarge">No results found</p>
+        <p class="regular medium">Please check your spelling and try again</p>
+      </div>
+    }
+    @case ('invalidStation') {
+      <div class="state__invalid-station">
+        <component-badge
+          [kind]="'station'"
+          [status]="'empty'"
+        />
+        <p class="bold xlarge">Invalid stations</p>
+        <p class="regular medium">The origin and destination stations cannot be the same</p>
+        <p class="regular medium">Please select different stations</p>
+      </div>
+    }
+    @case ('noDirection') {
+      <div class="state__no-direction">
+        <div class="state__no-direction__illustration">
+          <component-badge
+            [kind]="'station'"
+            [status]="'empty'"
+          />
+          <img class="state__no-direction__illustration__arrow" src="../../../../assets/icons/arrow.right.svg" alt="">
+          <component-badge
+            [kind]="'station'"
+            [status]="'empty'"
+          />
+        </div>
+        <p class="bold xlarge">Route not found</p>
+        <p class="regular medium">We couldn’t find a navigation route for your trip</p>
+        <p class="regular medium">Please try a different origin or destination station</p>
+      </div>
+    }
+  }
+</div>

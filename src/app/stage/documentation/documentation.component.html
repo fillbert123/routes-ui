@@ -1,93 +1,98 @@
 <component-search-bar/>
-  <component-title
-    [kind]="'station'"
-    [status]="'active'"
-    [title]="'Sample Title'"
-    [badgeData]="[
-      {
-        'label': 'AA50',
-        'color': 'red',
-        'status': 'active'
-      },
-      {
-        'label': 'AA50',
-        'color': 'green',
-        'status': 'active'
-      },
-      {
-        'label': 'AA50',
-        'color': 'cyan',
-        'status': 'active'
-      }
-    ]"
-  />
-  <component-title
-    [kind]="'routeGroup'"
-    [status]="'active'"
-    [title]="'Sample Title'"
-    [badgeLabel]="'AA'"
-    [badgeColor]="'blue'"
-    [badgeData]="{
-      'label': 'AA',
-      'color': 'green'
-    }"
-  />
-  <component-title
-    [kind]="'standard'"
-    [status]="'active'"
-    [title]="'Text Title'"
-  />
-  <component-title
-    [kind]="'routeGroup'"
-    [status]="'loading'"
-  />
-  <component-atomic 
-    [kind]="'stationLine'"
-    [type]="'leading'"
-    [status]="'active'"
-    [color]="'red'"
-    [label]="'AA99'"
-  />
-  <component-atomic 
-    [kind]="'stationLine'"
-    [status]="'loading'"
-  />
-  <component-badge
-    [kind]="'routeGroup'"
-    [status]="'active'"
-    [color]="'blue'"
-    [label]="'AA'"
-  />
-  <component-badge
-    [kind]="'line'"
-    [status]="'active'"
-    [label]="'AAL'"
-  />
-  <component-badge
-    [kind]="'station'"
-    [status]="'active'"
-    [bulkData]="[
-      {
-        'label': 'AA50',
-        'color': 'red',
-        'status': 'active'
-      }
-    ]"
-  />
-  <component-badge
-    [kind]="'station'"
-    [status]="'active'"
-    [color]="'blue'"
-    [label]="'AA99'"
-  />
-  <component-selection
-    [status]="'active'"
-  />
-  <component-figure-direction
-    [direction]="'low'"
-    [status]="'loading'"
-  />
-  <component-figure
+
+<component-input-text
+  [placeholder]="'Sample'"
+/>
+
+<!-- <component-title
+  [kind]="'station'"
+  [status]="'active'"
+  [title]="'Sample Title'"
+  [badgeData]="[
+    {
+      'label': 'AA50',
+      'color': 'red',
+      'status': 'active'
+    },
+    {
+      'label': 'AA50',
+      'color': 'green',
+      'status': 'active'
+    },
+    {
+      'label': 'AA50',
+      'color': 'cyan',
+      'status': 'active'
+    }
+  ]"
+/>
+<component-title
+  [kind]="'routeGroup'"
+  [status]="'active'"
+  [title]="'Sample Title'"
+  [badgeLabel]="'AA'"
+  [badgeColor]="'blue'"
+  [badgeData]="{
+    'label': 'AA',
+    'color': 'green'
+  }"
+/>
+<component-title
+  [kind]="'standard'"
+  [status]="'active'"
+  [title]="'Text Title'"
+/>
+<component-title
+  [kind]="'routeGroup'"
+  [status]="'loading'"
+/>
+<component-atomic 
+  [kind]="'stationLine'"
+  [type]="'leading'"
+  [status]="'active'"
+  [color]="'red'"
+  [label]="'AA99'"
+/>
+<component-atomic 
+  [kind]="'stationLine'"
+  [status]="'loading'"
+/>
+<component-badge
+  [kind]="'routeGroup'"
+  [status]="'active'"
+  [color]="'blue'"
+  [label]="'AA'"
+/>
+<component-badge
+  [kind]="'line'"
+  [status]="'active'"
+  [label]="'AAL'"
+/>
+<component-badge
+  [kind]="'station'"
+  [status]="'active'"
+  [bulkData]="[
+    {
+      'label': 'AA50',
+      'color': 'red',
+      'status': 'active'
+    }
+  ]"
+/>
+<component-badge
+  [kind]="'station'"
+  [status]="'active'"
+  [color]="'blue'"
+  [label]="'AA99'"
+/>
+<component-selection
+  [status]="'active'"
+/>
+<component-figure-direction
+  [direction]="'low'"
+  [status]="'loading'"
+/>
+<component-figure
     [color]="'cyan'"
     [status]="'active'"
     [routeGroupData]="{
@@ -127,8 +132,8 @@
         }
       }
     }"
-  />
-  <component-figure
+/>
+<component-figure
     [color]="'green'"
     [status]="'loading'"
     [routeGroupData]="{
@@ -167,30 +172,30 @@
         }
       }
     }"
-  />
-  <component-button
-    [status]="'active'"
-    [icon]="'direct'"
-  />
-  <component-button
-    [status]="'loading'"
-  />
-  <component-list
-    [kind]="'station'"
-    [status]="'loading'"
-    [listHeader]="true"
-    [headerCode]="'AAL'"
-    [headerName]="'Test Line'"
-    [color]="'red'"
-    [listData]="listData"
-  />
-  <component-list
-    [kind]="'routeGroup'"
-    [status]="'loading'"
-    [listHeader]="false"
-  />
-  <component-list
-    [kind]="'figure'"
-    [status]="'loading'"
-    [listHeader]="true"
-  />
+/>
+<component-button
+  [status]="'active'"
+  [icon]="'direct'"
+/>
+<component-button
+  [status]="'loading'"
+/>
+<component-list
+  [kind]="'station'"
+  [status]="'loading'"
+  [listHeader]="true"
+  [headerCode]="'AAL'"
+  [headerName]="'Test Line'"
+  [color]="'red'"
+  [listData]="listData"
+/>
+<component-list
+  [kind]="'routeGroup'"
+  [status]="'loading'"
+  [listHeader]="false"
+/>
+<component-list
+  [kind]="'figure'"
+  [status]="'loading'"
+  [listHeader]="true"
+/> -->

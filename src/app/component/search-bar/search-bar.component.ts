@@ -1,43 +1,24 @@
 import { Component, Input } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
 import { SubjectService } from '../../service/shared/subject.service';
+import { InputTextComponent } from "../input/input-text/input-text.component";
 
 @Component({
   selector: 'component-search-bar',
   standalone: true,
-  imports: [ButtonComponent],
+  imports: [ButtonComponent, InputTextComponent],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })
 export class SearchBarComponent {
-  @Input() stage!: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search';
+  @Input() stage!: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search' | 'direction';
   searchQuery: string = '';
-  clearButtonStatus: 'active' | 'hidden' = 'hidden';
-  searchButtonStatus: 'active' | 'inactive' = 'inactive';
 
   constructor(private subjectService: SubjectService) { }
 
-  handleInput(event: Event) {
-    this.searchQuery = (event.target as HTMLInputElement).value;
-    if(this.searchQuery === '') {
-      this.clearButtonStatus = 'hidden';
-      this.searchButtonStatus = 'inactive';
-    } else {
-      this.clearButtonStatus = 'active';
-      this.searchButtonStatus = 'active';
-    }
-  }
-
-  clearQuery() {
-    this.searchQuery = '';
-    this.clearButtonStatus = 'hidden';
-    this.searchButtonStatus = 'inactive';
-  }
-
-  handleKeyPress(event: any) {
-    if(event.key === 'Enter' && this.searchQuery !== '') {
-      this.emitItem('search');
-    }
+  handleUpdate(event: string) {
+    this.searchQuery = event;
+    this.emitItem('search');
   }
 
   emitItem(action: string) {
@@ -48,7 +29,12 @@ export class SearchBarComponent {
         });
         break;
       case 'search':
-        if(this.searchButtonStatus === 'active') {
+        if(this.searchQuery === '') {
+          this.subjectService.sendData({
+            'action': 'navigate',
+            'to': 'line'
+          });
+        } else {
           this.subjectService.sendData({
             'action': 'search',
             'data': this.searchQuery

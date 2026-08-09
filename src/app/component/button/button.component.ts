@@ -13,17 +13,29 @@ export class ButtonComponent {
   @Input() status!: 'active' | 'inactive' | 'loading';
   @Input() color: any;
   @Input() icon: string | any;
+  @Input() label: string | any;
 
   isHovered: boolean = false;
 
-  getSize() {
-    switch(this.size) {
-      case 'small':
-        return '34px';
-      case 'large':
-        return '46px';
-      default:
-        return '46px';
+  getSize(attribute: string) {
+    if(this.label) {
+      switch(attribute) {
+        case 'width':
+          return '100%';
+        case 'height':
+          return '38px';
+        default:
+          return '38px';
+      }
+    } else {
+      switch(this.size) {
+        case 'small':
+          return '34px';
+        case 'large':
+          return '46px';
+        default:
+          return '46px';
+      }
     }
   }
 

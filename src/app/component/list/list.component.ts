@@ -12,7 +12,7 @@ import { FigureComponent } from "../figure/figure.component";
   styleUrl: './list.component.scss'
 })
 export class ListComponent {
-  @Input() kind!: 'routeGroup' | 'station' | 'figure' | 'search';
+  @Input() kind!: 'routeGroup' | 'station' | 'figure' | 'search' | 'directionStation' | 'directionResult';
   @Input() status!: 'active' | 'loading';
   @Input() listHeader!: boolean;
   @Input() headerCode: string | any;
@@ -22,7 +22,7 @@ export class ListComponent {
   @Input() isSearch: boolean = false;
   
   getColor() {
-    if(this.status === 'loading') {
+    if(this.status === 'loading' || !this.color) {
       return('var(--semiwhite)');
     }
     return(`var(--${this.color})`);

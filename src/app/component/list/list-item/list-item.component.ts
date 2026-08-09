@@ -2,16 +2,17 @@ import { Component, Input } from '@angular/core';
 import { BadgeComponent } from "../../badge/badge.component";
 import { AtomicComponent } from "../../atomic/atomic.component";
 import { SubjectService } from '../../../service/shared/subject.service';
+import { ButtonComponent } from '../../button/button.component';
 
 @Component({
   selector: 'component-list-item',
   standalone: true,
-  imports: [BadgeComponent, AtomicComponent],
+  imports: [BadgeComponent, AtomicComponent, ButtonComponent],
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.scss'
 })
 export class ListItemComponent {
-  @Input() kind!: 'routeGroup' | 'station';
+  @Input() kind!: 'routeGroup' | 'station' | 'directionStation';
   @Input() status!: 'active' | 'inactive' | 'loading';
   @Input() type: 'standard' | 'single' | 'leading' | 'middle' | 'trailing' | any;
   @Input() color: string | any;
@@ -45,6 +46,17 @@ export class ListItemComponent {
     return routeName;
   }
 
+  getColor() {
+    if(this.color) {
+      return this.color;
+    } else {
+      if(!this.itemListData.prevLineColor || this.itemListData.prevLineColor === 'white') {
+        return this.itemListData.nextLineColor;
+      }
+      return this.itemListData.prevLineColor;
+    }
+  }
+
   getViaName() {
     let viaName = "";
     if(this.itemListData.via) {
@@ -64,11 +76,11 @@ export class ListItemComponent {
     });
   }
 
-  emitItem() {
+  emitItem(nextTo: string) {
     this.subjectService.sendData({
       'action': 'navigate',
-      'to': this.kind,
-      'data': this.itemListData.id
+      'to': (nextTo === 'routeGroup') ? this.kind : nextTo,
+      'data': (nextTo === 'routeGroup') ? this.itemListData.id : this.itemListData
     });
   }
 }

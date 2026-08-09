@@ -7,6 +7,7 @@
     [stage]="currentStage"
   />
   <section class="side-panel__content">
+    <!-- <stage-documentation/> -->
     @switch (currentStage) {
       @case ('line') {
         <stage-line/>
@@ -24,6 +25,11 @@
       @case ('search') {
         <stage-search
           [searchQuery]="currentId"  
+        />
+      }
+      @case ('direction') {
+        <stage-direction
+          [destinationData]="destinationData"
         />
       }
     }

@@ -1,7 +1,7 @@
-<div class="list-item" (click)="emitItem()">
+<div class="list-item">
   @switch (kind) {
     @case ('routeGroup') {
-      <div class="list-item__route-group">
+      <div class="list-item__route-group" (click)="emitItem('routeGroup')">
         <component-badge
           [kind]="'routeGroup'"
           [status]="status"
@@ -29,7 +29,7 @@
       </div>
     }
     @case ('station') {
-      <div class="list-item__station">
+      <div class="list-item__station" (click)="emitItem('routeGroup')">
         <div class="list-item__station__leading">
           @if (!isSearch) {
             <component-atomic 
@@ -37,12 +37,14 @@
               [type]="(status === 'loading') ? null : type"
               [status]="(status === 'loading') ? 'loading' : ((itemListData.isActive) ? 'active' : 'inactive')"
               [color]="(status === 'loading') ? null : color"
+              [colorLeading]="(status === 'loading') ? null : itemListData.prevLineColor"
+              [colorTrailing]="(status === 'loading') ? null : itemListData.nextLineColor"
             />
             <component-badge
               [kind]="'station'"
               [status]="(status === 'loading') ? 'loading' : ((itemListData.isActive) ? 'active' : 'inactive')"
-              [color]="(status === 'loading') ? null : color"
-              [label]="(status === 'loading') ? null : itemListData.code"
+              [color]="(status === 'loading') ? null : getColor()"
+              [label]="(status === 'loading') ? null : (itemListData.code || itemListData.lineStationCode)"
             />
           }
           @else {
@@ -75,16 +77,50 @@
               />
             }
             @else {
-              @for (interchange of itemListData.interchange; track $index) {
-                <component-badge
-                  [kind]="'routeGroup'"
-                  [status]="(interchange.isActive) ? 'active' : 'inactive'"
-                  [color]="interchange.color"
-                  [label]="interchange.code"
-                />
+              @if (itemListData.interchange) {
+                @for (interchange of itemListData.interchange; track $index) {
+                  <component-badge
+                    [kind]="'routeGroup'"
+                    [status]="(interchange.isActive) ? 'active' : 'inactive'"
+                    [color]="interchange.color"
+                    [label]="interchange.code"
+                  />
+                }
+              }
+              @if (itemListData.cumulativeDuration) {
+                <p class="regular medium">{{itemListData.cumulativeDuration}} min</p>
               }
             }
           </div>
+        } @else if (isSearch && itemListData.isActive) {
+          <component-button
+            [size]="'small'"
+            [status]="'active'"
+            [icon]="'direct'"
+            (click)="emitItem('direction')"
+          />
+        }
+      </div>
+    }
+    @case ('directionStation') {
+      <div class="list-item__direction-station" (click)="emitItem('direction')">
+        <component-badge
+          [kind]="'station'"
+          [status]="status"
+          [bulkData]="badgeData"
+        />
+        @if (status === 'loading') {
+          <div class="list-item__station__leading__name-loading loading"></div>
+        }
+        @else {
+          <p 
+            class="list-item__station__leading__name bold large"
+            [style]="{
+              color: (itemListData.isActive) ? 'var(--white)' : 'var(--semiwhite)'
+            }"
+          >
+            {{itemListData.name}}
+          </p>
         }
       </div>
     }

@@ -1,8 +1,8 @@
 <div 
   class="button"
   [ngStyle]="{
-    'width': getSize(),
-    'height': getSize(),
+    'width': getSize('width'),
+    'height': getSize('height'),
     'opacity': getOpacity(),
     'background-color': getColor(),
     'cursor': getCursor()
@@ -46,6 +46,9 @@
           <img class="button__icon" src="../../../assets/icons/house.svg" alt="">
         }
       }
+    }
+    @if (label) {
+      <p class="bold semilarge">{{label}}</p>
     }
   }
   @else if (status === 'loading') {

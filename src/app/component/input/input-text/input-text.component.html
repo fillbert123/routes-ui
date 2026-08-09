@@ -1,0 +1,34 @@
+<div class="input-text">
+  @switch (type) {
+    @case ('standard') {
+      <input 
+        #inputField
+        class="input-text__field semibold large" 
+        type="text"
+        [(ngModel)]="inputValue"
+        [placeholder]="placeholder"
+        (keydown.enter)="emitValue()"
+      >
+      <img class="input-text__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
+      @if (inputValue && inputValue.length > 0) {
+        <component-button
+          class="input-text__clear"
+          [size]="'small'"
+          [status]="'active'"
+          [icon]="'xmark'"
+          (click)="clearInput(inputField)"
+        />
+      }
+    }
+    @case ('readonly') {
+      <input 
+        class="input-text__field semibold large" 
+        type="text"
+        [(ngModel)]="inputValue"
+        [placeholder]="placeholder"
+        disabled
+      >
+      <img class="input-text__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
+    }
+  }
+</div>

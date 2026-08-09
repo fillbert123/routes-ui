@@ -6,11 +6,13 @@
         'background-color': getColor()
       }"
     >
-      <component-badge
-        [kind]="'line'"
-        [status]="status"
-        [label]="headerCode"
-      />
+      @if (headerCode) {
+        <component-badge
+          [kind]="'line'"
+          [status]="status"
+          [label]="headerCode"
+        />
+      }
       @if (status === 'loading') {
         <div class="list__header-loading loading"></div>
       }
@@ -53,7 +55,7 @@
           @case ('routeGroup') {
             @if (!isSearch) {
               <component-list-item
-                [kind]="'routeGroup'"
+                [kind]="kind"
                 [status]="'active'"
                 [color]="color"
                 [itemListData]="item"
@@ -61,7 +63,7 @@
             }
             @else {
               <component-list-item
-                [kind]="'routeGroup'"
+                [kind]="kind"
                 [status]="'active'"
                 [color]="item.line.color"
                 [itemListData]="item.routeGroup"
@@ -71,7 +73,7 @@
           @case ('station') {
             @if (!isSearch) {
               <component-list-item
-                [kind]="'station'"
+                [kind]="kind"
                 [status]="'active'"
                 [type]="getType(isFirst, isLast)"
                 [color]="color"
@@ -80,7 +82,7 @@
             }
             @else {
               <component-list-item
-                [kind]="'station'"
+                [kind]="kind"
                 [status]="'active'"
                 [type]="getType(isFirst, isLast)"
                 [color]="color"
@@ -94,6 +96,25 @@
               [color]="color"
               [status]="'active'"
               [routeGroupData]="item"
+            />
+          }
+          @case ('directionStation') {
+            <component-list-item
+              [kind]="kind"
+              [status]="'active'"
+              [type]="getType(isFirst, isLast)"
+              [color]="color"
+              [itemListData]="item"
+              [isSearch]="isSearch"
+            />
+          }
+          @case ('directionResult') {
+            <component-list-item
+              [kind]="'station'"
+              [status]="'active'"
+              [type]="getType(isFirst, isLast)"
+              [color]="color"
+              [itemListData]="item"
             />
           }
         }

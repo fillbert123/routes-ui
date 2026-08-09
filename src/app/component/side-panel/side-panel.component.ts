@@ -5,20 +5,24 @@ import { RouteComponent } from "../../stage/route/route.component";
 import { StationComponent } from "../../stage/station/station.component";
 import { SearchComponent } from "../../stage/search/search.component";
 import { SearchBarComponent } from "../../component/search-bar/search-bar.component";
+import { DirectionComponent } from '../../stage/direction/direction.component';
 import { isMobile } from '../../util/display.util';
+import { DocumentationComponent } from "../../stage/documentation/documentation.component";
 
 @Component({
   selector: 'component-side-panel',
   standalone: true,
   imports: [
-    LineComponent, RouteComponent, StationComponent, SearchComponent, SearchBarComponent,
-  ],
+    LineComponent, RouteComponent, StationComponent, SearchComponent, SearchBarComponent, DirectionComponent,
+    DocumentationComponent
+],
   templateUrl: './side-panel.component.html',
   styleUrl: './side-panel.component.scss'
 })
 export class SidePanelComponent {
-  currentStage: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search' = 'line';
+  currentStage: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search' | 'direction' = 'line';
   currentId: any = '';
+  destinationData: any;
   breadcrumbs: any = [];
 
   isMobile = isMobile;
@@ -51,12 +55,15 @@ export class SidePanelComponent {
               this.currentStage = value.to;
               this.breadcrumbs = [];
             } else {
+              if(this.currentStage !== value.to) {
+                this.currentStage = value.to;
+                this.breadcrumbs.push({
+                  'stage': this.currentStage,
+                  'id': this.currentId
+                })
+              }
               this.currentId = value.data;
-              this.currentStage = value.to;
-              this.breadcrumbs.push({
-                'stage': this.currentStage,
-                'id': this.currentId
-              })
+              this.destinationData = value.data;
             }
           } else {
             switch(this.currentStage) {
