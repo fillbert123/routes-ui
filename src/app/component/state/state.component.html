@@ -39,5 +39,35 @@
         <p class="regular medium">Please try a different origin or destination station</p>
       </div>
     }
+    @case ('invalid') {
+      <div class="state__no-direction">
+        <div class="state__no-direction__illustration">
+          <component-badge
+            [kind]="'station'"
+            [status]="'empty'"
+          />
+          <img class="state__no-direction__illustration__arrow" src="../../../../assets/icons/arrow.right.svg" alt="">
+          <component-badge
+            [kind]="'station'"
+            [status]="'empty'"
+          />
+        </div>
+        <p class="bold xlarge">Invalid stations</p>
+        <p class="regular medium">The origin and destination stations cannot be the same</p>
+        <p class="regular medium">Please select different stations</p>
+      </div>
+    }
+    @case ('noStation') {
+      <div class="state__no-direction">
+        <div class="state__no-direction__illustration">
+          <component-badge
+            [kind]="'station'"
+            [status]="'empty'"
+          />
+        </div>
+        <p class="bold xlarge">Select station</p>
+        <p class="regular medium">Please select origin and destination station</p>
+      </div>
+    }
   }
 </div>

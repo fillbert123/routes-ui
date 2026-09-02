@@ -22,8 +22,11 @@ export class ListComponent {
   @Input() isSearch: boolean = false;
   
   getColor() {
-    if(this.status === 'loading' || !this.color) {
+    if(this.status === 'loading') {
       return('var(--semiwhite)');
+    }
+    if(!this.color) {
+      return('var(--primary)');
     }
     return(`var(--${this.color})`);
   }

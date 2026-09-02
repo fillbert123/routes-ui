@@ -55,5 +55,28 @@
         }
       </div>
     }
+    @case ('transferLine') {
+      <div class="atomic__line">
+        @if(status != 'loading') {
+          <div 
+            class="atomic__line__leading"
+            [ngStyle]="{
+              'background-color': getColor('leading'),
+              'visibility': getVisibility('leading')
+            }"
+          ></div>
+          <div 
+            class="atomic__line__trailing"
+            [ngStyle]="{
+              'background-color': getColor('trailing'),
+              'visibility': getVisibility('trailing')
+            }"
+          ></div>
+        }
+        @else if(status === 'loading') {
+          <div class="atomic__line-loading loading"></div>
+        }
+      </div>
+    }
   }
 </div>

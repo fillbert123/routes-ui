@@ -16,6 +16,24 @@ export class BadgeComponent {
   @Input() color: string | any;
   @Input() label: string | any;
 
+  ngOnInit() {
+    let tempData: any = [];
+    if(this.bulkData) {
+      this.bulkData.forEach((data: any) => {
+        if(tempData) {
+          if(!tempData.find((temp: any) => {
+            return temp.label === data.label
+          })) {
+            tempData.push(data);
+          }
+        } else {
+          tempData.push(data);
+        }
+      })
+      this.bulkData = tempData;
+    }
+  }
+
   getOpacity() {
     return (this.status === 'inactive') ? 0.5 : 1;
   }

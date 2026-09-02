@@ -11,5 +11,11 @@
       [placeholder]="'Search for station or line'"
       (updateValue)="handleUpdate($event)"
     />
+  } @else {
+    <component-title
+      [kind]="'standard'"
+      [status]="'active'"
+      [title]="'Direction'"
+    />
   }
 </div>

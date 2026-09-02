@@ -5,7 +5,7 @@
     (updateActiveField)="setActiveField($event)"
     (reverseDirection)="reverseDirection()"
   />
-  @if (searchResultData) {
+  @if (searchResultData && searchResultData?.stationResult.length > 0) {
     <component-list
       [kind]="'directionStation'"
       [status]="fetchStationListStatus"
@@ -14,18 +14,17 @@
       [isSearch]="true"
     />
   }
-  @else {
-    <component-button
-      class="input-text__clear"
-      [color]="'primary'"
-      [size]="'small'"
-      [status]="(isDirectable) ? 'active' : 'inactive'"
-      [icon]="'search'"
-      [label]="'Find direction'"
-      (click)="findDirection()"
+  @else if (searchResultData && searchResultData?.stationResult.length === 0) {
+    <component-state
+      [error]="'noResult'"
     />
   }
-  @if (directionResultData && findDirectionStatus !== 'error') {
+  @else if (findDirectionStatus === 'invalid') {
+    <component-state
+      [error]="'invalid'"
+    />
+  }
+  @else if (directionResultData && findDirectionStatus !== 'error') {
     <component-list
       [kind]="'directionResult'"
       [status]="findDirectionStatus"
@@ -38,6 +37,11 @@
   @else if(findDirectionStatus === 'error') {
     <component-state
       [error]="'noDirection'"
+    />
+  }
+  @else {
+    <component-state
+      [error]="'noStation'"
     />
   }
 </section>

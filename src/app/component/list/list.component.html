@@ -109,13 +109,24 @@
             />
           }
           @case ('directionResult') {
-            <component-list-item
-              [kind]="'station'"
-              [status]="'active'"
-              [type]="getType(isFirst, isLast)"
-              [color]="color"
-              [itemListData]="item"
-            />
+            @if (item.type && item.type === 'transfer') {
+              <component-list-item
+                [kind]="'transfer'"
+                [status]="'active'"
+                [type]="getType(isFirst, isLast)"
+                [color]="color"
+                [itemListData]="item"
+              />
+            }
+            @else {
+              <component-list-item
+                [kind]="'station'"
+                [status]="'active'"
+                [type]="getType(isFirst, isLast)"
+                [color]="color"
+                [itemListData]="item"
+              />
+            }
           }
         }
       }

@@ -102,6 +102,44 @@
         }
       </div>
     }
+    @case ('transfer') {
+      <div class="list-item__transfer">
+        <div class="list-item__transfer__leading">
+          <component-atomic 
+            [kind]="'transferLine'"
+            [type]="(status === 'loading') ? null : type"
+            [status]="(status === 'loading') ? 'loading' : ((itemListData.isActive) ? 'active' : 'inactive')"
+            [color]="(status === 'loading') ? null : color"
+            [colorLeading]="(status === 'loading') ? null : itemListData.prevLineColor"
+            [colorTrailing]="(status === 'loading') ? null : itemListData.nextLineColor"
+          />
+          <component-badge
+            [kind]="'routeGroup'"
+            [status]="'active'"
+            [color]="itemListData.transferFromColor"
+            [label]="itemListData.transferFromCode"
+          />
+          <img class="list-item__transfer__leading__arrow" src="../../../../assets/icons/arrow.right.svg" alt="">
+          <component-badge
+            [kind]="'routeGroup'"
+            [status]="'active'"
+            [color]="itemListData.transferToColor"
+            [label]="itemListData.transferToCode"
+          />
+          @if (status === 'loading') {
+            <div class="list-item__transfer__leading__name-loading loading"></div>
+          }
+          @else {
+            <p 
+              class="list-item__transfer__leading__name bold large"
+              [style]="{color: 'var(--white)'}"
+            >
+              Transfer to {{itemListData.transferToName}}
+            </p>
+          }
+        </div>
+      </div>
+    }
     @case ('directionStation') {
       <div class="list-item__direction-station" (click)="emitItem('direction')">
         <component-badge

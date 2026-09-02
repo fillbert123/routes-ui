@@ -42,21 +42,11 @@ export class StationComponent {
     this.badgeData = [];
     this.stationData.line.forEach((station: any) => {
       station.routeGroup.forEach((routeGroup: any, index: number) => {
-        if(this.badgeData.length > 0) {
-          if(this.badgeData[this.badgeData.length - 1].label !== routeGroup.currentStation.code) {
-            this.badgeData.push({
-              'label': routeGroup.currentStation.code,
-              'color': station.color,
-              'status': (routeGroup.isActive) ? 'active' : 'inactive'
-            });
-          }
-        } else {
-          this.badgeData.push({
-            'label': routeGroup.currentStation.code,
-            'color': station.color,
-            'status': (routeGroup.isActive) ? 'active' : 'inactive'
-          });
-        }
+        this.badgeData.push({
+          'label': routeGroup.currentStation.code,
+          'color': station.color,
+          'status': (routeGroup.isActive) ? 'active' : 'inactive'
+        });
       });
     });
   }

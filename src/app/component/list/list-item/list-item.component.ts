@@ -12,7 +12,7 @@ import { ButtonComponent } from '../../button/button.component';
   styleUrl: './list-item.component.scss'
 })
 export class ListItemComponent {
-  @Input() kind!: 'routeGroup' | 'station' | 'directionStation';
+  @Input() kind!: 'routeGroup' | 'station' | 'directionStation' | 'transfer';
   @Input() status!: 'active' | 'inactive' | 'loading';
   @Input() type: 'standard' | 'single' | 'leading' | 'middle' | 'trailing' | any;
   @Input() color: string | any;
@@ -80,7 +80,7 @@ export class ListItemComponent {
     this.subjectService.sendData({
       'action': 'navigate',
       'to': (nextTo === 'routeGroup') ? this.kind : nextTo,
-      'data': (nextTo === 'routeGroup') ? this.itemListData.id : this.itemListData
+      'data': (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData
     });
   }
 }

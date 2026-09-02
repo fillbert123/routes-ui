@@ -1,18 +1,20 @@
 <div class="direction-bar">
   <component-input-text
+    class="direction-bar__input"
     [placeholder]="'Origin station'"
-    [initialValue]="this.directionData?.origin?.abbr"
+    [initialValue]="this.directionData?.origin?.name"
     (updateValue)="handleUpdate('origin', $event)"
   />
   <component-button
-    [size]="'small'"
+    [size]="'large'"
     [status]="'active'"
     [icon]="'reverse'"
     (click)="handleReverseClick()"
   />
   <component-input-text
+    class="direction-bar__input"
     [placeholder]="'Destination station'"
-    [initialValue]="this.directionData?.destination?.abbr"
+    [initialValue]="this.directionData?.destination?.name"
     (updateValue)="handleUpdate('destination', $event)"
   />
 </div>

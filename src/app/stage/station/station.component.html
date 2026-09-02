@@ -1,9 +1,12 @@
 <section class="station">
   <component-title
+    [id]="stationId"
     [kind]="'station'"
     [status]="status"
     [title]="(stationData) ? stationData.name : null"
+    [altTitle]="(stationData) ? stationData.nameAlt : null"
     [badgeData]="(stationData) ? badgeData : null"
+    [isStationActive]="(stationData) ? stationData.isActive : null"
   />
 
   @if (stationData) {

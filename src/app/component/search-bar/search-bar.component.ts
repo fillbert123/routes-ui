@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { ButtonComponent } from "../button/button.component";
 import { SubjectService } from '../../service/shared/subject.service';
 import { InputTextComponent } from "../input/input-text/input-text.component";
+import { TitleComponent } from '../title/title.component';
 
 @Component({
   selector: 'component-search-bar',
   standalone: true,
-  imports: [ButtonComponent, InputTextComponent],
+  imports: [ButtonComponent, InputTextComponent, TitleComponent],
   templateUrl: './search-bar.component.html',
   styleUrl: './search-bar.component.scss'
 })

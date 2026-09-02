@@ -9,7 +9,7 @@ import { NgStyle } from '@angular/common';
   styleUrl: './atomic.component.scss'
 })
 export class AtomicComponent {
-  @Input() kind!: 'stationCode' | 'stationLine';
+  @Input() kind!: 'stationCode' | 'stationLine' | 'transferLine';
   @Input() type: 'standard' | 'single' | 'leading' | 'middle' | 'trailing' | any;
   @Input() status!: 'active' | 'inactive' | 'loading' | 'empty';
   @Input() color: string | any;

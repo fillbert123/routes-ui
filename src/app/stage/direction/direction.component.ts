@@ -13,40 +13,60 @@ import { StateComponent } from '../../component/state/state.component';
   styleUrl: './direction.component.scss'
 })
 export class DirectionComponent {
-  @Input() destinationData: any;
+  @Input() stationId: number = 0;
+  destinationData: any;
+  fetchStationDataStatus: 'active' | 'loading' = 'loading';
   fetchStationListStatus: 'active' | 'loading' = 'loading';
-  findDirectionStatus: 'active' | 'loading' | 'error' = 'active';
+  findDirectionStatus: 'active' | 'loading' | 'error' | 'invalid' = 'active';
   currentActive: 'origin' | 'destination' | null = null;
+  stationData: any = null;
   searchResultData: any = null;
   directionData: any = {
     origin: null,
     destination: null
   }
-  isDirectable: boolean = false;
   directionResultData: any;
 
   constructor(private routeService: RouteService) { };
 
   ngOnChanges() {
-    if (this.currentActive === 'origin') {
-      this.directionData = {
-        ...this.directionData,
-        origin: this.destinationData
-      };
-    } else {
-      this.directionData = {
-        ...this.directionData,
-        destination: this.destinationData
-      };
-    }
-    this.searchResultData = null;
-    if(this.directionData.origin && this.directionData.destination) {
-      this.isDirectable = true;
-    }
+    this.fetchStationData(this.stationId);
   }
 
   handleSearchQueryUpdate(event: string) {
     this.fetchSearchResult(event);
+  }
+
+  fetchStationData(stationId: number) {
+    this.fetchStationDataStatus = 'loading';
+    this.stationData = null;
+    this.routeService.getStationById(stationId).subscribe({
+      next: (res) => {
+        this.stationData = res;
+        this.setDirectionData();
+      },
+      error: (err) => {
+        console.log('error', err);
+      }
+    })
+  }
+
+  setDirectionData() {
+    if (this.currentActive === 'origin') {
+      this.directionData = {
+        ...this.directionData,
+        origin: this.stationData
+      };
+    } else {
+      this.directionData = {
+        ...this.directionData,
+        destination: this.stationData
+      };
+    }
+    this.searchResultData = null;
+    if(this.directionData.origin && this.directionData.destination) {
+      this.findDirection();
+    }
   }
 
   fetchSearchResult(query: string) {
@@ -68,17 +88,22 @@ export class DirectionComponent {
   }
 
   findDirection() {
-    this.findDirectionStatus = 'loading';
-    this.routeService.getDirectionResult(this.directionData.origin.id, this.directionData.destination.id).subscribe({
-      next: (res) => {
-        this.directionResultData = res;
-        this.findDirectionStatus = 'active';
-      },
-      error: (err) => {
-        this.findDirectionStatus = 'error'
-        console.log('error', err);
-      }
-    })
+    if(this.directionData.origin.id === this.directionData.destination.id) {
+      this.findDirectionStatus = 'invalid'
+    } else {
+      this.findDirectionStatus = 'loading';
+      this.routeService.getDirectionResult(this.directionData.origin.id, this.directionData.destination.id).subscribe({
+        next: (res) => {
+          res.path = this.addTransferDetail(res.path);
+          this.directionResultData = res;
+          this.findDirectionStatus = 'active';
+        },
+        error: (err) => {
+          this.findDirectionStatus = 'error'
+          console.log('error', err);
+        }
+      })
+    }
   }
 
   getHeaderName() {
@@ -91,5 +116,27 @@ export class DirectionComponent {
       destination: this.directionData.origin
     }
     this.directionData = newDirectionData;
+    this.findDirection();
+  }
+
+  addTransferDetail(path: any) {
+    let tempData: { type: string; prevLineColor: string; nextLineColor: string; transferToColor: any; transferToName: any; transferToCode: any; transferFromColor: any; transferFromName: any; transferFromCode: any; }[] = [];
+    path.forEach((data: any, index: number) => {
+      tempData.push(data);
+      if(path[index]?.nextLineColor === 'white' && path[index + 1]?.prevLineColor === 'white') {
+        tempData.push({
+          'type': 'transfer',
+          'prevLineColor': 'white',
+          'nextLineColor': 'white',
+          'transferToColor': path[index + 1].nextLineColor,
+          'transferToName': path[index + 1].routeGroupName,
+          'transferToCode': path[index + 1].routeGroupCode,
+          'transferFromColor': path[index].prevLineColor,
+          'transferFromName': path[index].routeGroupName,
+          'transferFromCode': path[index].routeGroupCode,
+        })
+      }
+    })
+    return tempData;
   }
 }

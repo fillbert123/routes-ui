@@ -13,7 +13,6 @@ export class InputTextComponent {
   @Input() type: 'readonly' | 'standard' = 'standard';
   @Input() placeholder!: string;
   @Input() initialValue: string = '';
-  @Input() isShowClearButton: boolean = false;
   @Output() updateValue = new EventEmitter<any>;
   isShowSearchButton: boolean = false;
   inputValue: string = '';
@@ -24,12 +23,17 @@ export class InputTextComponent {
 
   clearInput(inputField: HTMLInputElement) {
     this.inputValue = '';
-    this.isShowClearButton = false;
     inputField.focus();
     this.emitValue();
   }
 
   emitValue() {
     this.updateValue.emit(this.inputValue);
+  }
+
+  onFocusInput(inputField: HTMLInputElement) {    
+    setTimeout(() => {
+      inputField.select();
+    }, 0);
   }
 }

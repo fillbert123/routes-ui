@@ -55,6 +55,7 @@ export class SidePanelComponent {
               this.currentStage = value.to;
               this.breadcrumbs = [];
             } else {
+              this.currentId = value.data;
               if(this.currentStage !== value.to) {
                 this.currentStage = value.to;
                 this.breadcrumbs.push({
@@ -62,7 +63,6 @@ export class SidePanelComponent {
                   'id': this.currentId
                 })
               }
-              this.currentId = value.data;
               this.destinationData = value.data;
             }
           } else {

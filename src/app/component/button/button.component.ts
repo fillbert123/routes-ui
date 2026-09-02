@@ -21,7 +21,7 @@ export class ButtonComponent {
     if(this.label) {
       switch(attribute) {
         case 'width':
-          return '100%';
+          return 'fit-content';
         case 'height':
           return '38px';
         default:
@@ -36,6 +36,14 @@ export class ButtonComponent {
         default:
           return '46px';
       }
+    }
+  }
+
+  getPadding() {
+    if(this.label) {
+      return '0 16px';
+    } else {
+      return '0';
     }
   }
 

@@ -8,17 +8,9 @@
         [(ngModel)]="inputValue"
         [placeholder]="placeholder"
         (keydown.enter)="emitValue()"
+        (focus)="onFocusInput(inputField)"
       >
       <img class="input-text__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
-      @if (inputValue && inputValue.length > 0) {
-        <component-button
-          class="input-text__clear"
-          [size]="'small'"
-          [status]="'active'"
-          [icon]="'xmark'"
-          (click)="clearInput(inputField)"
-        />
-      }
     }
     @case ('readonly') {
       <input 

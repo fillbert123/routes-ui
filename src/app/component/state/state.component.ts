@@ -9,5 +9,5 @@ import { BadgeComponent } from '../badge/badge.component';
   styleUrl: './state.component.scss'
 })
 export class StateComponent {
-  @Input() error!: 'noResult' | 'invalidStation' | 'noDirection';
+  @Input() error!: 'noResult' | 'invalidStation' | 'noDirection' | 'noStation' | 'invalid';
 }
