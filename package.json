@@ -1,6 +1,6 @@
 {
   "name": "routes-ui",
-  "version": "0.2.1 - Direction Service",
+  "version": "0.2.2 - Direction Service",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

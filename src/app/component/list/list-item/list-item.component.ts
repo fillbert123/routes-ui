@@ -18,6 +18,7 @@ export class ListItemComponent {
   @Input() color: string | any;
   @Input() itemListData: any;
   @Input() isSearch: boolean = false;
+  @Input() isClickable: boolean = true;
   badgeData: any = [];
 
   constructor(private subjectService: SubjectService) { }
@@ -77,10 +78,12 @@ export class ListItemComponent {
   }
 
   emitItem(nextTo: string) {
-    this.subjectService.sendData({
-      'action': 'navigate',
-      'to': (nextTo === 'routeGroup') ? this.kind : nextTo,
-      'data': (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData
-    });
+    if(this.isClickable) {
+      this.subjectService.sendData({
+        'action': 'navigate',
+        'to': (nextTo === 'routeGroup') ? this.kind : nextTo,
+        'data': (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData
+      });
+    }
   }
 }
