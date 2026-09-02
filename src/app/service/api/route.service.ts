@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RouteService {
-  // private url = 'https://routes.up.railway.app'
-  private url = 'http://127.0.0.1:8000'
+  private url = 'https://routes.up.railway.app'
+  // private url = 'http://127.0.0.1:8000'
 
   constructor(private http: HttpClient) { }
 
