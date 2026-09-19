@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BadgeComponent } from "../../badge/badge.component";
+import { Status } from '../../../util/type.util';
 
 @Component({
   selector: 'component-selection-item',
@@ -9,7 +10,7 @@ import { BadgeComponent } from "../../badge/badge.component";
   styleUrl: './selection-item.component.scss'
 })
 export class SelectionItemComponent {
-  @Input() status!: 'active' | 'loading';
+  @Input() status!: Status;
   @Input() label: string | any;
   @Input() isSelected!: boolean;
   @Input() id: number | any;

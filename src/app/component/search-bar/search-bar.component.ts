@@ -3,6 +3,8 @@ import { ButtonComponent } from "../button/button.component";
 import { SubjectService } from '../../service/shared/subject.service';
 import { InputTextComponent } from "../input/input-text/input-text.component";
 import { TitleComponent } from '../title/title.component';
+import { subjectEmitData } from '../../util/interface.util';
+import { ActionService } from '../../service/shared/action.service';
 
 @Component({
   selector: 'component-search-bar',
@@ -15,7 +17,7 @@ export class SearchBarComponent {
   @Input() stage!: 'line' | 'routeGroup' | 'station' | 'documentation' | 'search' | 'direction';
   searchQuery: string = '';
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService, private actionService: ActionService) { }
 
   handleUpdate(event: string) {
     this.searchQuery = event;
@@ -25,28 +27,13 @@ export class SearchBarComponent {
   emitItem(action: string) {
     switch(action) {
       case 'back':
-        this.subjectService.sendData({
-          'action': 'back'
-        });
+        this.actionService.back();
         break;
       case 'search':
-        if(this.searchQuery === '') {
-          this.subjectService.sendData({
-            'action': 'navigate',
-            'to': 'line'
-          });
-        } else {
-          this.subjectService.sendData({
-            'action': 'search',
-            'data': this.searchQuery
-          });
-        }
+        this.actionService.search(this.searchQuery);
         break;
       case 'line':
-        this.subjectService.sendData({
-          'action': 'navigate',
-          'to': 'line'
-        });
+        this.actionService.navigate('line');
         break;
     }
   }

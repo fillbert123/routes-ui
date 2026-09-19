@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
+import { Size, Status } from '../../util/type.util';
 
 @Component({
   selector: 'component-button',
@@ -9,8 +10,8 @@ import { NgStyle } from '@angular/common';
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
-  @Input() size!: 'small' | 'large';
-  @Input() status!: 'active' | 'inactive' | 'loading';
+  @Input() size!: Size;
+  @Input() status!: Status;
   @Input() color: any;
   @Input() icon: string | any;
   @Input() label: string | any;

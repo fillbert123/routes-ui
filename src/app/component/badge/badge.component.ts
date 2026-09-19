@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { AtomicComponent } from '../atomic/atomic.component';
+import { Status, Type } from '../../util/type.util';
 
 @Component({
   selector: 'component-badge',
@@ -11,7 +12,7 @@ import { AtomicComponent } from '../atomic/atomic.component';
 })
 export class BadgeComponent {
   @Input() kind!: 'routeGroup' | 'line' | 'station' | 'terminus';
-  @Input() status!: 'active' | 'inactive' | 'loading' | 'empty';
+  @Input() status!: Status;
   @Input() bulkData: any;
   @Input() color: string | any;
   @Input() label: string | any;
@@ -42,7 +43,7 @@ export class BadgeComponent {
     return(`var(--${this.color})`);
   }
 
-  getType(isFirst: boolean, isLast: boolean): "single" | "leading" | "middle" | "trailing" {
+  getType(isFirst: boolean, isLast: boolean): Type {
     if(isFirst && isLast) return 'single';
     else if(isFirst) return 'leading';
     else if(isLast) return 'trailing';
