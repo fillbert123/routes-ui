@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
+import { Status, Type } from '../../util/type.util';
 
 @Component({
   selector: 'component-atomic',
@@ -10,8 +11,8 @@ import { NgStyle } from '@angular/common';
 })
 export class AtomicComponent {
   @Input() kind!: 'stationCode' | 'stationLine' | 'transferLine';
-  @Input() type: 'standard' | 'single' | 'leading' | 'middle' | 'trailing' | any;
-  @Input() status!: 'active' | 'inactive' | 'loading' | 'empty';
+  @Input() type: Type | any;
+  @Input() status!: Status;
   @Input() color: string | any;
   @Input() colorLeading: string | any;
   @Input() colorTrailing: string | any;

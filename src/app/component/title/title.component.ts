@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BadgeComponent } from "../badge/badge.component";
 import { ButtonComponent } from '../button/button.component';
 import { SubjectService } from '../../service/shared/subject.service';
+import { ActionService } from '../../service/shared/action.service';
 
 @Component({
   selector: 'component-title',
@@ -21,13 +22,9 @@ export class TitleComponent {
   @Input() badgeData: any;
   @Input() isStationActive: boolean = false;
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService, private actionService: ActionService) { }
 
   emitDirection() {
-    this.subjectService.sendData({
-      'action': 'navigate',
-      'to': 'direction',
-      'data': this.id
-    });
+    this.actionService.navigate('direction', this.id)
   }
 }

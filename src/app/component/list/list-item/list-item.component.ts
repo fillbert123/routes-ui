@@ -3,6 +3,8 @@ import { BadgeComponent } from "../../badge/badge.component";
 import { AtomicComponent } from "../../atomic/atomic.component";
 import { SubjectService } from '../../../service/shared/subject.service';
 import { ButtonComponent } from '../../button/button.component';
+import { subjectEmitData } from '../../../util/interface.util';
+import { ActionService } from '../../../service/shared/action.service';
 
 @Component({
   selector: 'component-list-item',
@@ -21,7 +23,7 @@ export class ListItemComponent {
   @Input() isClickable: boolean = true;
   badgeData: any = [];
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private subjectService: SubjectService, private actionService: ActionService) { }
 
   ngOnInit() {
     if(this.isSearch) {
@@ -78,12 +80,10 @@ export class ListItemComponent {
   }
 
   emitItem(nextTo: string) {
+    const actionTo: string = (nextTo === 'routeGroup') ? this.kind : nextTo;
+    const actionData: any = (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData;
     if(this.isClickable) {
-      this.subjectService.sendData({
-        'action': 'navigate',
-        'to': (nextTo === 'routeGroup') ? this.kind : nextTo,
-        'data': (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData
-      });
+      this.actionService.navigate(actionTo, actionData);
     }
   }
 }

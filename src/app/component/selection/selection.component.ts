@@ -1,5 +1,6 @@
 import { Component, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
 import { SelectionItemComponent } from "./selection-item/selection-item.component";
+import { Status } from '../../util/type.util';
 
 @Component({
   selector: 'component-selection',
@@ -9,7 +10,7 @@ import { SelectionItemComponent } from "./selection-item/selection-item.componen
   styleUrl: './selection.component.scss'
 })
 export class SelectionComponent {
-  @Input() status!: 'active' | 'loading';
+  @Input() status!: Status;
   @Input() selectionData: any;
   @Output() routeIdUpdate = new EventEmitter<any>;
   selectedIndex: number | any;

@@ -1,6 +1,6 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import { SubjectService } from '../../service/shared/subject.service';
 import { CommonModule } from '@angular/common';
+import { ActionService } from '../../service/shared/action.service';
 
 @Component({
   selector: 'component-system-map',
@@ -12,13 +12,9 @@ import { CommonModule } from '@angular/common';
 export class SystemMapComponent {
   @Input() zoomLevel!: number;
 
-  constructor(private subjectService: SubjectService) { }
+  constructor(private actionService: ActionService) { }
 
   emitItem(id: number, type: string) {
-    this.subjectService.sendData({
-      'action': 'navigate',
-      'to': type,
-      'data': id
-    });
+    this.actionService.navigate(type, id)
   }
 }

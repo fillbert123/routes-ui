@@ -3,6 +3,7 @@ import { ListItemComponent } from "./list-item/list-item.component";
 import { BadgeComponent } from "../badge/badge.component";
 import { NgStyle } from '@angular/common';
 import { FigureComponent } from "../figure/figure.component";
+import { Status } from '../../util/type.util';
 
 @Component({
   selector: 'component-list',
@@ -13,7 +14,7 @@ import { FigureComponent } from "../figure/figure.component";
 })
 export class ListComponent {
   @Input() kind!: 'routeGroup' | 'station' | 'figure' | 'search' | 'directionStation' | 'directionResult';
-  @Input() status!: 'active' | 'loading';
+  @Input() status!: Status;
   @Input() listHeader!: boolean;
   @Input() headerCode: string | any;
   @Input() headerName: string | any;
