@@ -1,6 +1,6 @@
 {
   "name": "routes-ui",
-  "version": "0.2.3 - Direction Service",
+  "version": "2.0.4 - Enhance Animation",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",

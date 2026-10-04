@@ -4,6 +4,8 @@
   height: 48px;
   display: flex;
   align-items: center;
+  border-radius: 12px;
+  transition: 0.2s;
   &__route-group {
     display: flex;
     flex-direction: row;
