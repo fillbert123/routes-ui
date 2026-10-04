@@ -12,44 +12,14 @@
   (mouseleave)="switchIsHovered()"
 >
   @if (status != 'loading') {
-    @switch (icon) {
-      @case ('back') {
-        <img class="button__icon" src="../../../assets/icons/chevron.backward.svg" alt="">
-      }
-      @case ('search') {
-        <img class="button__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
-      }
-      @case ('xmark') {
-        <img class="button__icon" src="../../../assets/icons/xmark.svg" alt="">
-      }
-      @case ('reverse') {
-        <img class="button__icon" src="../../../assets/icons/arrow.left.arrow.right.svg" alt="">
-      }
-      @case ('zoom-plus') {
-        <img class="button__icon" src="../../../assets/icons/plus.magnifyingglass.svg" alt="">
-      }
-      @case ('zoom-minus') {
-        <img class="button__icon" src="../../../assets/icons/minus.magnifyingglass.svg" alt="">
-      }
-      @case ('direct') {
-        @if (isHovered) {
-          <img class="button__icon" src="../../../assets/icons/arrowshape.turn.up.forward.fill.svg" alt="">
-        }
-        @else if (!isHovered) {
-          <img class="button__icon" src="../../../assets/icons/arrowshape.turn.up.forward.svg" alt="">
-        }
-      }
-      @case ('home') {
-        @if (isHovered) {
-          <img class="button__icon" src="../../../assets/icons/house.fill.svg" alt="">
-        }
-        @else if (!isHovered) {
-          <img class="button__icon" src="../../../assets/icons/house.svg" alt="">
-        }
-      }
+    @if (icon || leftIcon) {
+      <component-icon [icon]="icon || leftIcon" size="large" [isHover]="isHovered"/>
     }
     @if (label) {
       <p class="bold semilarge">{{label}}</p>
+    }
+    @if (rightIcon) {
+      <component-icon [icon]="rightIcon" size="large" [isHover]="isHovered"/>
     }
   }
   @else if (status === 'loading') {

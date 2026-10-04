@@ -5,10 +5,15 @@
         #inputField
         class="input-text__field semibold large" 
         type="text"
+        [ngStyle]="{
+          'background-color': getColor(),
+        }"
         [(ngModel)]="inputValue"
         [placeholder]="placeholder"
         (keydown.enter)="emitValue()"
         (focus)="onFocusInput(inputField)"
+        (mouseenter)="switchIsHovered()"
+        (mouseleave)="switchIsHovered()"
       >
       <img class="input-text__icon" src="../../../assets/icons/magnifyingglass.svg" alt="">
     }

@@ -3,7 +3,6 @@ import { ButtonComponent } from "../button/button.component";
 import { SubjectService } from '../../service/shared/subject.service';
 import { InputTextComponent } from "../input/input-text/input-text.component";
 import { TitleComponent } from '../title/title.component';
-import { subjectEmitData } from '../../util/interface.util';
 import { ActionService } from '../../service/shared/action.service';
 
 @Component({

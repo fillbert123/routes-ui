@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { FigureItemComponent } from "../figure-item/figure-item.component";
+import { Status } from '../../../util/type.util';
 
 @Component({
   selector: 'component-figure-route',
@@ -10,7 +11,7 @@ import { FigureItemComponent } from "../figure-item/figure-item.component";
   styleUrl: './figure-route.component.scss'
 })
 export class FigureRouteComponent {
-  @Input() status!: 'active' | 'loading';
+  @Input() status!: Status;
   @Input() color: string | any;
   @Input() isBranching: boolean | any;
   @Input() currentStationData: any;
@@ -18,44 +19,39 @@ export class FigureRouteComponent {
   @Input() nextStationData: any;
   
   arrangedFigureRouteLine() {
-    let arrangedLine = [];
+    let arrangedLine: any = [];
     if(!this.isBranching) {
       if(!this.previousStationData) {
-        arrangedLine.push('empty');
-        arrangedLine.push('empty')
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'empty', 'empty');
       } else if(this.previousStationData.terminus.id.includes(this.previousStationData.id)) {
-        arrangedLine.push('empty');
-        arrangedLine.push('solid');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'empty', 'solid');
       } else {
-        arrangedLine.push('leading');
-        arrangedLine.push('solid');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'leading', 'solid');
       }
       if(!this.previousStationData) {
-        arrangedLine.push('empty');
-        arrangedLine.push('solid');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'empty', 'solid');
       } else if(!this.nextStationData) {
-        arrangedLine.push('solid');
-        arrangedLine.push('empty');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'solid', 'empty');
       } else {
-        arrangedLine.push('solid');
-        arrangedLine.push('solid');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'solid', 'solid');
       }
       if(!this.nextStationData) {
-        arrangedLine.push('empty');
-        arrangedLine.push('empty')
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'empty', 'empty');
       } else if(this.nextStationData.terminus.id.includes(this.nextStationData.id)) {
-        arrangedLine.push('solid');
-        arrangedLine.push('empty');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'solid', 'empty');
       } else {
-        arrangedLine.push('solid');
-        arrangedLine.push('trailing');
+        arrangedLine = this.addTwoElementToArray(arrangedLine, 'solid', 'trailing');
       }
     } else if(this.isBranching) {
-      arrangedLine.push('branch');
-      arrangedLine.push('trailing');
+      arrangedLine = this.addTwoElementToArray(arrangedLine, 'branch', 'trailing');
     }
-    
     return arrangedLine;
+  }
+
+  addTwoElementToArray(array: any, firstItem: string, secondItem: string): any {
+    array.push(firstItem);
+    array.push(secondItem);
+    return array;
   }
 
   getColor() {

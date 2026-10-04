@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  border-radius: 20px;
+  transition: 0.2s;
   &__label {
     display: flex;
     flex-direction: row;

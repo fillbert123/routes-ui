@@ -3,7 +3,6 @@ import { BadgeComponent } from "../../badge/badge.component";
 import { AtomicComponent } from "../../atomic/atomic.component";
 import { SubjectService } from '../../../service/shared/subject.service';
 import { ButtonComponent } from '../../button/button.component';
-import { subjectEmitData } from '../../../util/interface.util';
 import { ActionService } from '../../../service/shared/action.service';
 
 @Component({
@@ -79,7 +78,14 @@ export class ListItemComponent {
     });
   }
 
-  emitItem(nextTo: string) {
+  emitItem(nextTo?: string) {
+    if(this.kind === 'routeGroup' || this.kind === 'station') {
+      nextTo = 'routeGroup';
+    } else if (this.kind === 'directionStation') {
+      nextTo = 'direction';
+    } else {
+      nextTo = 'line';
+    }
     const actionTo: string = (nextTo === 'routeGroup') ? this.kind : nextTo;
     const actionData: any = (nextTo === 'routeGroup' || nextTo === 'direction') ? this.itemListData.id : this.itemListData;
     if(this.isClickable) {

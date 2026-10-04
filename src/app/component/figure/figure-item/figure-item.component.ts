@@ -20,6 +20,6 @@ export class FigureItemComponent {
   constructor(private actionService: ActionService) { }
   
   emitItem() {
-    this.actionService.navigate('station', this.id)
+    this.actionService.navigate('station', this.id);
   }
 }

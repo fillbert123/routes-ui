@@ -1,19 +1,22 @@
 import { Component, Input } from '@angular/core';
 import { NgStyle } from '@angular/common';
 import { Size, Status } from '../../util/type.util';
+import { IconComponent } from '../icon/icon.component';
 
 @Component({
   selector: 'component-button',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle, IconComponent],
   templateUrl: './button.component.html',
   styleUrl: './button.component.scss'
 })
 export class ButtonComponent {
   @Input() size!: Size;
   @Input() status!: Status;
-  @Input() color: any;
+  @Input() color: 'primary' | 'transparent' | any;
   @Input() icon: string | any;
+  @Input() leftIcon: string | any;
+  @Input() rightIcon: string | any;
   @Input() label: string | any;
 
   isHovered: boolean = false;
@@ -52,15 +55,7 @@ export class ButtonComponent {
     if(this.status === 'inactive') {
       return 0.5;
     } else {
-      if(!this.color) {
-        return 1;
-      } else {
-        if(this.isHovered) {
-          return 0.8;
-        } else {
-          return 1;
-        }
-      }
+      return 1;
     }
   }
   
@@ -70,12 +65,16 @@ export class ButtonComponent {
     } else {
       if(!this.color) {
         if(this.isHovered && this.status === 'active') {
-          return 'var(--transparent)';
+          return 'var(--clear)';
         } else {
           return 'transparent';
         }
       } else {
-        return `var(--${this.color})`;
+        if(this.isHovered && this.status === 'active') {
+          return `var(--${this.color}-dark)`;
+        } else {
+          return `var(--${this.color})`;
+        }
       }
     }
   }
