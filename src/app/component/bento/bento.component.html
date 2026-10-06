@@ -1,0 +1,38 @@
+<div class="bento">
+  @for (row of info; track $index; let isRowFirst = $first; let isRowLast = $last) {
+    <div 
+      class="bento__column"
+      [ngStyle]="{
+        'padding': getRowPadding(isRowFirst, isRowLast),
+        'border-bottom': getBorder(isRowFirst, isRowLast)
+      }"
+    >
+    @for (column of row; track $index; let isColumnFirst = $first; let isColumnLast = $last) {
+      <div 
+        class="bento__grid"
+        [ngStyle]="{
+          'padding': getColumnPadding(isColumnFirst, isColumnLast),
+          'width': getWidth(column.proportion, row.length),
+          'border-right': getBorder(isColumnFirst, isColumnLast)
+        }"  
+      >
+        <p class="bento__grid__label bold xsmall">{{column.label}}</p>
+        <span class="bento__grid__value">
+          @switch (column.name) {
+            @case ('totalDuration') {
+              <component-icon icon="time" size="large"/>
+            }
+            @case ('totalTransfer') {
+              <component-icon icon="transfer" size="large"/>
+            }
+            @case ('totalStation') {
+              <component-icon icon="station" size="large"/>
+            }
+          }
+          <p class="bento__grid__value__text bold large">{{getValue(column.name)}}</p>
+        </span>
+      </div>
+    }
+    </div>
+  }
+</div>

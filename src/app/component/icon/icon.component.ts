@@ -56,6 +56,12 @@ export class IconComponent {
         return "url('/assets/icons/arrow.left.svg')";
       case 'right-arrow':
         return "url('/assets/icons/arrow.right.svg')";
+      case 'transfer':
+        return "url('/assets/icons/chevron.forward.dotted.chevron.forward.svg')";
+      case 'station':
+        return "url('/assets/icons/flag.fill.svg')";
+      case 'time':
+        return "url('/assets/icons/timer.svg')";
       default:
         return;
     }
