@@ -4,11 +4,12 @@ import { DirectionBarComponent } from "../../component/direction-bar/direction-b
 import { ListComponent } from "../../component/list/list.component";
 import { ButtonComponent } from '../../component/button/button.component';
 import { StateComponent } from '../../component/state/state.component';
+import { BentoComponent } from '../../component/bento/bento.component';
 
 @Component({
   selector: 'stage-direction',
   standalone: true,
-  imports: [DirectionBarComponent, ListComponent, ButtonComponent, StateComponent],
+  imports: [DirectionBarComponent, ListComponent, ButtonComponent, StateComponent, BentoComponent],
   templateUrl: './direction.component.html',
   styleUrl: './direction.component.scss'
 })
@@ -25,6 +26,37 @@ export class DirectionComponent {
     origin: null,
     destination: null
   }
+  bentoInfo: any = [
+    [
+      {
+        'name': 'origin',
+        'label': 'ORIGIN STATION',
+        'proportion': 50
+      },
+      {
+        'name': 'destination',
+        'label': 'DESTINATION STATION',
+        'proportion': 50
+      }
+    ],
+    [
+      {
+        'name': 'totalDuration',
+        'label': 'EST. DURATION',
+        'proportion': 35
+      },
+      {
+        'name': 'totalTransfer',
+        'label': 'TOTAL TRANSFER',
+        'proportion': 30
+      },
+      {
+        'name': 'totalStation',
+        'label': 'TOTAL STATION',
+        'proportion': 35
+      }
+    ]
+  ]
   directionResultData: any;
 
   constructor(private routeService: RouteService) { };
@@ -106,9 +138,9 @@ export class DirectionComponent {
     }
   }
 
-  getHeaderName() {
-    return `${this.directionResultData.path[0].name} to ${this.directionResultData.path[this.directionResultData.path.length - 1].name} (${this.directionResultData.duration} min)`;
-  }
+  // getHeaderName() {
+  //   return `${this.directionResultData.path[0].name} to ${this.directionResultData.path[this.directionResultData.path.length - 1].name} (${this.directionResultData.duration} min)`;
+  // }
 
   reverseDirection() {
     let newDirectionData: any = {
